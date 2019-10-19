@@ -66,13 +66,17 @@ navIconSize = 40px
   .logo
     width 40px
     height 40px
+    margin-right 30px
 
   .nav-links
     .nav-link
       display inline-block
+      margin 10px
     .el-avatar
       width navIconSize
       height navIconSize
+  .nav-right
+    margin-left auto
 
   .user-box
     display flex
