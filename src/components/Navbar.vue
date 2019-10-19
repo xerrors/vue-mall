@@ -2,12 +2,12 @@
   <header class="navbar">
     <img class="logo" src="favicon.ico">
     <div class="nav-links">
-      <router-link to='/test' class="nav-link">Test</router-link>
-      <router-link to='/test' class="nav-link">Test</router-link>
-      <router-link to='/test' class="nav-link">Test</router-link>
+      <router-link to='/test' class="nav-link" tag="div">测试</router-link>
+      <router-link to='/test' class="nav-link" tag="div">测试</router-link>
+      <router-link to='/test' class="nav-link" tag="div">测试</router-link>
     </div>
     <div v-if="!logined" class="nav-right">
-      <el-button round plain @click="logined = true">登录</el-button>
+      <el-button round plain @click="login">登录</el-button>
     </div>
     <div v-else class="user-box nav-right">
       <el-badge :is-dot="user.unread" class="item">
@@ -29,11 +29,7 @@ export default {
   nmae: 'nav-bar',
   components: {
   },
-  data () {
-    return {
-      logined: false
-    }
-  },
+  props: ['logined'],
   computed: {
     user () {
       var user = {
@@ -44,6 +40,10 @@ export default {
     }
   },
   methods: {
+    login () {
+      this.$emit('on-login')
+      // 如果需要传参的话，可以在"on-close"后面再加参数，然后在父组件的函数里接收就可以了。
+    },
     dropdownCmd () {
       this.logined = false
     }
@@ -53,35 +53,40 @@ export default {
 
 <style lang="stylus">
 navIconSize = 40px
+anvBarHeight = 50px
 
 .navbar
   display flex
   align-items center
 
   width 100%
-  height 50px
+  height anvBarHeight
 
   background-color navBgColor
 
   .logo
-    width 40px
-    height 40px
+    width navIconSize
+    height navIconSize
     margin-right 30px
 
   .nav-links
     .nav-link
       display inline-block
-      margin 10px
+      line-height navIconSize
+      margin 0 10px
+
+      cursor pointer
     .el-avatar
       width navIconSize
       height navIconSize
   .nav-right
     margin-left auto
+    margin-right 30px
 
   .user-box
     display flex
     align-items center
     .el-button, .el-dropdown
-      margin 8px
+      margin 0 10px
       height navIconSize
 </style>
