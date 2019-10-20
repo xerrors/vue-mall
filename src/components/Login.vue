@@ -1,32 +1,74 @@
  <template>
-  <div class="login">
+  <form class="login">
     <!--外层的遮罩 点击事件用来关闭弹窗，isShow控制弹窗显示 隐藏的props-->
-    <div class="login-cover back"  v-if="isShow"  @click="closeMyself"></div>
+    <div class="login-cover"  v-if="isShow"  @click="closeMyself"></div>
     <!-- transition 这里可以加一些简单的动画效果 -->
     <transition name="drop">
       <div class="card" v-if="isShow">
         <div class="card__head">
-          <div class="select title">用户登录</div>
-          <div class="title">商户登录</div>
+          <div
+            :class="[{'select': userForm.role == 'user'}, 'title']"
+            @click="userForm.role = 'user'"
+            >用户登录</div>
+          <div
+            :class="[{'select': userForm.role == 'boss'}, 'title']"
+            @click="userForm.role = 'boss'"
+            >商户登录</div>
         </div>
-        <input class="reset card__input" placeholder="用户名">
-        <input class="reset card__input" placeholder="密码">
-        <button class="reset card__btn">登录</button>
+        <input
+          v-model.trim="userForm.username"
+          class="reset card__input"
+          placeholder="用户名"
+          required>
+        <input
+          type="password"
+          name="password"
+          v-model.trim="userForm.password"
+          class="reset card__input"
+          placeholder="密码"
+          @keyup.enter.native="submit"
+          required>
+        <button class="reset card__btn" @click="submit" v-loading="loading">登录</button>
         <div class="card__info">
           <router-link to="register">注册</router-link>
           <router-link to="fog-pwd">忘记密码</router-link>
         </div>
       </div>
     </transition>
-  </div>
+  </form>
 </template>
 
 <script>
 export default {
   props: ['isShow'],
+  data () {
+    return {
+      isUser: true,
+      loading: false,
+      userForm: {
+        username: '',
+        password: '',
+        role: 'user'
+      }
+    }
+  },
   methods: {
     closeMyself () {
       this.$emit('on-close')
+    },
+    submit () {
+      this.loading = true
+      this.$store
+        .dispatch('Login', this.userForm)
+        .then(() => {
+          this.loading = false
+          this.$emit('login')
+          this.$router.push({ path: this.redirect || '/' })
+        })
+        .catch(err => {
+          console.log(err)
+          this.loading = false
+        })
     }
   }
 }
@@ -52,27 +94,28 @@ export default {
     top 0
     z-index 200
 
-    width 100%
-    height 100%
+    width 100vw
+    height 100vh
 
-    background rgba(0,0,0, 0.8)
+    background rgba(0,0,0, 0.2)
     overflow hidden
 
   .card
+    position fixed
     display flex
     flex-direction column
     z-index 300
 
     height 60vh
-    min-height 400px
-    max-height 800px
-    min-width 250px
-    max-width: 350px
-    top 2.5vh
+    min-height 25rem
+    max-height 28rem
+    min-width 14rem
+    max-width: 22rem
+    top 10vh
     padding 2rem 4rem
-    border-radius 6px
-    border-top 7px solid mainColor
-    box-shadow rgba(0, 0, 0, 0.1) 0px 2px 12px 0px
+    border-radius 0.4rem
+    border-top 0.5rem solid mainColor
+    box-shadow cardShadow
     background white
 
     *
@@ -83,6 +126,7 @@ export default {
       justify-content space-around
       .title
         line-height 2rem
+        cursor pointer
       .select
         border-bottom 4px solid mainColor
 
@@ -91,7 +135,7 @@ export default {
       border-radius 2rem
       &:focus
         outline none
-        box-shadow rgba(0, 0, 0, 0.1) 0px 2px 12px 0px
+        box-shadow cardShadow
 
     &__input
       height 1rem
@@ -99,12 +143,12 @@ export default {
       background-color #d9e0e1
     &__btn
       height 3rem
-      padding 0rem 2rem
+      padding 0.8rem 2rem
       background-color mainColor
       font-size medium
       cursor pointer
       &:hover
-        box-shadow rgba(0, 0, 0, 0.1) 0px 2px 12px 0px
+        box-shadow cardShadow
 
     &__info
       font-size small

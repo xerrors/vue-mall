@@ -5,8 +5,12 @@
     </header>
 
     <main>
-      <p>主页内容测试</p>
-      <login :is-show='isShow' @on-close="isShow=false"/>
+      <div class="test-ctn">
+        <div class="test"></div>
+        <div class="test"></div>
+        <div class="test"></div>
+      </div>
+      <login :is-show='isShow' @on-close="isShow=false" @login="login"/>
     </main>
 
     <footer>
@@ -33,23 +37,57 @@ export default {
       isShow: false,
       logined: false
     }
+  },
+  methods: {
+    login () {
+      this.logined = true
+      this.isShow = false
+    }
   }
 }
 </script>
 
 <style lang="stylus">
-  fheight = 3rem
-  .home
-    min-height 100vh
-    display flex
-    flex-direction column
-    main
-      flex 1
-    footer
-      display flex
-      justify-content center
-      align-items center
+::-webkit-scrollbar {
+  width: 0.3rem !important;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #f2f2f2;
+  border-radius: 0.25rem;
+  transition: .3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #c2c2c2;
+  cursor: pointer;
+}
 
-      height fheight
-      background-color footerBg
+::selection {
+  color: #fff;
+  background: #282c34;
+}
+
+.home
+  min-height 100vh
+  display flex
+  flex-direction column
+  main
+    flex 1
+  footer
+    display flex
+    justify-content center
+    align-items center
+
+    height fheight
+    background-color footerBg
+</style>
+
+<style scoped>
+.test {
+  height: 100vh;
+  border: 1px solid #ccc
+}
+
+.test-ctn:nth-child(even) {
+  background-color: #fff;
+}
 </style>

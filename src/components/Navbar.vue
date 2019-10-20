@@ -2,9 +2,9 @@
   <div class="navbar">
     <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Wikimedia-logo.png">
     <div class="nav-links">
-      <router-link to='/test' class="nav-link" tag="div">测试</router-link>
-      <router-link to='/test' class="nav-link" tag="div">测试</router-link>
-      <router-link to='/test' class="nav-link" tag="div">测试</router-link>
+      <router-link to='/test' class="nav-link" tag="div">公关部门</router-link>
+      <router-link to='/test' class="nav-link" tag="div">市场部门</router-link>
+      <router-link to='/test' class="nav-link" tag="div">人力部门</router-link>
     </div>
     <div v-if="!logined" class="nav-right">
       <el-button round plain @click="login">登录</el-button>
@@ -42,7 +42,6 @@ export default {
   methods: {
     login () {
       this.$emit('on-login')
-      // 如果需要传参的话，可以在"on-close"后面再加参数，然后在父组件的函数里接收就可以了。
     },
     dropdownCmd () {
       this.logined = false
@@ -52,17 +51,15 @@ export default {
 </script>
 
 <style lang="stylus">
-navIconSize = 40px
-anvBarHeight = 50px
-
 .navbar
   display flex
   align-items center
 
-  height anvBarHeight
+  height navBarHeight
   padding 0 30px
 
   background-color navBgColor
+  box-shadow cardShadow
 
   .logo
     width navIconSize
@@ -73,12 +70,14 @@ anvBarHeight = 50px
     .nav-link
       display inline-block
       line-height navIconSize
-      margin 0 10px
+      margin 0 20px
 
+      color navTextColor
       cursor pointer
     .el-avatar
       width navIconSize
       height navIconSize
+      cursor pointer
   .nav-right
     margin-left auto
 
