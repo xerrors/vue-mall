@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <img class="logo" src="favicon.ico">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Wikimedia-logo.png">
     <div class="nav-links">
       <router-link to='/test' class="nav-link" tag="div">测试</router-link>
       <router-link to='/test' class="nav-link" tag="div">测试</router-link>
@@ -59,8 +59,8 @@ anvBarHeight = 50px
   display flex
   align-items center
 
-  width 100%
   height anvBarHeight
+  padding 0 30px
 
   background-color navBgColor
 
@@ -81,7 +81,6 @@ anvBarHeight = 50px
       height navIconSize
   .nav-right
     margin-left auto
-    margin-right 30px
 
   .user-box
     display flex
