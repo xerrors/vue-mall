@@ -1,8 +1,17 @@
 <template>
   <div class="home">
-    <navbar :logined="logined" @on-login="isShow=true"></navbar>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <login :is-show='isShow' @on-close="isShow=false"/>
+    <header>
+      <navbar :logined="logined" @on-login="isShow=true"></navbar>
+    </header>
+
+    <main>
+      <img alt="Vue logo" src="../assets/logo.png">
+      <login :is-show='isShow' @on-close="isShow=false"/>
+    </main>
+
+    <footer>
+
+    </footer>
   </div>
 </template>
 

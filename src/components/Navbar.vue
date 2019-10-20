@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar">
+  <div class="navbar">
     <img class="logo" src="favicon.ico">
     <div class="nav-links">
       <router-link to='/test' class="nav-link" tag="div">测试</router-link>
@@ -20,8 +20,8 @@
           <el-dropdown-item command="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+    </div>
   </div>
-  </header>
 </template>
 
 <script>
