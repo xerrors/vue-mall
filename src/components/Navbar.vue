@@ -11,7 +11,7 @@
     </div>
     <div v-else class="user-box nav-right">
       <el-badge :is-dot="user.unread" class="item">
-        <el-link icon="el-icon-bell">消息</el-link>
+        <el-link icon="el-icon-message-solid">消息</el-link>
       </el-badge>
       <el-dropdown type="primary" @command="dropdownCmd">
         <el-avatar :src="user.avatar"></el-avatar>
