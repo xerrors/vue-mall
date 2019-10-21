@@ -72,6 +72,10 @@ export default {
           this.loading = false
         })
       this.$store.dispatch('GetInfo')
+      this.$message({
+        message: '登录成功',
+        type: 'success'
+      })
     }
   }
 }
