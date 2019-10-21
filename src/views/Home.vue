@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header>
-      <navbar :logined="logined" @on-login="isShow=true"></navbar>
+      <navbar></navbar>
     </header>
 
     <main>
@@ -10,7 +10,7 @@
         <div class="test"></div>
         <div class="test"></div>
       </div>
-      <login :is-show='isShow' @on-close="isShow=false" @login="login"/>
+      <login :is-show='showLogin'/>
     </main>
 
     <footer>
@@ -25,6 +25,8 @@ import Navbar from '@/components/Navbar.vue'
 import Foot from '@/components/Foot.vue'
 import Login from '@/components/Login.vue'
 
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'home',
   components: {
@@ -34,15 +36,12 @@ export default {
   },
   data () {
     return {
-      isShow: false,
-      logined: false
     }
   },
+  computed: {
+    ...mapGetters(['name', 'roles', 'token', 'showLogin'])
+  },
   methods: {
-    login () {
-      this.logined = true
-      this.isShow = false
-    }
   }
 }
 </script>

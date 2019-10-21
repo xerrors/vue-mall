@@ -6,7 +6,7 @@
       <router-link to='/test' class="nav-link" tag="div">市场部门</router-link>
       <router-link to='/test' class="nav-link" tag="div">人力部门</router-link>
     </div>
-    <div v-if="!logined" class="nav-right">
+    <div v-if="!token" class="nav-right">
       <el-button round plain @click="login">登录</el-button>
     </div>
     <div v-else class="user-box nav-right">
@@ -25,15 +25,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   nmae: 'nav-bar',
   components: {
   },
-  props: ['logined'],
   computed: {
+    ...mapGetters(['token', 'avatar']),
     user () {
       var user = {
-        avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+        avatar: this.avatar,
         unread: true
       }
       return user
@@ -41,10 +42,20 @@ export default {
   },
   methods: {
     login () {
-      this.$emit('on-login')
+      this.$store.state.showLogin = true
     },
-    dropdownCmd () {
-      this.logined = false
+    dropdownCmd (obj) {
+      if (obj === 'logout') {
+        this.$store
+          .dispatch('FedLogOut')
+          .then(() => {
+            this.loading = false
+          })
+          .catch(err => {
+            console.log(err)
+            this.loading = false
+          })
+      }
     }
   }
 }

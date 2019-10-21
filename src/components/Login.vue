@@ -1,5 +1,5 @@
  <template>
-  <form class="login">
+  <div class="login">
     <!--外层的遮罩 点击事件用来关闭弹窗，isShow控制弹窗显示 隐藏的props-->
     <div class="login-cover"  v-if="isShow"  @click="closeMyself"></div>
     <!-- transition 这里可以加一些简单的动画效果 -->
@@ -22,7 +22,6 @@
           required>
         <input
           type="password"
-          name="password"
           v-model.trim="userForm.password"
           class="reset card__input"
           placeholder="密码"
@@ -35,12 +34,11 @@
         </div>
       </div>
     </transition>
-  </form>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ['isShow'],
   data () {
     return {
       isUser: true,
@@ -52,9 +50,14 @@ export default {
       }
     }
   },
+  computed: {
+    isShow () {
+      return this.$store.state.showLogin
+    }
+  },
   methods: {
     closeMyself () {
-      this.$emit('on-close')
+      this.$store.state.showLogin = false
     },
     submit () {
       this.loading = true
@@ -62,13 +65,13 @@ export default {
         .dispatch('Login', this.userForm)
         .then(() => {
           this.loading = false
-          this.$emit('login')
-          this.$router.push({ path: this.redirect || '/' })
+          this.closeMyself()
         })
         .catch(err => {
           console.log(err)
           this.loading = false
         })
+      this.$store.dispatch('GetInfo')
     }
   }
 }
