@@ -1,40 +1,47 @@
 <template>
-  <div class="navbar">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Wikimedia-logo.png">
-    <div class="nav-links">
-      <router-link to='/test' class="nav-link" tag="div">公关部门</router-link>
-      <router-link to='/test' class="nav-link" tag="div">市场部门</router-link>
-      <router-link to='/test' class="nav-link" tag="div">人力部门</router-link>
-    </div>
-    <div v-if="!token" class="nav-right">
-      <el-button round plain @click="login">登录</el-button>
-    </div>
-    <div v-else class="user-box nav-right">
-      <el-badge :is-dot="user.unread" class="item">
-        <el-link icon="el-icon-message-solid">消息</el-link>
-      </el-badge>
-      <el-dropdown type="primary" @command="dropdownCmd">
-        <el-avatar :src="user.avatar"></el-avatar>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>我的主页</el-dropdown-item>
-          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+  <div>
+    <login :is-show='!token'/>
+    <div class="navbar">
+      <router-link to="/"><img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Wikimedia-logo.png"></router-link>
+      <div class="nav-links">
+        <router-link to='/test' class="nav-link" tag="div">公关部门</router-link>
+        <router-link to='/test' class="nav-link" tag="div">市场部门</router-link>
+        <router-link to='/test' class="nav-link" tag="div">人力部门</router-link>
+        <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
+      </div>
+      <div v-if="!token" class="nav-right">
+        <el-button round plain @click="login">登录</el-button>
+      </div>
+      <div v-else class="user-box nav-right">
+        <el-badge :is-dot="user.unread" class="item">
+          <!-- TODO 消息功能 -->
+          <el-link icon="el-icon-message-solid">消息</el-link>
+        </el-badge>
+        <el-dropdown type="primary" @command="dropdownCmd">
+          <el-avatar :src="avatar"></el-avatar>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>我的主页</el-dropdown-item>
+            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Login from '@/components/Login.vue'
+
 export default {
   nmae: 'nav-bar',
   components: {
+    Login
   },
   computed: {
     ...mapGetters(['token', 'avatar']),
     user () {
       var user = {
-        avatar: this.avatar,
         unread: true
       }
       return user
@@ -55,6 +62,10 @@ export default {
             console.log(err)
             this.loading = false
           })
+        this.$message({
+          message: '成功登出',
+          type: 'success'
+        })
       }
     }
   }
@@ -88,7 +99,6 @@ export default {
     .el-avatar
       width navIconSize
       height navIconSize
-      cursor pointer
   .nav-right
     margin-left auto
 
@@ -98,4 +108,5 @@ export default {
     .el-button, .el-dropdown
       margin 0 10px
       height navIconSize
+      cursor: pointer;
 </style>
