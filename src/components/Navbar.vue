@@ -15,12 +15,14 @@
       <div v-else class="user-box nav-right">
         <el-badge :is-dot="user.unread" class="item">
           <!-- TODO 消息功能 -->
+          <span v-if="$store.state.roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>
+          <span v-else style="font-size: 14px; margin: 0 10px;">用户版</span>
           <el-link icon="el-icon-message-solid">消息</el-link>
         </el-badge>
         <el-dropdown type="primary" @command="dropdownCmd">
           <el-avatar :src="avatar"></el-avatar>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>我的主页</el-dropdown-item>
+            <el-dropdown-item command="profile">我的主页</el-dropdown-item>
             <el-dropdown-item command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -52,6 +54,13 @@ export default {
       this.$store.state.showLogin = true
     },
     dropdownCmd (obj) {
+      if (obj === 'profile') {
+        if (this.$store.state.roles === 'user') {
+          this.$router.push('/user/profile')
+        } else {
+          this.$router.push('/boss/profile')
+        }
+      }
       if (obj === 'logout') {
         this.$store
           .dispatch('FedLogOut')

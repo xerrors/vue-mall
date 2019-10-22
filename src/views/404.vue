@@ -30,20 +30,14 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.page404-container {
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 40%;
-  left: 50%;
-}
 .page404 {
-  position: relative;
-  width: 1200px;
-  padding: 0 50px;
-  border: 0;
-  overflow: hidden;
+  display flex
+  align-items space-between
+  flex-wrap wrap
+
+  margin: 50px;
+  overflow: hidden; 
   .img404 {
-    position: relative;
     margin-right: 50px;
     float: left;
     width: 550px;
@@ -55,7 +49,6 @@ export default {
     animation-fill-mode: forwards;
   }
   .errorcard {
-    position: relative;
     float: left;
     width: 300px;
     padding: 30px 0;
