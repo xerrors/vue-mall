@@ -2,11 +2,9 @@
   <div>
     <login :is-show='!token'/>
     <div class="navbar">
-      <router-link to="/"><img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Wikimedia-logo.png"></router-link>
+      <router-link to="/"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
-        <router-link to='/test' class="nav-link" tag="div">公关部门</router-link>
-        <router-link to='/test' class="nav-link" tag="div">市场部门</router-link>
-        <router-link to='/test' class="nav-link" tag="div">人力部门</router-link>
+        <router-link to='/test' class="nav-link" tag="div">测试部门</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
       <div v-if="!token" class="nav-right">
@@ -93,7 +91,6 @@ export default {
   box-shadow cardShadow
 
   .logo
-    width navIconSize
     height navIconSize
     margin-right 30px
 
@@ -105,6 +102,10 @@ export default {
 
       color navTextColor
       cursor pointer
+
+      &:hover, &.active
+        color mainColor
+
     .el-avatar
       width navIconSize
       height navIconSize

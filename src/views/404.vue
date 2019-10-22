@@ -57,7 +57,7 @@ export default {
       font-size: 32px;
       font-weight: bold;
       line-height: 40px;
-      color: #1482f0;
+      color: mainColor;
       opacity: 0;
       margin-bottom: 20px;
       animation-name: slideUp;

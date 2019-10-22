@@ -29,8 +29,8 @@
           required>
         <button class="reset card__btn" @click="submit" v-loading="loading">登录</button>
         <div class="card__info">
-          <router-link to="register">注册</router-link>
-          <router-link to="fog-pwd">忘记密码</router-link>
+          <el-link @click="register">注册</el-link>
+          <el-link @click="forgotPWD">忘记密码</el-link>
         </div>
       </div>
     </transition>
@@ -48,6 +48,12 @@ export default {
         password: '',
         role: 'user'
       }
+    }
+  },
+  watch: {
+    $route (to, from) {
+      // 当路由切换的时候关闭登录窗口
+      this.closeMyself()
     }
   },
   computed: {
@@ -76,6 +82,12 @@ export default {
         message: '登录成功',
         type: 'success'
       })
+    },
+    register () {
+      this.$router.push('register')
+    },
+    forgotPWD () {
+      this.$router.push('fog-pwd')
     }
   }
 }
