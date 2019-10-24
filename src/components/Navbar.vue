@@ -4,7 +4,8 @@
     <div class="navbar">
       <router-link to="/"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
-        <router-link to='/test' class="nav-link" tag="div">测试部门</router-link>
+        <router-link to='/test' class="nav-link" tag="div" v-if="roles==='boss'">商户用例</router-link>
+        <router-link to='/test' class="nav-link" tag="div" v-else>用户用例</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
       <div v-if="!token" class="nav-right">
@@ -13,7 +14,7 @@
       <div v-else class="user-box nav-right">
         <el-badge :is-dot="user.unread" class="item">
           <!-- TODO 消息功能 -->
-          <span v-if="$store.state.roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>
+          <span v-if="roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>
           <span v-else style="font-size: 14px; margin: 0 10px;">用户版</span>
           <el-link icon="el-icon-message-solid">消息</el-link>
         </el-badge>
@@ -39,7 +40,7 @@ export default {
     Login
   },
   computed: {
-    ...mapGetters(['token', 'avatar']),
+    ...mapGetters(['token', 'avatar', 'roles']),
     user () {
       var user = {
         unread: true
@@ -53,7 +54,7 @@ export default {
     },
     dropdownCmd (obj) {
       if (obj === 'profile') {
-        if (this.$store.state.roles === 'user') {
+        if (this.roles === 'user') {
           this.$router.push('/user/profile')
         } else {
           this.$router.push('/boss/profile')
