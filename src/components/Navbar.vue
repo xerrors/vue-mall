@@ -99,13 +99,15 @@ export default {
     .nav-link
       display inline-block
       line-height navIconSize
-      margin 0 20px
+      margin 0 1.5rem
+      padding 0 1.5rem
 
       color navTextColor
       cursor pointer
 
       &:hover, &.active
-        color mainColor
+        color white
+        background-color mainColor
 
     .el-avatar
       width navIconSize
