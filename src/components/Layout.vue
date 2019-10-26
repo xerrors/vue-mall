@@ -4,6 +4,7 @@
       <navbar/>
     </header>
     <main>
+      <debug class="debug"/>
       <router-view/>
     </main>
     <footer>
@@ -15,12 +16,14 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Foot from '@/components/Foot.vue'
+import Debug from '@/components/Debug.vue'
 
 export default {
   name: 'layout',
   components: {
     Navbar,
-    Foot
+    Foot,
+    Debug
   }
 }
 </script>
@@ -58,4 +61,13 @@ export default {
 
     height fheight
     background-color footerBg
+</style>
+
+<style scoped>
+.debug {
+  position: absolute;
+  right: 100px;
+  top: 300px;
+  width: 400px;
+}
 </style>
