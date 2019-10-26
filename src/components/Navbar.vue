@@ -49,17 +49,22 @@ export default {
     }
   },
   methods: {
+    // 点击登录按钮触发
     login () {
       this.$store.state.showLogin = true
     },
+    // 对于下拉菜单栏的指令进行处理
     dropdownCmd (obj) {
+      // 跳转到对应的个人中心去
       if (obj === 'profile') {
         if (this.roles === 'user') {
-          this.$router.push('/user/profile')
+          this.$router.push('/user/center')
         } else {
-          this.$router.push('/boss/profile')
+          this.$router.push('/boss/center')
         }
       }
+
+      // 实现登出功能，现在只写了前端部分
       if (obj === 'logout') {
         this.$store
           .dispatch('FedLogOut')
@@ -75,6 +80,12 @@ export default {
           type: 'success'
         })
       }
+    }
+  },
+  mounted () {
+    if (this.$store.state.token) {
+      // 防止页面刷新之后无法获取用户信息
+      this.$store.dispatch('GetInfo')
     }
   }
 }

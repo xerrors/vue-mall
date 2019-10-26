@@ -78,6 +78,9 @@ export default {
           this.loading = false
         })
       this.$store.dispatch('GetInfo')
+      if (this.$route.path === '/') {
+        this.$router.push('/' + this.$store.state.roles + '/main')
+      }
       this.$message({
         message: '登录成功',
         type: 'success'
