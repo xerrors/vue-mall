@@ -4,8 +4,8 @@
     <div class="navbar">
       <router-link to="/"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
-        <router-link to='/test' class="nav-link" tag="div" v-if="roles==='boss'">商户用例</router-link>
-        <router-link to='/test' class="nav-link" tag="div" v-else>用户用例</router-link>
+        <router-link to='/bosstest' class="nav-link" tag="div" v-if="roles==='boss'">商户用例</router-link>
+        <router-link to='/usertest' class="nav-link" tag="div" v-if="roles==='user'">用户用例</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
       <div v-if="!token" class="nav-right">
@@ -69,11 +69,10 @@ export default {
         this.$store
           .dispatch('FedLogOut')
           .then(() => {
-            this.loading = false
+            this.$router.push('/')
           })
           .catch(err => {
             console.log(err)
-            this.loading = false
           })
         this.$message({
           message: '成功登出',
@@ -101,6 +100,7 @@ export default {
 
   background-color navBgColor
   box-shadow cardShadow
+  user-select none
 
   .logo
     height navIconSize
