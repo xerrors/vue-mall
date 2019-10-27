@@ -1,14 +1,16 @@
 <template>
   <div class="home">
-    <div class="box1" :style="{ backgroundImage: 'url(' +bg + ')'}">
+    <div :class="{showMsg: isShowMsg}" class="box1" :style="{ backgroundImage: 'url(' +bg + ')'}">
       <div class="pic-1-left"></div>
       <div class="text-box">
         <h1>易传 eTran</h1>
         <p>用科技让每个电子产品都死得其所！</p>
         <button @click="goCenter" v-if="token">进入主页</button>
         <button @click="goLogin" v-else>去登录</button>
+        <button @click="showMsg" class="more">了解更多</button>
       </div>
     </div>
+    <div class="home_msg" v-if="isShowMsg"></div>
   </div>
 </template>
 
@@ -19,7 +21,8 @@ export default {
   name: 'home',
   data () {
     return {
-      bg: 'home/bg-2.jpg'
+      bg: 'home/bg-2.jpg',
+      isShowMsg: false
     }
   },
   computed: {
@@ -31,14 +34,15 @@ export default {
     },
     goLogin () {
       this.$store.state.showLogin = true
+    },
+    showMsg () {
+      this.isShowMsg = true
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-*
-  user-select none
 .box1
   position: relative
   display flex
@@ -50,6 +54,7 @@ export default {
 
   background-size 100% 100%
   background-repeat no-repeat
+  user-select none
 
   &:after
     position: absolute;
@@ -83,7 +88,8 @@ export default {
       font-size inherit
       font-family inherit
       color white
-      padding 0.5em 1em
+      padding 0.5em 1.5em
+      margin-right 1rem
       outline none
       border-radius 2rem
       border none
@@ -108,4 +114,14 @@ export default {
         color #161616
         &::before
           transform translate3d(-50%, -50%, 0) scale3d(15, 15, 15)
+</style>
+
+<style lang="stylus" scoped>
+.showMsg
+  height 95vh
+  transition height 0.5s ease
+
+.home_msg
+  height 100vh
+  background #003847
 </style>

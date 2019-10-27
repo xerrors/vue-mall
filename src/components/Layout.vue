@@ -43,8 +43,10 @@ export default {
 </script>
 
 <style lang="stylus">
+// 为了美观就关掉了
 ::-webkit-scrollbar {
-  width: 0.3rem !important;
+  // width: 0.3rem !important;
+  width: 0 !important;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #f2f2f2;
@@ -66,13 +68,26 @@ export default {
   min-width 600px
   display flex
   flex-direction column
+  align-items center
+  header
+    width 100%
+    background-color navBgColor
+    .navbar
+      margin 0 auto
+      width 80%
+      max-width 100rem
+      min-width 75rem
   main
     flex 1
+    width 80%
+    max-width 100rem
+    min-width 75rem
   footer
     display flex
     justify-content center
     align-items center
 
+    width 100%
     height fheight
     background-color footerBg
 </style>

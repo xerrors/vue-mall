@@ -11,15 +11,16 @@
         <el-button round plain @click="login">登录</el-button>
       </div>
       <div v-else class="user-box nav-right">
-        <el-badge :is-dot="user.unread" class="item">
-          <!-- TODO 消息功能 -->
-          <span v-if="roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>
-          <span v-else style="font-size: 14px; margin: 0 10px;">用户版</span>
-          <el-link icon="el-icon-message-solid">消息</el-link>
-        </el-badge>
+        <span v-if="roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>
+        <span v-else style="font-size: 14px; margin: 0 10px;">用户版</span>
         <el-dropdown type="primary" @command="dropdownCmd">
-          <el-avatar :src="avatar"></el-avatar>
+          <el-badge :is-dot="user.unread" class="item">
+            <el-avatar :src="avatar"></el-avatar>
+          </el-badge>
           <el-dropdown-menu slot="dropdown">
+            <el-badge :is-dot="user.unread" class="item">
+              <el-dropdown-item command="msg">我的消息</el-dropdown-item>
+            </el-badge>
             <el-dropdown-item command="profile">我的主页</el-dropdown-item>
             <el-dropdown-item command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
@@ -38,7 +39,7 @@ export default {
     ...mapGetters(['token', 'avatar', 'roles', 'showLogin']),
     user () {
       var user = {
-        unread: true
+        unread: false
       }
       return user
     }
@@ -89,13 +90,9 @@ export default {
 .navbar
   display flex
   align-items center
-
   height navBarHeight
-  padding 0 30px
-
+  color navTextColor
   background-color navBgColor
-  // box-shadow cardShadow
-  border-bottom 1px solid #ccc
   user-select none
 
   .logo
@@ -108,8 +105,6 @@ export default {
       display inline-block
       line-height navIconSize - 10px
       margin 0 1.5rem
-
-      color navTextColor
       cursor pointer
 
       &::before, &::after
@@ -146,6 +141,9 @@ export default {
   .user-box
     display flex
     align-items center
+    .my-msg
+      font-size small
+      padding 0 1rem
     .el-button, .el-dropdown
       margin 0 10px
       height navIconSize

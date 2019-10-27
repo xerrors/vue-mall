@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <img src='logo_dark.png'/>
   </div>
 </template>
