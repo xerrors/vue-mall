@@ -4,11 +4,15 @@
     <header v-if="!hiddenNavbar">
       <navbar></navbar>
     </header>
-    <main>
-      <debug class="debug"/>
+
+    <main v-if="!isSpecialPage">
+      <!-- <debug class="debug"/> -->
       <router-view/>
     </main>
-    <footer  v-if="!hiddenFooter">
+
+    <router-view v-if="isSpecialPage"/>
+
+    <footer v-if="!hiddenFooter">
       <foot/>
     </footer>
   </div>
@@ -17,7 +21,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Foot from '@/components/Foot.vue'
-import Debug from '@/components/Debug.vue'
+// import Debug from '@/components/Debug.vue'
 import Login from '@/components/Login.vue'
 
 import { mapGetters } from 'vuex'
@@ -25,9 +29,9 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'layout',
   components: {
+    // Debug,
     Navbar,
     Foot,
-    Debug,
     Login
   },
   computed: {
@@ -37,6 +41,9 @@ export default {
     },
     hiddenFooter () {
       return this.$route.meta.hiddenFooter || false
+    },
+    isSpecialPage () {
+      return this.$route.meta.isSpecialPage || false
     }
   }
 }
@@ -90,6 +97,9 @@ export default {
     width 100%
     height fheight
     background-color footerBg
+
+  .home
+    width 100%
 </style>
 
 <style scoped>

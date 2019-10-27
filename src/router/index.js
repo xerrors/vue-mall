@@ -27,6 +27,7 @@ const routes = [
     name: 'home',
     component: () => import('@/views/Home'),
     meta: {
+      isSpecialPage: true,
       hiddenNavbar: true,
       hiddenFooter: true
     }
@@ -86,7 +87,7 @@ router.beforeEach((to, from, next) => {
         // console.log(store.state.roles)
         // console.log(to.meta.roles.indexOf(store.state.roles))
       } else {
-        next('/403')
+        next('/404')
       }
     } else {
       next()
