@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="navbar">
-      <router-link to="/"><img class="logo" src="logo_dark.png"></router-link>
+      <router-link :to="'/' + roles + '/main'"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
         <router-link to='/bosstest' class="nav-link" tag="div" v-if="roles==='boss'">商户用例</router-link>
         <router-link to='/usertest' class="nav-link" tag="div" v-if="roles==='user'">用户用例</router-link>
@@ -94,7 +94,8 @@ export default {
   padding 0 30px
 
   background-color navBgColor
-  box-shadow cardShadow
+  // box-shadow cardShadow
+  border-bottom 1px solid #ccc
   user-select none
 
   .logo

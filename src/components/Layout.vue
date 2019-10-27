@@ -84,5 +84,7 @@ export default {
   top: 300px;
   width: 200px;
   overflow: hidden;
+  background: rgba(0,0,0,.5);
+  color: white;
 }
 </style>

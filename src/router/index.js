@@ -71,27 +71,28 @@ const router = new VueRouter({
 
 // https://www.jianshu.com/p/986776a20352
 router.beforeEach((to, from, next) => {
-  if (store.state.token) { // 判断是否有token
-    if (to.path === '/login') {
-      next({ path: '/' })
-    } else {
-      if (!store.state.roles) { // 判断当前用户是否已拉取完user_info信息
-        store.dispatch('GetInfo').then(() => {
-          if (!to.meta.roles || to.meta.roles.indexOf(store.state.roles) > -1) {
-            next(to)
-          } else {
-            next('/403')
-          }
-        })
+  if (store.state.token) { // 判断是否有token(即是否登录)
+    if (!store.state.roles) { // 判断当前用户是否已拉取完user_info信息
+      store.dispatch('GetInfo')
+    }
+    // 判断当前用户的身份是否有权限访问这个页面，否则就跳转到 403
+    if (to.meta.roles) {
+      if (to.meta.roles.indexOf(store.state.roles) > -1) {
+        next()
+        // console.log(to.meta.roles)
+        // console.log(store.state.roles)
+        // console.log(to.meta.roles.indexOf(store.state.roles))
       } else {
-        next() // 当有用户权限的时候，说明所有可访问路由已生成 如访问没权限的全面会自动进入404页面
+        next('/403')
       }
+    } else {
+      next()
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
       next()
     } else {
-      next('/') // 否则全部重定向到登录页
+      next('/') // 否则全部重定向到主页并提示登录
       store.state.showLogin = true
     }
   }

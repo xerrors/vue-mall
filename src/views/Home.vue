@@ -3,8 +3,8 @@
     <div class="box1" :style="{ backgroundImage: 'url(' +bg + ')'}">
       <div class="pic-1-left"></div>
       <div class="text-box">
-        <h1>Welcome</h1>
-        <p>thanks god to take me here, And my name is HanMeimei!</p>
+        <h1>易传 eTran</h1>
+        <p>用科技让每个电子产品都死得其所！</p>
         <button @click="goCenter" v-if="token">进入主页</button>
         <button @click="goLogin" v-else>去登录</button>
       </div>
@@ -37,6 +37,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+*
+  user-select none
 .box1
   position: relative
   display flex
