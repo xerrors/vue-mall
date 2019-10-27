@@ -51,6 +51,11 @@ export default {
     },
     // 对于下拉菜单栏的指令进行处理
     dropdownCmd (obj) {
+      // 跳转到消息中心去
+      if (obj === 'msg') {
+        this.$router.push('/messages')
+      }
+
       // 跳转到对应的个人中心去
       if (obj === 'profile') {
         if (this.roles === 'user') {
