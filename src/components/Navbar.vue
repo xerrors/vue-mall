@@ -1,6 +1,5 @@
 <template>
   <div>
-    <login :is-show='!token'/>
     <div class="navbar">
       <router-link to="/"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
@@ -32,15 +31,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Login from '@/components/Login.vue'
 
 export default {
   nmae: 'nav-bar',
-  components: {
-    Login
-  },
   computed: {
-    ...mapGetters(['token', 'avatar', 'roles']),
+    ...mapGetters(['token', 'avatar', 'roles', 'showLogin']),
     user () {
       var user = {
         unread: true
@@ -82,7 +77,7 @@ export default {
     }
   },
   mounted () {
-    if (this.$store.state.token) {
+    if (this.token) {
       // 防止页面刷新之后无法获取用户信息
       this.$store.dispatch('GetInfo')
     }
@@ -108,17 +103,38 @@ export default {
 
   .nav-links
     .nav-link
+      position relative
       display inline-block
-      line-height navIconSize
+      line-height navIconSize - 10px
       margin 0 1.5rem
-      padding 0 1.5rem
 
       color navTextColor
       cursor pointer
 
-      &:hover, &.active
-        color white
+      &::before, &::after
+        content ''
+        position absolute
+        left 0
+        right 0
+        height 2px
         background-color mainColor
+        transform scaleX(0)
+        transition transform 0.5s ease
+
+      &::before
+        top 0
+        transform-origin center right
+      &::after
+        bottom 0
+        transform-origin center left
+
+      &:hover, &.active
+        &::before
+          transform-origin center left
+          transform scaleX(1)
+        &::after
+          transform-origin center right
+          transform scaleX(1)
 
     .el-avatar
       width navIconSize
@@ -132,5 +148,5 @@ export default {
     .el-button, .el-dropdown
       margin 0 10px
       height navIconSize
-      cursor: pointer;
+      cursor pointer
 </style>

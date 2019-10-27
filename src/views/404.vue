@@ -18,7 +18,7 @@ export default {
   name: "Page404",
   computed: {
     message() {
-      return "好像并没有找到这个界面。。。";
+      return "页面似乎不存在~~~";
     }
   },
   methods: {
@@ -30,30 +30,35 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.page404 {
+.page404
   display flex
-  align-items space-between
+  align-items center
+  justify-content center
   flex-wrap wrap
 
-  margin: 50px;
-  overflow: hidden; 
-  .img404 {
-    margin-right: 50px;
-    float: left;
-    width: 550px;
-    overflow: hidden;
+  height 100vh
+  overflow: hidden
+
+  .img404
     opacity: 0;
+    display inline-block
+
     animation-name: slideUp;
     animation-duration: 0.5s;
     animation-delay: 0.1s;
-    animation-fill-mode: forwards;
-  }
-  .errorcard {
+    animation-fill-mode: forwards
+
+    object-fit scale-down
+    width 50vw
+    min-width 400px
+
+  .errorcard
     float: left;
-    width: 300px;
-    padding: 30px 0;
+    width: 30vw;
+    min-width 400px
+    margin-left 30px
     overflow: hidden;
-    &__oops {
+    &__oops
       font-size: 32px;
       font-weight: bold;
       line-height: 40px;
@@ -64,8 +69,7 @@ export default {
       animation-duration: 0.5s;
       animation-delay: 0.1s;
       animation-fill-mode: forwards;
-    }
-    &__headline {
+    &__headline
       font-size: 20px;
       line-height: 24px;
       color: #222;
@@ -76,36 +80,31 @@ export default {
       animation-duration: 0.5s;
       animation-delay: 0.2s;
       animation-fill-mode: forwards;
-    }
-    &__info {
-      font-size: 13px;
-      line-height: 21px;
+
+    &__info
+      font-size: 0.8rem;
+      line-height: 1.5rem;
       color: grey;
       opacity: 0;
-      margin-bottom: 30px;
+      margin-bottom: 2rem;
       animation-name: slideUp;
       animation-duration: 0.5s;
       animation-delay: 0.3s;
       animation-fill-mode: forwards;
-    }
-    &__return-btn {
+    &__return-btn
       opacity: 0;
       cursor: pointer;
       animation-name: slideUp;
       animation-duration: 0.5s;
       animation-delay: 0.4s;
       animation-fill-mode: forwards;
-    }
-    @keyframes slideUp {
-      0% {
+
+    @keyframes slideUp
+      0%
         transform: translateY(60px);
         opacity: 0;
-      }
-      100% {
+
+      100%
         transform: translateY(0);
         opacity: 1;
-      }
-    }
-  }
-}
 </style>

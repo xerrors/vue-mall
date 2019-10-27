@@ -8,14 +8,29 @@ Vue.use(VueRouter)
 var whiteList = ['/', '/about', '/404', '/403']
 
 const routes = [
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
   {
+    path: '/403',
+    component: () => import('@/views/403'),
+    meta: {
+      hiddenNavbar: true,
+      hiddenFooter: true
+    }
+  }, {
+    path: '/404',
+    component: () => import('@/views/404'),
+    meta: {
+      hiddenNavbar: true,
+      hiddenFooter: true
+    }
+  }, {
     path: '/',
     name: 'home',
-    component: () => import('@/views/Home')
-  },
-
-  {
+    component: () => import('@/views/Home'),
+    meta: {
+      hiddenNavbar: true,
+      hiddenFooter: true
+    }
+  }, {
     path: '/boss/main',
     component: () => import('@/views/boss/product_flow'),
     meta: {
@@ -46,9 +61,7 @@ const routes = [
   { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
   { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
 
-  { path: '/403', name: '403', component: () => import('@/views/403') },
-
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/404' }
 ]
 
 const router = new VueRouter({

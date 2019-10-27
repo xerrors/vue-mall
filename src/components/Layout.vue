@@ -1,13 +1,14 @@
 <template>
   <div class="layout">
-    <header>
-      <navbar/>
+    <login :is-show='!token'/>
+    <header v-if="!hiddenNavbar">
+      <navbar></navbar>
     </header>
     <main>
       <debug class="debug"/>
       <router-view/>
     </main>
-    <footer>
+    <footer  v-if="!hiddenFooter">
       <foot/>
     </footer>
   </div>
@@ -17,13 +18,26 @@
 import Navbar from '@/components/Navbar.vue'
 import Foot from '@/components/Foot.vue'
 import Debug from '@/components/Debug.vue'
+import Login from '@/components/Login.vue'
+
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'layout',
   components: {
     Navbar,
     Foot,
-    Debug
+    Debug,
+    Login
+  },
+  computed: {
+    ...mapGetters(['token']),
+    hiddenNavbar () {
+      return this.$route.meta.hiddenNavbar || false
+    },
+    hiddenFooter () {
+      return this.$route.meta.hiddenFooter || false
+    }
   }
 }
 </script>
@@ -49,7 +63,7 @@ export default {
 
 .layout
   min-height 100vh
-  min-width 400px
+  min-width 600px
   display flex
   flex-direction column
   main
@@ -68,6 +82,7 @@ export default {
   position: absolute;
   right: 100px;
   top: 300px;
-  width: 400px;
+  width: 200px;
+  overflow: hidden;
 }
 </style>
