@@ -46,3 +46,12 @@ export function register (userForm) {
     }
   })
 }
+
+// 获取消息
+export function getMsg (token, roles) {
+  return request({
+    url: '/getMsg',
+    method: 'get',
+    params: { token, roles }
+  })
+}

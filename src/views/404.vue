@@ -51,6 +51,7 @@ export default {
     object-fit scale-down
     width 50vw
     min-width 400px
+    max-width 600px
 
   .errorcard
     float: left;

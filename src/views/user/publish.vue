@@ -23,11 +23,16 @@ export default {
 <style lang="stylus" scoped>
 .publish
   &__top_box
-    position absolute
-    left 0
-    width 100vw
     height 20rem
-    background-color navBgColor
+    &::after
+      content ''
+      z-index -1
+      position absolute
+      left 0
+      top navBarHeight
+      width 100vw
+      height 20rem
+      background navBgColor
   &__title
     padding-top 4rem
     color white
