@@ -11,12 +11,9 @@
           v-model="model"
           :options="options"
           :props="{ expandTrigger: 'hover' }"
-          @change="handleChange"></el-cascader>
+          @change="mdSelected"></el-cascader>
       </div>
-
-      <el-button @click="test">测试</el-button>
-
-      <el-collapse v-model="activeNames" accordion>
+      <el-collapse v-if="modelSelected" v-model="activeNames" accordion>
         <el-collapse-item
           v-for="(select, ind) in selections" :key="ind"
           :title="title(select, ind)"
@@ -252,8 +249,8 @@ export default {
     handleChange (value) {
       console.log(value)
     },
-    test () {
-      console.log(this.selections)
+    mdSelected () {
+      this.modelSelected = true
     }
   },
   computed: {
@@ -276,7 +273,6 @@ export default {
       }, {
         label: '手机状态',
         value: 'status1',
-        selected: 0,
         options: [{
           label: '正常进入桌面',
           value: 'nomal'
@@ -290,7 +286,6 @@ export default {
       }, {
         label: '手机状态',
         value: 'status2',
-        selected: 0,
         options: [{
           label: '正常进入桌面',
           value: 'nomal'
@@ -304,7 +299,6 @@ export default {
       }, {
         label: '手机状态',
         value: 'status3',
-        selected: 0,
         options: [{
           label: '正常进入桌面',
           value: 'nomal'
@@ -342,6 +336,6 @@ export default {
 
   .select
     width 60%
-    min-width 50rem
+    min-width 30rem
     margin 0 auto
 </style>

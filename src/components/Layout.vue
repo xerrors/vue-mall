@@ -83,12 +83,12 @@ export default {
       margin 0 auto
       width 80%
       max-width 100rem
-      min-width 75rem
+      min-width 40rem
   main
     flex 1
     width 80%
     max-width 100rem
-    min-width 75rem
+    min-width 40rem
   footer
     display flex
     justify-content center
