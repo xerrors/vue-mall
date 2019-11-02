@@ -110,6 +110,7 @@ export default {
       display inline-block
       line-height navIconSize - 10px
       margin 0 1.5rem
+      font-weight bolder
       cursor pointer
 
       &::before, &::after
