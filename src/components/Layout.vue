@@ -94,6 +94,7 @@ export default {
     justify-content center
     align-items center
 
+    margin-top 10rem
     width 100%
     height fheight
     background-color footerBg

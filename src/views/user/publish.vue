@@ -3,29 +3,69 @@
     <div class="publish__top_box">
       <h1 class="publish__title">发布你的产品</h1>
     </div>
-
+    <!-- TODO: 组件化 -->
+    <!-- 选择机型 -->
     <div class="select">
-      <div class="block">
-        <span class="demonstration">选择你的机型：</span>
-        <el-cascader
+      <div v-if="step==1" class="block">
+        <h4 class="demonstration">选择你的机型：</h4>
+        <!-- <el-cascader
+          placeholder="试试搜索：Mate20"
           v-model="model"
           :options="options"
-          :props="{ expandTrigger: 'hover' }"
+          filterable
           @change="mdSelected"></el-cascader>
+        <el-button class="pub_btn" @click="handleNext" type="primary">></el-button> -->
+        <el-cascader-panel
+          v-model="model"
+          :options="options"
+          @change="mdSelected"></el-cascader-panel>
+        <el-button class="pub_btn" @click="handleNext" type="primary">下一步</el-button>
       </div>
-      <el-collapse v-if="modelSelected" v-model="activeNames" accordion>
-        <el-collapse-item
-          v-for="(select, ind) in selections" :key="ind"
-          :title="title(select, ind)"
-          :name="select.value">
-          <el-radio-group v-model="selected[ind]">
-            <el-radio
-              v-for="(option, index) in select.options" :key="index"
-              :label="index"
-              border>{{ option.label }}</el-radio>
-          </el-radio-group>
-        </el-collapse-item>
-      </el-collapse>
+      <!-- 选择手机的情况信息 -->
+      <div v-if="step==2">
+        <h4>根据手机情况选择</h4>
+        <el-collapse v-model="activeNames" accordion>
+          <el-collapse-item
+            v-for="(select, ind) in selections" :key="ind"
+            :title="title(select, ind)"
+            :name="select.value">
+            <el-radio-group v-model="selected[ind]">
+              <el-radio
+                v-for="(option, index) in select.options" :key="index"
+                :label="index"
+                border>{{ option.label }}</el-radio>
+            </el-radio-group>
+          </el-collapse-item>
+        </el-collapse>
+        <!-- 添加手机的照片，必选项 -->
+        <h4>添加手机正面、背面、边框的照片</h4>
+        <el-upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove">
+          <i class="el-icon-plus"></i>
+        </el-upload>
+        <el-dialog :visible.sync="dialogVisible">
+          <img width="100%" :src="dialogImageUrl" alt="">
+        </el-dialog>
+        <!-- 交互逻辑按钮 -->
+        <el-button class="pub_btn" @click="handlePre">上一步</el-button>
+        <el-button class="pub_btn" @click="handleNext" type="primary">下一步</el-button>
+      </div>
+
+      <div v-if="step ==3">
+        <h4>添加手机的描述</h4>
+
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 2, maxRows: 10}"
+          placeholder="请输入描述"
+          v-model="describe">
+        </el-input>
+        <el-button class="pub_btn" @click="handlePre">上一步</el-button>
+        <el-button class="pub_btn" @click="publish" type="primary">提交</el-button>
+      </div>
     </div>
 
   </div>
@@ -35,9 +75,13 @@
 export default {
   data () {
     return {
-      selected: [],
-      activeNames: ['0'],
-      model: [],
+      dialogImageUrl: '',
+      dialogVisible: false,
+      selected: [], // 记录用户的选择
+      activeNames: ['0'], // 选择需要展开的页面
+      model: [], // 保存用户的机型信息
+      describe: '', // 哟用户填写的描述
+      step: 1, // 当前进行的步骤是第几步
       options: [{
         value: 'zhinan',
         label: '指南',
@@ -251,6 +295,27 @@ export default {
     },
     mdSelected () {
       this.modelSelected = true
+    },
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview (file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
+    },
+    // 处理下一步交互逻辑
+    handleNext () {
+      // TODO:如果当前界面的信息没有填完，无法进入下一步
+      this.step += 1
+    },
+    // 处理上一步交互逻辑
+    handlePre () {
+      this.step -= 1
+    },
+    // 提交操作 TODO:
+    publish () {
+      // 将手机的信息传到服务器，同时返还一个商品ID，然后界面跳转到商品详情界面
+
     }
   },
   computed: {
@@ -338,4 +403,7 @@ export default {
     width 60%
     min-width 30rem
     margin 0 auto
+
+    .pub_btn
+      margin-top 20px
 </style>
