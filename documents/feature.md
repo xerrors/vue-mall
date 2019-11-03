@@ -1,3 +1,7 @@
+全新任务看板：
+
+[腾讯云](https://dev.tencent.com/u/Xerrors/p/eTran/tasks/board)
+
 - [x] 配置全局变量以及形式
 
 - [x] 配置导航栏
