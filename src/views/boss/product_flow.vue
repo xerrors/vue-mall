@@ -1,5 +1,14 @@
 <template>
   <div>
-    <h1>Boos main</h1>
+    <pd-card/>
   </div>
 </template>
+
+<script>
+import PdCard from '@/components/PdCard.vue'
+export default {
+  components: {
+    PdCard
+  }
+}
+</script>
