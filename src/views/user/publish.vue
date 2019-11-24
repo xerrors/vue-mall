@@ -7,19 +7,36 @@
     <!-- 选择机型 -->
     <div class="select">
       <div v-if="step==1" class="block">
-        <h4 class="demonstration">选择你的机型：</h4>
-        <!-- <el-cascader
-          placeholder="试试搜索：Mate20"
-          v-model="model"
-          :options="options"
-          filterable
-          @change="mdSelected"></el-cascader>
-        <el-button class="pub_btn" @click="handleNext" type="primary">></el-button> -->
-        <el-cascader-panel
-          v-model="model"
-          :options="options"
-          @change="mdSelected"></el-cascader-panel>
-        <el-button class="pub_btn" @click="handleNext" type="primary">下一步</el-button>
+        <div class="model_box">
+          <div class="tabs">
+            <div
+              v-for="(brand, index) in brands"
+              :key="index"
+              class="tab"
+              :class="{ tab_active: form.brand.value===brand.value }"
+              @click="handleBrand(brand.value, index)"
+              >{{brand.label}}</div>
+            <div class="tab">其他</div>
+          </div>
+          <div class="models models_1" v-if="show_models === 1">
+            <div
+              class="model"
+              v-for="(model, index) in brands[form.brand.index].models.slice(0, 5)"
+              :key="index"
+              @click="handleSelectModel(model)">
+                <div>{{ model.label }}</div>
+              </div>
+          </div>
+          <div class="models models_2" v-if="show_models === 2">
+            <div
+              class="model"
+              v-for="(model, index) in brands[form.brand.index].models.slice(5, 9)"
+              :key="index"
+              @click="handleSelectModel(model)">
+                <div>{{ model.label }}</div>
+              </div>
+            </div>
+          </div>
       </div>
       <!-- 选择手机的情况信息 -->
       <div v-if="step==2">
@@ -29,7 +46,7 @@
             v-for="(select, ind) in selections" :key="ind"
             :title="title(select, ind)"
             :name="select.value">
-            <el-radio-group v-model="selected[ind]">
+            <el-radio-group v-model="form.selected[ind]">
               <el-radio
                 v-for="(option, index) in select.options" :key="index"
                 :label="index"
@@ -61,7 +78,7 @@
           type="textarea"
           :autosize="{ minRows: 2, maxRows: 10}"
           placeholder="请输入描述"
-          v-model="describe">
+          v-model="form.describe">
         </el-input>
         <el-button class="pub_btn" @click="handlePre">上一步</el-button>
         <el-button class="pub_btn" @click="publish" type="primary">提交</el-button>
@@ -75,216 +92,300 @@
 export default {
   data () {
     return {
+      show_models: 1, // 两个机型块展示哪一个
+      step: 1, // 当前进行的步骤是第几步
       dialogImageUrl: '',
       dialogVisible: false,
-      selected: [], // 记录用户的选择
-      activeNames: ['0'], // 选择需要展开的页面
-      model: [], // 保存用户的机型信息
-      describe: '', // 哟用户填写的描述
-      step: 1, // 当前进行的步骤是第几步
-      options: [{
-        value: 'zhinan',
-        label: '指南',
-        children: [{
-          value: 'shejiyuanze',
-          label: '设计原则',
-          children: [{
-            value: 'yizhi',
-            label: '一致'
-          }, {
-            value: 'fankui',
-            label: '反馈'
-          }, {
-            value: 'xiaolv',
-            label: '效率'
-          }, {
-            value: 'kekong',
-            label: '可控'
-          }]
+      activeNames: ['status'], // 选择需要展开的页面
+      brands: [{
+        label: '华为',
+        value: 'Huawei',
+        models: [{
+          label: '华为 Mate30',
+          value: 'Huawei Mate30'
         }, {
-          value: 'daohang',
-          label: '导航',
-          children: [{
-            value: 'cexiangdaohang',
-            label: '侧向导航'
-          }, {
-            value: 'dingbudaohang',
-            label: '顶部导航'
-          }]
+          label: '华为 Mate30 Pro',
+          value: 'Huawei Mate30 Pro'
+        }, {
+          label: '华为 Mate30 Pro 5G',
+          value: 'Huawei Mate30 Pro 5G'
+        }, {
+          label: '华为 P30',
+          value: 'Huawei P30'
+        }, {
+          label: '华为 P30 Pro',
+          value: 'Huawei P30 Pro'
+        }, {
+          label: '华为 MateX',
+          value: 'Huawei MateX'
+        }, {
+          label: '华为 Mate20',
+          value: 'Huawei Mate20'
+        }, {
+          label: '华为 Mate20 Pro',
+          value: 'Huawei Mate20 Pro'
+        }, {
+          label: '华为 Mate20X',
+          value: 'Huawei Mate20X'
+        }, {
+          label: '华为 Mate20X 5G',
+          value: 'Huawei Mate20X 5G'
         }]
       }, {
-        value: 'zujian',
-        label: '组件',
-        children: [{
-          value: 'basic',
-          label: 'Basic',
-          children: [{
-            value: 'layout',
-            label: 'Layout 布局'
-          }, {
-            value: 'color',
-            label: 'Color 色彩'
-          }, {
-            value: 'typography',
-            label: 'Typography 字体'
-          }, {
-            value: 'icon',
-            label: 'Icon 图标'
-          }, {
-            value: 'button',
-            label: 'Button 按钮'
-          }]
+        label: '苹果',
+        value: 'Apple',
+        models: [{
+          label: '苹果 iPhone 11',
+          value: 'Apple iPhone 11'
         }, {
-          value: 'form',
-          label: 'Form',
-          children: [{
-            value: 'radio',
-            label: 'Radio 单选框'
-          }, {
-            value: 'checkbox',
-            label: 'Checkbox 多选框'
-          }, {
-            value: 'input',
-            label: 'Input 输入框'
-          }, {
-            value: 'input-number',
-            label: 'InputNumber 计数器'
-          }, {
-            value: 'select',
-            label: 'Select 选择器'
-          }, {
-            value: 'cascader',
-            label: 'Cascader 级联选择器'
-          }, {
-            value: 'switch',
-            label: 'Switch 开关'
-          }, {
-            value: 'slider',
-            label: 'Slider 滑块'
-          }, {
-            value: 'time-picker',
-            label: 'TimePicker 时间选择器'
-          }, {
-            value: 'date-picker',
-            label: 'DatePicker 日期选择器'
-          }, {
-            value: 'datetime-picker',
-            label: 'DateTimePicker 日期时间选择器'
-          }, {
-            value: 'upload',
-            label: 'Upload 上传'
-          }, {
-            value: 'rate',
-            label: 'Rate 评分'
-          }, {
-            value: 'form',
-            label: 'Form 表单'
-          }]
+          label: '苹果 iPhone 11 Pro',
+          value: 'Apple iPhone 11Pro'
         }, {
-          value: 'data',
-          label: 'Data',
-          children: [{
-            value: 'table',
-            label: 'Table 表格'
-          }, {
-            value: 'tag',
-            label: 'Tag 标签'
-          }, {
-            value: 'progress',
-            label: 'Progress 进度条'
-          }, {
-            value: 'tree',
-            label: 'Tree 树形控件'
-          }, {
-            value: 'pagination',
-            label: 'Pagination 分页'
-          }, {
-            value: 'badge',
-            label: 'Badge 标记'
-          }]
+          label: '苹果 iPhone XR',
+          value: 'Apple iPhone XR'
         }, {
-          value: 'notice',
-          label: 'Notice',
-          children: [{
-            value: 'alert',
-            label: 'Alert 警告'
-          }, {
-            value: 'loading',
-            label: 'Loading 加载'
-          }, {
-            value: 'message',
-            label: 'Message 消息提示'
-          }, {
-            value: 'message-box',
-            label: 'MessageBox 弹框'
-          }, {
-            value: 'notification',
-            label: 'Notification 通知'
-          }]
+          label: '苹果 iPhone XS',
+          value: 'Apple iPhone XS'
         }, {
-          value: 'navigation',
-          label: 'Navigation',
-          children: [{
-            value: 'menu',
-            label: 'NavMenu 导航菜单'
-          }, {
-            value: 'tabs',
-            label: 'Tabs 标签页'
-          }, {
-            value: 'breadcrumb',
-            label: 'Breadcrumb 面包屑'
-          }, {
-            value: 'dropdown',
-            label: 'Dropdown 下拉菜单'
-          }, {
-            value: 'steps',
-            label: 'Steps 步骤条'
-          }]
+          label: '苹果 iPhone XS Max',
+          value: 'Apple iPhone XS Max'
         }, {
-          value: 'others',
-          label: 'Others',
-          children: [{
-            value: 'dialog',
-            label: 'Dialog 对话框'
-          }, {
-            value: 'tooltip',
-            label: 'Tooltip 文字提示'
-          }, {
-            value: 'popover',
-            label: 'Popover 弹出框'
-          }, {
-            value: 'card',
-            label: 'Card 卡片'
-          }, {
-            value: 'carousel',
-            label: 'Carousel 走马灯'
-          }, {
-            value: 'collapse',
-            label: 'Collapse 折叠面板'
-          }]
+          label: '苹果 iPhone X',
+          value: 'Apple iPhone X'
+        }, {
+          label: '苹果 iPhone8',
+          value: 'Apple iPhone8'
+        }, {
+          label: '苹果 iPhone8 plus',
+          value: 'Apple iPhone8 plus'
+        }, {
+          label: '苹果 iPhone7 plus',
+          value: 'Apple iPhone7 plus'
+        }, {
+          label: '苹果 iPhone7',
+          value: 'Apple iPhone7'
         }]
       }, {
-        value: 'ziyuan',
-        label: '资源',
-        children: [{
-          value: 'axure',
-          label: 'Axure Components'
+        label: 'OPPO',
+        value: 'OPPO',
+        models: [{
+          label: 'OPPO Reno 2',
+          value: 'OPPO Reno 2'
         }, {
-          value: 'sketch',
-          label: 'Sketch Templates'
+          label: 'OPPO Reno 2Z',
+          value: 'OPPO Reno 2Z'
         }, {
-          value: 'jiaohu',
-          label: '组件交互文档'
+          label: 'OPPO Reno Ace',
+          value: 'OPPO Reno Ace'
+        }, {
+          label: 'OPPO Reno',
+          value: 'OPPO Reno'
+        }, {
+          label: 'OPPO FindX',
+          value: 'OPPO FindX'
+        }, {
+          label: 'OPPO R17 Pro',
+          value: 'OPPO R17 Pro'
+        }, {
+          label: 'OPPO R17',
+          value: 'OPPO R17'
+        }, {
+          label: 'OPPO R15',
+          value: 'OPPO R15'
+        }, {
+          label: 'OPPO K3',
+          value: 'OPPO K3'
+        }, {
+          label: 'OPPO Find 7',
+          value: 'OPPO Find 7'
         }]
-      }]
+      }, {
+        label: '小米',
+        value: 'XiaoMi',
+        models: [{
+          label: '小米 9 Pro',
+          value: 'XiaoMi 9 Pro'
+        }, {
+          label: '小米 9',
+          value: 'XiaoMi 9'
+        }, {
+          label: '小米 CC9 Pro',
+          value: 'XiaoMi CC9 Pro'
+        }, {
+          label: '小米 CC9',
+          value: 'XiaoMi CC9'
+        }, {
+          label: '小米 Redmi K20',
+          value: 'XiaoMi Redmi K20'
+        }, {
+          label: '小米 Redmi K20 Pro',
+          value: 'XiaoMi Redmi K20 Pro'
+        }, {
+          label: '小米 8',
+          value: 'XiaoMi 8'
+        }, {
+          label: '小米 8 SE',
+          value: 'XiaoMi 8 SE'
+        }, {
+          label: '小米 Mix 3',
+          value: 'XiaoMi Mix 3'
+        }, {
+          label: '小米 Mix 3 5G',
+          value: 'XiaoMi Mix 3 5G'
+        }]
+      }, {
+        label: 'Vivo',
+        value: 'Vivo',
+        models: [{
+          label: 'Vivo iQOO Pro',
+          value: 'Vivo iQOO Pro'
+        }, {
+          label: 'Vivo iQOO',
+          value: 'Vivo iQOO'
+        }, {
+          label: 'Vivo iQOO Neo',
+          value: 'Vivo iQOO Neo'
+        }, {
+          label: 'Vivo Nex 3',
+          value: 'Vivo Nex 3'
+        }, {
+          label: 'Vivo X27',
+          value: 'Vivo X27'
+        }, {
+          label: 'Vivo X27 Pro',
+          value: 'Vivo X27 Pro'
+        }, {
+          label: 'Vivo S5',
+          value: 'Vivo S5'
+        }, {
+          label: 'Vivo Z5',
+          value: 'Vivo Z5'
+        }, {
+          label: 'Vivo Z5x',
+          value: 'Vivo Z5x'
+        }, {
+          label: 'Vivo Y7s',
+          value: 'Vivo Y7s'
+        }]
+      }],
+      selections: [{
+        label: '手机状态',
+        value: 'status',
+        options: [{
+          label: '正常进入桌面',
+          value: 'nomal'
+        }, {
+          label: '无法开机或者进入桌面',
+          value: 'unbootlog'
+        }, {
+          label: '全新未拆封',
+          value: 'brandnew'
+        }]
+      }, {
+        label: '内存、存储容量',
+        value: 'status1',
+        options: [{
+          label: '256G',
+          value: '256G'
+        }, {
+          label: '128G',
+          value: '128G'
+        }, {
+          label: '64G',
+          value: '64G'
+        }]
+      }, {
+        label: '账号是否可退出',
+        value: 'status2',
+        options: [{
+          label: '可正常退出',
+          value: 'nomal'
+        }, {
+          label: '不可退出',
+          value: 'disexit'
+        }]
+      }, {
+        label: '磨损程度',
+        value: 'status3',
+        options: [{
+          label: '外壳无瑕疵',
+          value: 'almost_new'
+        }, {
+          label: '细微划痕无磕碰',
+          value: 'slightly'
+        }, {
+          label: '磕碰掉漆、边框磨损',
+          value: 'middle'
+        }, {
+          label: '外壳裂缝、变形',
+          value: 'heavy'
+        }]
+      }, {
+        label: '屏幕磨损',
+        value: 'status4',
+        options: [{
+          label: '完美使用无划痕',
+          value: 'almost_new'
+        }, {
+          label: '细微划痕',
+          value: 'slightly'
+        }, {
+          label: '划伤、脱胶、小缺角',
+          value: 'middle'
+        }, {
+          label: '碎裂、边角破损',
+          value: 'heavy'
+        }]
+      }, {
+        label: '屏幕显示',
+        value: 'status5',
+        options: [{
+          label: '完美无瑕疵',
+          value: 'almost_new'
+        }, {
+          label: '显示色差，或轻微泛黄/亮坏点',
+          value: 'slightly'
+        }, {
+          label: '显示烧屏，或有透图/透字',
+          value: 'middle'
+        }, {
+          label: '显示漏液，或闪烁/横竖线/花屏',
+          value: 'heavy'
+        }]
+      }, {
+        label: '维修情况',
+        value: 'status6',
+        options: [{
+          label: '无维修情况',
+          value: 'almost_new'
+        }, {
+          label: '屏幕维修',
+          value: 'slightly'
+        }, {
+          label: '主板维修或功能故障',
+          value: 'middle'
+        }, {
+          label: '屏幕和主板皆有维修',
+          value: 'heavy'
+        }]
+      }],
+      form: {
+        brand: {
+          value: 'Huawei',
+          index: 0
+        },
+        model: '', // 保存用户的机型信息
+        selected: [], // 记录用户的选择的手机的状态
+        describe: '' // 用户填写的描述
+      }
     }
   },
   methods: {
     title (select, ind) {
       const head = select.label + ' : '
       let tail = ''
-      if (select.options[this.selected[ind]]) {
-        tail = select.options[this.selected[ind]].label
+      if (select.options[this.form.selected[ind]]) {
+        tail = select.options[this.form.selected[ind]].label
       } else {
         tail = '未选择'
       }
@@ -303,6 +404,10 @@ export default {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
     },
+    handleSelectModel (model) {
+      this.form.model = model
+      this.step += 1
+    },
     // 处理下一步交互逻辑
     handleNext () {
       // TODO:如果当前界面的信息没有填完，无法进入下一步
@@ -312,69 +417,13 @@ export default {
     handlePre () {
       this.step -= 1
     },
+    handleBrand (value, index) {
+      this.form.brand.value = value
+      this.form.brand.index = index
+    },
     // 提交操作 TODO:
     publish () {
       // 将手机的信息传到服务器，同时返还一个商品ID，然后界面跳转到商品详情界面
-
-    }
-  },
-  computed: {
-    selections () {
-      // TODO: 数据用例
-      return [{
-        label: '手机状态',
-        value: 'status',
-        selected: 0,
-        options: [{
-          label: '正常进入桌面',
-          value: 'nomal'
-        }, {
-          label: '无法开机或者进入桌面',
-          value: 'unbootlog'
-        }, {
-          label: '全新未拆封',
-          value: 'brandnew'
-        }]
-      }, {
-        label: '手机状态',
-        value: 'status1',
-        options: [{
-          label: '正常进入桌面',
-          value: 'nomal'
-        }, {
-          label: '无法开机或者进入桌面',
-          value: 'unbootlog'
-        }, {
-          label: '全新未拆封',
-          value: 'brandnew'
-        }]
-      }, {
-        label: '手机状态',
-        value: 'status2',
-        options: [{
-          label: '正常进入桌面',
-          value: 'nomal'
-        }, {
-          label: '无法开机或者进入桌面',
-          value: 'unbootlog'
-        }, {
-          label: '全新未拆封',
-          value: 'brandnew'
-        }]
-      }, {
-        label: '手机状态',
-        value: 'status3',
-        options: [{
-          label: '正常进入桌面',
-          value: 'nomal'
-        }, {
-          label: '无法开机或者进入桌面',
-          value: 'unbootlog'
-        }, {
-          label: '全新未拆封',
-          value: 'brandnew'
-        }]
-      }]
     }
   }
 }
@@ -399,11 +448,64 @@ export default {
     text-align center
     font-size 3rem
 
+  .block
+    .model_box
+      height 20rem
+      border 1px solid #f3f4f5
+      border-radius 3px
+      box-shadow cardShadow
+      .tabs
+        display flex
+        align-items center
+        .tab
+          flex-grow 1
+          text-align center
+          height 3rem
+          line-height 3rem
+          background #f3f4f5
+          &:hover
+            background white
+            cursor pointer
+        .tab_active
+          background white
+    .models
+      width 100%
+      height 17rem
+      display flex
+      justify-content center
+      align-items center
+      .model
+        width: 18%
+        height 80%
+        text-align center
+        display inline-block
+        &:hover
+          cursor pointer
+          color mainColor
+
   .select
-    width 60%
+    width 80%
     min-width 30rem
     margin 0 auto
 
     .pub_btn
       margin-top 20px
+</style>
+
+<style lang="stylus">
+// 对 ElementUI 的原本的样式进行修改
+.el-radio.is-bordered+.el-radio.is-bordered
+  margin-left 10px
+
+.el-radio
+  &.is-bordered
+    padding 0 10px
+    margin 10px
+    height 2rem
+  &__inner
+    display none
+  &__label
+    font-size smaller
+    line-height 2rem
+    padding-left 0
 </style>

@@ -67,6 +67,11 @@ const routes = [
     component: () => import('@/views/Messages.vue')
   },
 
+  {
+    path: '/product/:id',
+    component: () => import('@/views/Product.vue')
+  },
+
   { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
   { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
 

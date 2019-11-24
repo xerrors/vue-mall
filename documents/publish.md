@@ -9,17 +9,12 @@
         "label": String,
         "value": String,
         "children": [{
-            // 系列
+            // 具体型号
             "label": String,
-            "value": String,
-            "children": [{
-                // 具体型号
-                "label": String,
-                "value": String
-            }, {
-                "label": String,
-                "value": String
-            }]
+            "value": String
+        }, {
+            "label": String,
+            "value": String
         }]
     }],
 
@@ -43,9 +38,11 @@
 
 ```json
 {
-    "model": [ "brand", "series", "model" ],
+    "model": [ "brand", "model" ],
 
-    "results": [ ] // 数组里面保存的是每个选择中用户的选择如：0， 1， 2 等等
+    "results": [ ], // 数组里面保存的是每个选择中用户的选择如：0， 1， 2 等等
+
+    "describe": String
 }
 ```
 
