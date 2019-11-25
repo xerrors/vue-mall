@@ -4,7 +4,15 @@
       <el-avatar class="seller__avatar" :src="productInfo.seller.avatar"></el-avatar>
       <span class="seller__name">{{ productInfo.seller.name }}</span>
       <div class="product_box">
-        <div class="gallary"></div>
+        <el-carousel class="gallary" :interval="4000" type="card" height="400px" @change="handleChange">
+          <el-carousel-item v-for="(item, index) in productInfo.pics" :key="index">
+            <el-image
+              style="width: 300px; height: 400px"
+              :src="item"
+              fit="contain">
+            </el-image>
+          </el-carousel-item>
+        </el-carousel>
         <div class="info">
           <h3>{{ productInfo.model.label }}</h3>
           <div class="info__box" v-for="(item, index) in productInfo.selected" :key="index">
@@ -141,13 +149,21 @@ export default {
         },
         selected: [1, 1, 1, 1, 1, 1, 1],
         pics: [
-          'https://img.pconline.com.cn/images/product/1112/1112714/mate30pro-Q.jpg',
-          'https://img.pconline.com.cn/images/product/1112/1112714/mate30pro-H.jpg',
-          'https://img.pconline.com.cn/images/product/1112/1112714/mate30pro-C.jpg',
-          'https://img.pconline.com.cn/images/product/1112714/20199/20/15689536580911934_800.jpg'
+          'http://src.xerrors.fun/blog/20191125/E4YSQB5mISMl.jpg?imageslim',
+          'http://src.xerrors.fun/blog/20191125/lX3mGcjhk6rH.jpg?imageslim',
+          'http://src.xerrors.fun/blog/20191125/cx7Mvp3pLSNb.jpg?imageslim',
+          'http://src.xerrors.fun/blog/20191125/4MlfwFzvvv9D.jpg?imageslim',
+          'http://src.xerrors.fun/blog/20191125/lX3mGcjhk6rH.jpg?imageslim'
         ],
         description: '换了新款手机了，这个不想使用了，没有任何问题，打算卖掉，入手渠道:专卖店全款购买的，有发票；使用感受:功能一切正常运行流畅，大型游戏不卡顿，使用起来没有任何问题，拍照清晰，吊打全球一亿像素的手机。'
       }
+    }
+  },
+
+  methods: {
+    handleChange (now, pre) {
+      console.log(now)
+      // TODO：在这里修改DOM的样式
     }
   }
 }
@@ -156,4 +172,6 @@ export default {
 <style lang="stylus" scoped>
 .main_container
   max-width 75rem
+  .gallary
+    width 32rem
 </style>
