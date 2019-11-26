@@ -1,27 +1,31 @@
 <template>
   <div class="main_container">
-    <div class="seller">
+    <div name="seller" class="seller">
       <el-avatar class="seller__avatar" :src="productInfo.seller.avatar"></el-avatar>
       <span class="seller__name">{{ productInfo.seller.name }}</span>
-      <div class="product_box">
-        <el-carousel class="gallary" :interval="4000" type="card" height="400px" @change="handleChange">
-          <el-carousel-item v-for="(item, index) in productInfo.pics" :key="index">
-            <el-image
-              style="width: 300px; height: 400px"
-              :src="item"
-              fit="contain">
-            </el-image>
-          </el-carousel-item>
-        </el-carousel>
-        <div class="info">
-          <h3>{{ productInfo.model.label }}</h3>
-          <div class="info__box" v-for="(item, index) in productInfo.selected" :key="index">
-            <span><strong>{{ selections[index].label + ': ' }}</strong></span>
-            <span>{{ selections[index].options[item].label }}</span>
-          </div>
+    </div>
+    <el-carousel class="gallary" ref="gallary" :interval="4000" type="card" height="400px" @change="handleChange">
+      <el-carousel-item v-for="(item, index) in productInfo.pics" :key="index">
+        <el-image
+          style="width: 300px; height: 400px"
+          :src="item"
+          fit="contain">
+        </el-image>
+      </el-carousel-item>
+    </el-carousel>
+    <div class="product_box">
+      <div class="description">
+        <div class="info__title">商品描述</div>
+        <div class="description__text">{{ productInfo.description }}</div>
+      </div>
+      <div class="info">
+        <div class="info__title">商品详情</div>
+        <h4>手机型号：{{ productInfo.model.label }}</h4>
+        <div class="info__box" v-for="(item, index) in productInfo.selected" :key="index">
+          <span><strong>{{ selections[index].label + ': ' }}</strong></span>
+          <span>{{ selections[index].options[item].label }}</span>
         </div>
       </div>
-      <p class="description">{{ productInfo.description }}</p>
     </div>
   </div>
 </template>
@@ -149,11 +153,13 @@ export default {
         },
         selected: [1, 1, 1, 1, 1, 1, 1],
         pics: [
-          'http://src.xerrors.fun/blog/20191125/E4YSQB5mISMl.jpg?imageslim',
-          'http://src.xerrors.fun/blog/20191125/lX3mGcjhk6rH.jpg?imageslim',
-          'http://src.xerrors.fun/blog/20191125/cx7Mvp3pLSNb.jpg?imageslim',
-          'http://src.xerrors.fun/blog/20191125/4MlfwFzvvv9D.jpg?imageslim',
-          'http://src.xerrors.fun/blog/20191125/lX3mGcjhk6rH.jpg?imageslim'
+          'http://src.xerrors.fun/blog/20191126/TiEyQCEnc6hi.png?imageslim',
+          'http://src.xerrors.fun/blog/20191126/O6OBffI8bIuW.png?imageslim',
+          'http://src.xerrors.fun/blog/20191126/wiafVBTwyzvD.png?imageslim',
+          'http://src.xerrors.fun/blog/20191126/thMAJ0QTX489.png?imageslim',
+          'http://src.xerrors.fun/blog/20191126/Oj6LnzUFkPUA.png?imageslim',
+          'http://src.xerrors.fun/blog/20191126/o7Iyr9CY3s5Y.png?imageslim',
+          'http://src.xerrors.fun/blog/20191126/0YFUsTWYHLaX.png?imageslim'
         ],
         description: '换了新款手机了，这个不想使用了，没有任何问题，打算卖掉，入手渠道:专卖店全款购买的，有发票；使用感受:功能一切正常运行流畅，大型游戏不卡顿，使用起来没有任何问题，拍照清晰，吊打全球一亿像素的手机。'
       }
@@ -162,7 +168,7 @@ export default {
 
   methods: {
     handleChange (now, pre) {
-      console.log(now)
+      console.log(this.$refs.gallary.$children[now])
       // TODO：在这里修改DOM的样式
     }
   }
@@ -171,7 +177,49 @@ export default {
 
 <style lang="stylus" scoped>
 .main_container
+  width 70%
   max-width 75rem
+  margin 0 auto
+  .seller
+    display flex
+    margin-top 3rem
+    height 2.5rem
+    &__avatar
+      height 2.5rem
+    &__name
+      margin-left 1rem
+      line-height 2.5rem
   .gallary
-    width 32rem
+    width 60%
+    min-width 50trm
+    margin 0 auto
+  .product_box
+    box-shadow cardShadow
+    padding 3rem
+    display flex
+    justif center
+    margin-top 5rem
+    .description
+      width 50%
+      &__text
+        line-height 2rem
+        padding-right 2rem
+    .info
+      padding-left 3rem
+      width 50%
+      h4
+        color mainColor
+      &__title
+        margin-bottom 1rem
+        background #53bf7e
+        display: inline-block
+        color white
+        padding .5rem 1rem
+        border-radius 3px
+      &__box
+        margin 1rem 0
+        span:first-child
+          margin-right 1rem
+          padding-left .5rem
+          border-left 2px solid mainColor
 </style>
