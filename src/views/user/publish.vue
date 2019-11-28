@@ -424,6 +424,7 @@ export default {
     // 提交操作 TODO:
     publish () {
       // 将手机的信息传到服务器，同时返还一个商品ID，然后界面跳转到商品详情界面
+      this.$router.push('/product/id_12138')
     }
   }
 }
