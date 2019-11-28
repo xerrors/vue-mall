@@ -24,7 +24,11 @@
               v-for="(model, index) in brands[form.brand.index].models.slice(0, 5)"
               :key="index"
               @click="handleSelectModel(model)">
-                <div>{{ model.label }}</div>
+                <el-image
+                  class="model__img"
+                  :src="url"
+                  :fit="fit"></el-image>
+                <div class="model__label">{{ model.label }}</div>
               </div>
           </div>
           <div class="models models_2" v-if="show_models === 2">
@@ -469,6 +473,7 @@ export default {
             cursor pointer
         .tab_active
           background white
+          border-top 2px solid mainColor
     .models
       width 100%
       height 17rem
@@ -483,6 +488,13 @@ export default {
         &:hover
           cursor pointer
           color mainColor
+        &__img
+          width 6rem
+          height 9rem
+          margin 1.5rem 0
+          &:hover
+            transform scale(1.1)
+            transition all .3s ease
 
   .select
     width 80%

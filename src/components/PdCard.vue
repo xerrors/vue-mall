@@ -1,21 +1,37 @@
 <template>
-  <div class="card_body">
+  <div class="card_body" @click="checkDetails">
     <div class="left">
-      <h3 class="title">HUAWEI Mate 30 Pro</h3>
+      <h3 class="title">{{ info.model.label }}</h3>
       <div class="tags">
-        <span>6+128G</span>
-        <span>5G</span>
-        <span>幻夜黑</span>
       </div>
-      <small class="info">发布于 2019年10月28日</small>
+      <small class="info">发布于 {{ info.date }}</small>
     </div>
     <div class="pic"></div>
   </div>
 </template>
 
+<script>
+export default {
+  props: ['info'],
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+    checkDetails () {
+      this.$router.push('/product/id_' + this.info.id)
+    }
+  },
+  mounted () {
+    console.log(this.info)
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .card_body
-  background #f7f7f7
+  background white
   display flex
   justify-content space-between
   width 40rem
@@ -51,4 +67,6 @@
     width 10rem
     height 8rem
     background #ddd
+  &:hover
+    cursor pointer
 </style>
