@@ -17,15 +17,23 @@
     <div
       class="value"
       v-if="this.$store.state.roles === 'boss'"
-      :disabled="valued"
+      style="display: flex"
       >
       <el-slider
         v-model="value"
         show-input
         :step="elSlider.step"
         :min="elSlider.min"
-        :max='elSlider.max'>
+        :max='elSlider.max'
+        :disabled="valued"
+        style="width: 90%">
       </el-slider>
+      <el-button
+        type="primary"
+        size="small"
+        style="margin-left: 1rem;"
+        :disabled="valued"
+        @click="handleValue">出价</el-button>
     </div>
     <div class="product_box">
       <div class="description">
@@ -204,20 +212,35 @@ export default {
 
   methods: {
     handleChange (now, pre) {
-      console.log(this.$refs.gallary.$children[now])
+      // console.log(this.$refs.gallary.$children[now])
       // TODO：在这里修改DOM的样式
     },
     handleValue () {
-      let value = {
-        // 获取用户的 ID
-        id: 12138,
-        // 获取当前时间
-        date: '2019-11-29 18:15:48',
-        value: this.value
-      }
-      // 向服务器发送请求
-      this.valued = true
-      return value
+      this.$confirm('确认出价吗？出价后24小时内不可更改！', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '算了',
+        type: 'warning'
+      }).then(() => {
+        let value = {
+          // 获取用户的 ID
+          id: 12138,
+          // 获取当前时间
+          date: '2019-11-29 18:15:48',
+          value: this.value
+        }
+        this.valued = true
+        // 向服务器发送请求
+        console.log(value)
+        this.$message({
+          type: 'success',
+          message: '出价成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
     }
   }
 }
@@ -249,7 +272,7 @@ export default {
     box-shadow cardShadow
     padding 3rem
     display flex
-    margin-top 5rem
+    margin-top 3rem
     .description
       width 50%
       &__text
