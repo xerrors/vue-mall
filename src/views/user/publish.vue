@@ -15,7 +15,7 @@
               class="tab"
               :class="{ tab_active: form.brand.value===brand.value }"
               @click="handleBrand(brand.value, index)"
-              >{{brand.label}}</div>
+              ><strong>{{ brand.label }}</strong></div>
             <div class="tab">其他</div>
           </div>
           <div class="models models_1" v-if="show_models === 1">
@@ -24,6 +24,9 @@
               v-for="(model, index) in brands[form.brand.index].models.slice(0, 5)"
               :key="index"
               @click="handleSelectModel(model)">
+                <el-image
+                  :src="model.pic"
+                ></el-image>
                 <div>{{ model.label }}</div>
               </div>
           </div>
@@ -45,8 +48,8 @@
           <el-collapse-item
             v-for="(select, ind) in selections" :key="ind"
             :title="title(select, ind)"
-            :name="select.value">
-            <el-radio-group v-model="form.selected[ind]">
+            :name="ind + 1">
+            <el-radio-group v-model="form.selected[ind]" @change="handleRadioChg">
               <el-radio
                 v-for="(option, index) in select.options" :key="index"
                 :label="index"
@@ -421,6 +424,11 @@ export default {
       this.form.brand.value = value
       this.form.brand.index = index
     },
+    // 当选项组改变之后处理的事件
+    handleRadioChg (e) {
+      // 可以根据上次所使用的东西进行更改下面的逻辑。例如保存到矩阵里面
+      this.activeNames += 1
+    },
     // 提交操作 TODO:
     publish () {
       // 将手机的信息传到服务器，同时返还一个商品ID，然后界面跳转到商品详情界面
@@ -480,6 +488,10 @@ export default {
         height 80%
         text-align center
         display inline-block
+        .el-image
+          height 80%
+          width 90%
+          margin-bottom 1rem
         &:hover
           cursor pointer
           color mainColor
