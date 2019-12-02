@@ -477,6 +477,7 @@ export default {
             cursor pointer
         .tab_active
           background white
+          border-top 2px solid mainColor
     .models
       width 100%
       height 17rem
@@ -495,6 +496,13 @@ export default {
         &:hover
           cursor pointer
           color mainColor
+        &__img
+          width 6rem
+          height 9rem
+          margin 1.5rem 0
+          &:hover
+            transform scale(1.1)
+            transition all .3s ease
 
   .select
     width 80%
