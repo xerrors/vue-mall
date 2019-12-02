@@ -24,20 +24,29 @@
               v-for="(model, index) in brands[form.brand.index].models.slice(0, 5)"
               :key="index"
               @click="handleSelectModel(model)">
-                <el-image
-                  :src="model.pic"
-                ></el-image>
-                <div>{{ model.label }}</div>
-              </div>
+              <el-image
+                :src="model.pic"
+              ></el-image>
+              <div>{{ model.label }}</div>
+            </div>
+            <div class="model-arrow">
+              <i class="el-icon-caret-right" @click="show_models = 2"></i>
+            </div>
           </div>
           <div class="models models_2" v-if="show_models === 2">
+            <div class="model-arrow">
+              <i class="el-icon-caret-left" @click="show_models = 1"></i>
+            </div>
             <div
               class="model"
-              v-for="(model, index) in brands[form.brand.index].models.slice(5, 9)"
+              v-for="(model, index) in brands[form.brand.index].models.slice(5, 10)"
               :key="index"
               @click="handleSelectModel(model)">
-                <div>{{ model.label }}</div>
-              </div>
+              <el-image
+                :src="model.pic"
+              ></el-image>
+              <div>{{ model.label }}</div>
+            </div>
             </div>
           </div>
       </div>
@@ -484,6 +493,18 @@ export default {
       display flex
       justify-content center
       align-items center
+      transition all .5s ease
+      .model-arrow
+        display flex
+        width 2rem
+        height 70%
+        opacity 0
+        &:hover
+          cursor pointer
+          opacity 1
+          color mainColor
+        i
+          margin auto
       .model
         width: 18%
         height 80%
