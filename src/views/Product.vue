@@ -14,6 +14,7 @@
       </el-carousel-item>
     </el-carousel>
     <!--TODO:-->
+    <h4 style="text-align: center">型号：{{ productInfo.model.label }}</h4>
     <div
       class="value"
       v-if="this.$store.state.roles === 'boss'"
@@ -42,7 +43,6 @@
       </div>
       <div class="info">
         <div class="info__title">商品详情</div>
-        <h4>手机型号：{{ productInfo.model.label }}</h4>
         <div class="info__box" v-for="(item, index) in productInfo.selected" :key="index">
           <span><strong>{{ selections[index].label + ': ' }}</strong></span>
           <span>{{ selections[index].options[item].label }}</span>
@@ -250,6 +250,7 @@ export default {
 .main_container
   width 70%
   max-width 75rem
+  min-width 55rem
   margin 0 auto
   .seller
     display flex
@@ -266,10 +267,12 @@ export default {
     margin 0 auto
   .value
     box-shadow cardShadow
+    border-radius 4px
     padding 3rem
-    margin-top 5rem
+    margin-top 3rem
   .product_box
     box-shadow cardShadow
+    border-radius 4px
     padding 3rem
     display flex
     margin-top 3rem

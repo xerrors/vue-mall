@@ -37,35 +37,31 @@ export default {
   width 40rem
   height 8rem
   margin-top 5rem
-  padding 2rem
   border 1px solid #ccc
   border-radius 4px
   .left
     display flex
     justify-content space-between
     flex-direction column
-  .title
-    grid-area title
-    height 20%
-    margin 1rem 0
-  .tags
-    grid-area tags
-    height 60%
-    span
-      background rgba(88, 220, 117, .2)
-      padding .5rem
-      font-size small
-      border-radius .3rem
-      margin-right .5rem
-  .info
-    height 20%
-    grid-area info
-    font-size smaller
-    color #666
+    padding 1rem
+    .title
+      height 20%
+      margin .5rem 0
+    .tags
+      height 60%
+      span
+        background rgba(88, 220, 117, .2)
+        padding .5rem
+        font-size small
+        border-radius .3rem
+        margin-right .5rem
+    .info
+      height 20%
+      font-size smaller
+      color #666
   .pic
-    grid-area pic
-    width 10rem
-    height 8rem
+    width 8rem
+    height 100%
     background #ddd
   &:hover
     cursor pointer
