@@ -28,7 +28,7 @@
               @click="handleSelectModel(model)">
               <el-image
                 class="model__img"
-                :fit="contain"
+                fit="contain"
                 :src="model.pic"
               ></el-image>
               <div>{{ model.label }}</div>
@@ -49,6 +49,8 @@
               :key="index"
               @click="handleSelectModel(model)">
               <el-image
+                class="model__img"
+                fit="contain"
                 :src="model.pic"
               ></el-image>
               <div>{{ model.label }}</div>
@@ -498,7 +500,8 @@ export default {
     // 提交操作 TODO:
     publish () {
       // 将手机的信息传到服务器，同时返还一个商品ID，然后界面跳转到商品详情界面
-      this.$router.push('/product/id_12138')
+      this.$router.push('/price')
+      // this.$router.push('/product/id_12138')
     }
   }
 }
@@ -506,6 +509,7 @@ export default {
 
 <style lang="stylus" scoped>
 .publish
+  color color-text-primary
   &__top_box
     height 20rem
     &::after
@@ -530,6 +534,7 @@ export default {
       border-radius 3px
       box-shadow cardShadow
       .tabs
+        color color-text-title
         display flex
         align-items center
         .tab
@@ -572,8 +577,7 @@ export default {
           cursor pointer
           color mainColor
         &__img
-          height 70%
-          width 70%
+          width 80%
           margin-top 1rem
           margin-bottom 1.5rem
           transition all .3s ease

@@ -72,6 +72,14 @@ const routes = [
     component: () => import('@/views/Product.vue')
   },
 
+  {
+    path: '/price',
+    component: () => import('@/views/user/Price.vue'),
+    meta: {
+      roles: ['user']
+    }
+  },
+
   { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
   { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
 

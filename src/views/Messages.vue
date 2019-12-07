@@ -3,12 +3,16 @@
     <div class="msg__top_box">
       <h1 class="msg__title">消息管理</h1>
     </div>
-
-    <div class="messages">
-      <div class="messages__box" :class="{ messages_readed : msg.readed }" v-for="msg in msgs" :key='msg'>
-        {{ msg }}
+      <div class="messages">
+        <div class="messages__box"
+          :class="{ messages_readed : msg.readed }"
+          v-for="msg in msgs" :key='msg'
+          @click="openMsg(msg)">
+          <el-badge :is-dot="!msg.readed" style="width: 100%;">
+            {{ msg.title }}
+          </el-badge>
+        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -19,6 +23,24 @@ export default {
   data () {
     return {
       msgs: []
+    }
+  },
+  methods: {
+    openMsg (item) {
+      if (item.magType === 'text') {
+        this.$alert(item.content, '消息详情', {
+          confirmButtonText: '朕已阅',
+          callback: () => {
+            // 消息已读，发送到服务器
+            item.readed = true
+          }
+        })
+      } else if (item.magType === 'product') {
+        item.readed = true
+        this.$router.push('/product/id_' + item.productID)
+      } else if (item.magType === 'web') {
+        window.open(item.link)
+      }
     }
   },
   mounted () {
@@ -34,8 +56,8 @@ export default {
       profucer: 'admin',
       reveiver: 'everyone',
       magType: 'text', // text | product | web page
-      title: '系统测试提醒：系统将于2020年2月31日进行系统维护，届时系统将无法进入！',
-      content: '系统测试提醒：系统将于2020年2月31日进行系统维护，届时系统将无法进入！'
+      title: '系统测试提醒：系统将于2020年2月31日进行系统维护！',
+      content: '系统测试提醒：系统将于2020年2月31日进行系统维护，届时系统将无法进入！维护时长为 1000分钟！感谢您的理解！'
     }, {
       date: '',
       readed: false,
@@ -81,9 +103,16 @@ export default {
     margin 0 auto
     pading 1rem
     &__box
-      min-height 2rem
-      border 1px solid #ccc
+      color text-color-primary
+      min-height 1rem
+      border 1px solid border-color-light
       border-radius 4px
       margin 1rem
       padding 1rem
+      transition all .2s ease
+      &:hover
+        cursor pointer
+        color link-color-primary
+    .messages_readed
+      color text-color-secondary
 </style>
