@@ -15,9 +15,26 @@
     </el-carousel>
     <!--TODO:-->
     <h4 style="text-align: center">型号：{{ productInfo.model.label }}</h4>
+    <!-- 出价记录 -->
+    <div
+      class="valued-list"
+      style="width: 100%;"
+      >
+      <div class="valued-list__item"
+        v-for="item in productInfo.values" :key="item.id"
+        style="text-align: center;">
+        <p style="display: inline-block;"><strong>{{ item.name }}</strong> 出价{{ item.value }}元 - {{ item.date }}</p>
+        <el-button
+          type="text"
+          v-if="$store.state.roles === 'user'"
+          style="display: inline-block; margin-left: 1rem;"
+          :disabled="productInfo.dealed"
+          @click="handleDeal">成交</el-button>
+      </div>
+    </div>
     <div
       class="value"
-      v-if="this.$store.state.roles === 'boss'"
+      v-if="$store.state.roles === 'boss'"
       style="display: flex"
       >
       <el-slider
@@ -34,7 +51,8 @@
         size="small"
         style="margin-left: 1rem;"
         :disabled="valued"
-        @click="handleValue">出价</el-button>
+        @click="handleValue"
+        plain>出价</el-button>
     </div>
     <div class="product_box">
       <div class="description">
@@ -179,6 +197,7 @@ export default {
           avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim'
         },
         date: '2019-11-29',
+        dealed: false, // 此订单是否已经交易
         // 手机的品牌
         model: {
           label: '华为 Mate30 Pro',
@@ -198,10 +217,12 @@ export default {
         // 出价记录
         values: [{
           id: 12138,
+          name: '宋仁投',
           date: '2019-11-30 17:14:16',
           value: '2500'
         }, {
           id: 9527,
+          name: '潘达秋',
           date: '2019-11-29 19:45:17',
           value: '2899'
         }],
@@ -214,6 +235,10 @@ export default {
     handleChange (now, pre) {
       // console.log(this.$refs.gallary.$children[now])
       // TODO：在这里修改DOM的样式
+    },
+    handleDeal () {
+      this.productInfo.dealed = true
+      // 把信息发到服务器
     },
     handleValue () {
       this.$confirm('确认出价吗？出价后24小时内不可更改！', '提示', {
@@ -230,6 +255,12 @@ export default {
         }
         this.valued = true
         // 向服务器发送请求
+        this.productInfo.values.push({
+          id: 7677,
+          name: '黄玉川',
+          date: '2019-12-16 09:45:17',
+          value: this.value
+        })
         console.log(value)
         this.$message({
           type: 'success',

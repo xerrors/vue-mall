@@ -105,7 +105,7 @@ export default {
     &__box
       color text-color-primary
       min-height 1rem
-      border 1px solid border-color-light
+      background: #f5f5f5;
       border-radius 4px
       margin 1rem
       padding 1rem
