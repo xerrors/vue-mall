@@ -22,7 +22,7 @@
         <el-input v-model="newAddress.phone"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="createNewAddress">立即创建</el-button>
+        <el-button type="primary" @click="createNewAddress" plain>立即创建</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -36,7 +36,7 @@
         width="80">
       </el-table-column>
       <el-table-column
-        prop="area.toString()"
+        prop="area"
         label="所在地区">
       </el-table-column>
       <el-table-column
@@ -59,7 +59,9 @@
         width="120">
         <template slot-scope="scope">
         <el-button @click="handleRemove(scope.row)" type="text">删除</el-button>
-        <el-button type="text" @click="handleSetDeafult(scope.row)">设为默认</el-button>
+        <el-button type="text" v-if="scope.row.default" disabled>默认地址</el-button>
+        <el-button type="text" v-else @click="handleSetDefault(scope.row)">设为默认</el-button>
+        <!-- <el-button type="text" @click="handleSetDefault(scope.row)">设为默认</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -71,6 +73,7 @@ import { pca, pcaa } from 'area-data' // v5 or higher
 import { AreaSelect } from 'vue-area-linkage'
 import 'vue-area-linkage/dist/index.css' // v2 or higher
 export default {
+  props: [ 'serverEndAddrs' ],
   components: { AreaSelect },
   data () {
     return {
@@ -84,41 +87,26 @@ export default {
         phone: '',
         default: false
       },
-      testAddr: [
-        {
-          receiver: '黄玉川',
-          area: [
-            { 320000: '江苏省' },
-            { 320200: '无锡市' },
-            { 320211: '滨湖区' }
-          ],
-          address: '蠡湖大道1800号江南大学',
-          code: '214122',
-          phone: '17681352667',
-          default: true
-        }
-      ]
+      testAddr: this.serverEndAddrs
     }
   },
   computed: {
     addresses () {
       let addrs = []
-      let addr
       let item
-      for (addr in this.testAddr) {
+      for (var j = 0; j < this.testAddr.length; j++) {
+        item = this.testAddr[j]
         let tmpAddr = {}
-        for (item in addr) {
-          tmpAddr.receiver = item.receiver
-          tmpAddr.address = item.address
-          tmpAddr.code = item.code
-          tmpAddr.phone = item.phone
-          tmpAddr.default = item.default
-          let tmpArea = ''
-          for (var i = 0; i < item.area.length; i++) {
-            tmpArea = tmpArea + Object.values(item.area[i])[0]
-          }
-          tmpAddr.area = tmpArea
+        tmpAddr.receiver = item.receiver
+        tmpAddr.address = item.address
+        tmpAddr.code = item.code
+        tmpAddr.phone = item.phone
+        tmpAddr.default = item.default
+        let tmpArea = ''
+        for (var i = 0; i < item.area.length; i++) {
+          tmpArea = tmpArea + Object.values(item.area[i])[0]
         }
+        tmpAddr.area = tmpArea
         addrs.push(tmpAddr)
       }
       return addrs
@@ -129,10 +117,16 @@ export default {
       console.log(item)
     },
     handleSetDefault (item) {
+      // 具有服务器后台的实现思路应该是，我向服务端发送请求，服务端处理相应之后返还心得地址
+      for (var i = 0; i < this.addresses.length; i++) {
+        this.addresses[i].default = false
+      }
+      item.default = true
       console.log(item)
     },
     createNewAddress () {
       console.log(this.newAddress)
+      this.testAddr.push(this.newAddress)
     }
   }
 }
