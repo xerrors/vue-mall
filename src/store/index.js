@@ -15,7 +15,8 @@ export default new Vuex.Store({
     name: '',
     avatar: '',
     roles: '',
-    showLogin: false
+    showLogin: false,
+    currentOrder: ''
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     // },
     // SET_DATA: (state, data) => {
     //   state.data = data
+    },
+    CREATE_ORDER: (state, order) => {
+      state.currentOrder = order
     }
   },
   actions: {
@@ -113,6 +117,11 @@ export default new Vuex.Store({
         removeToken()
         resolve()
       })
+    },
+
+    // 创建订单
+    CreateOrder ({ commit }, order) {
+      commit('CREATE_ORDER', order)
     }
   },
   modules: {

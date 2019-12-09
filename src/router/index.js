@@ -80,6 +80,14 @@ const routes = [
     }
   },
 
+  {
+    path: '/order',
+    component: () => import('@/views/Order.vue'),
+    meta: {
+      roles: ['user', 'boss']
+    }
+  },
+
   { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
   { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
 

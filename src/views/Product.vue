@@ -21,7 +21,7 @@
       style="width: 100%;"
       >
       <div class="valued-list__item"
-        v-for="item in productInfo.values" :key="item.id"
+        v-for="(item, index) in productInfo.values" :key="item.id"
         style="text-align: center;">
         <p style="display: inline-block;"><strong>{{ item.name }}</strong> 出价{{ item.value }}元 - {{ item.date }}</p>
         <el-button
@@ -29,7 +29,7 @@
           v-if="$store.state.roles === 'user'"
           style="display: inline-block; margin-left: 1rem;"
           :disabled="productInfo.dealed"
-          @click="handleDeal">成交</el-button>
+          @click="handleDeal(index)">成交</el-button>
       </div>
     </div>
     <div
@@ -80,6 +80,7 @@ export default {
         max: 10000
       },
       valued: false,
+      dealed: false,
       value: 0,
       selections: [{
         label: '手机状态',
@@ -236,9 +237,35 @@ export default {
       // console.log(this.$refs.gallary.$children[now])
       // TODO：在这里修改DOM的样式
     },
-    handleDeal () {
-      this.productInfo.dealed = true
+    handleDeal (index) {
       // 把信息发到服务器
+      this.$confirm('确认交易吗？出价后24小时内不可更改！', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '算了',
+        type: 'warning'
+      }).then(() => {
+        // 创建一个订单
+        this.dealed = true
+        var order = {
+          order_id: 23454,
+          product: this.productInfo,
+          seller: this.productInfo.seller,
+          buyer: this.productInfo.values[index]
+        }
+        this.$store
+          .dispatch('CreateOrder', order)
+          .then(() => {
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        this.$router.push('/order')
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
     },
     handleValue () {
       this.$confirm('确认出价吗？出价后24小时内不可更改！', '提示', {
