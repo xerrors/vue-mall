@@ -15,7 +15,7 @@
     </el-tab-pane>
 
     <el-tab-pane label="地址管理" name="address">
-      <addr-mng></addr-mng>
+      <addr-mng :serverEndAddrs="serverEndAddrs"></addr-mng>
     </el-tab-pane>
   </el-tabs>
   </div>
@@ -41,6 +41,31 @@ export default {
         phone: '15251630520',
         sex: 'male'
       }
+    },
+    serverEndAddrs () {
+      return [{
+        receiver: '蔡徐坤',
+        area: [
+          { 320000: '江苏省' },
+          { 320200: '无锡市' },
+          { 320211: '滨湖区' }
+        ],
+        address: '蠡湖大道1800号江南大学',
+        code: '214122',
+        phone: '15251630520',
+        default: true
+      }, {
+        receiver: '蔡徐坤',
+        area: [
+          { 340000: '安徽省' },
+          { 341600: '亳州市' },
+          { 341623: '利辛县' }
+        ],
+        address: '利辛县第一中学',
+        code: '246700',
+        phone: '15251630520',
+        default: false
+      }]
     }
   }
 }
