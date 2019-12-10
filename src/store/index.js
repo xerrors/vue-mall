@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import { getToken, setToken, removeToken } from '@/utils/cookies'
 import { register, logout } from '@/api/user'
-// import { login, register, getInfo, logout } from '@/api/user'
 
 import getters from './getters'
 
