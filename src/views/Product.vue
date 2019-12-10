@@ -55,16 +55,16 @@
         plain>出价</el-button>
     </div>
     <div class="product_box">
-      <div class="description">
-        <div class="info__title">商品描述</div>
-        <div class="description__text">{{ productInfo.description }}</div>
-      </div>
       <div class="info">
         <div class="info__title">商品详情</div>
         <div class="info__box" v-for="(item, index) in productInfo.selected" :key="index">
           <span><strong>{{ selections[index].label + ': ' }}</strong></span>
           <span>{{ selections[index].options[item].label }}</span>
         </div>
+      </div>
+      <div class="description">
+        <div class="info__title">商品描述</div>
+        <div class="description__text">{{ productInfo.description }}</div>
       </div>
     </div>
   </div>

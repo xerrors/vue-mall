@@ -95,6 +95,7 @@ export default {
       let addrs = []
       let item
       for (var j = 0; j < this.testAddr.length; j++) {
+        // 将数组形式的数组转换为字符串形式显示，可以在服务端完成
         item = this.testAddr[j]
         let tmpAddr = {}
         tmpAddr.receiver = item.receiver
