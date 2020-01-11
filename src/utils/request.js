@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '../store'
-// import { getToken } from '@/utils/auth'
+// import { getToken } from '@/utils/cookies'
 
 // 创建axios实例
 axios.defaults.baseURL = process.env.BASE_API// api 的 base_url
@@ -22,17 +22,18 @@ axios.defaults.timeout = 50000 // 请求超时时间
 //   }
 // )
 
+const successCode = 1
 // response 拦截器
 axios.interceptors.response.use(
   response => {
     /**
-     * code为非200是抛错 可结合自己业务进行修改
+     * code为非1是抛错 可结合自己业务进行修改
      */
-    const res = response.data.data
+    const res = response.data
     console.log(res)
-    if (res.code !== 200) {
+    if (res.code !== successCode) {
       Message({
-        message: res.message,
+        message: res.info,
         type: 'error',
         duration: 5 * 1000
       })
@@ -55,6 +56,11 @@ axios.interceptors.response.use(
       }
       return Promise.reject(new Error('error'))
     } else {
+      Message({
+        message: res.info,
+        type: 'success',
+        duration: 5 * 1000
+      })
       return response.data
     }
   },

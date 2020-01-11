@@ -1,15 +1,17 @@
 <template>
   <div>
     <div class="navbar">
-      <router-link :to="'/' + roles + '/main'"><img class="logo" src="logo_dark.png"></router-link>
+      <router-link :to="'/' + (roles?(roles + '/main'):'')"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
         <!-- <router-link to='/bosstest' class="nav-link" tag="div" v-if="roles==='boss'">商户用例</router-link> -->
         <!-- <router-link to='/usertest' class="nav-link" tag="div" v-if="roles==='user'">用户用例</router-link> -->
-        <router-link to='/messages' class="nav-link" tag="div">消息中心</router-link>
+        <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
       <div v-if="!token" class="nav-right">
-        <el-button round plain @click="login">登录</el-button>
+        <el-button round plain @click="login"
+          style="background: #47cf73; border: none; color: #000;"
+          >登录</el-button>
       </div>
       <div v-else class="user-box nav-right">
         <span v-if="roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>

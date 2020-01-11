@@ -5,19 +5,19 @@ import store from '../store'
 
 Vue.use(VueRouter)
 
-var whiteList = ['/', '/about', '/404', '/403']
+var whiteList = ['/', '/about', '/404', '/403', '/register']
 
 const routes = [
   {
     path: '/403',
-    component: () => import('@/views/403'),
+    component: () => import('@/views/errors/403'),
     meta: {
       hiddenNavbar: true,
       hiddenFooter: true
     }
   }, {
     path: '/404',
-    component: () => import('@/views/404'),
+    component: () => import('@/views/errors/404'),
     meta: {
       hiddenNavbar: true,
       hiddenFooter: true
@@ -65,6 +65,11 @@ const routes = [
   {
     path: '/messages',
     component: () => import('@/views/Messages.vue')
+  },
+
+  {
+    path: '/register',
+    component: () => import('@/views/account/Register.vue')
   },
 
   {

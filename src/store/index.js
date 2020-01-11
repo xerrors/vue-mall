@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { getToken, setToken, removeToken } from '@/utils/cookies'
-import { register, logout } from '@/api/user'
+import { register, logout, login } from '@/api/user'
 
 import getters from './getters'
 
@@ -15,6 +15,7 @@ export default new Vuex.Store({
     avatar: '',
     roles: '',
     showLogin: false,
+    tel: '',
     currentOrder: ''
   },
   mutations: {
@@ -29,9 +30,12 @@ export default new Vuex.Store({
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
-    // },
-    // SET_DATA: (state, data) => {
-    //   state.data = data
+    },
+    SET_DATA: (state, data) => {
+      state.data = data
+    },
+    SET_TEL: (state, tel) => {
+      state.tel = tel
     },
     CREATE_ORDER: (state, order) => {
       state.currentOrder = order
@@ -41,7 +45,7 @@ export default new Vuex.Store({
     // 注册
     Register ({ commit }, userForm) {
       return new Promise((resolve, reject) => {
-        register(userForm).then(() => {
+        register(userForm).then((res) => {
           resolve()
         }).catch(error => {
           reject(error)
@@ -50,18 +54,19 @@ export default new Vuex.Store({
     },
     // 登录
     Login ({ commit }, userForm) {
-      // return new Promise((resolve, reject) => {
-      //   login(userForm).then(res => {
-      //     const data = res.data
-      //     setToken(data.token)
-      //     commit('SET_TOKEN', data.token)
-      //     resolve()
-      //   }).catch(error => {
-      //     reject(error)
-      //   })
-      // })
-      setToken(userForm.role)
-      commit('SET_TOKEN', userForm.role)
+      return new Promise((resolve, reject) => {
+        login(userForm).then(res => {
+          const info = res.info
+          setToken(info.PHPSESSID)
+          commit('SET_NAME', info.account)
+          commit('SET_TOKEN', info.PHPSESSID)
+          commit('SET_TEL', info.tel)
+          commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
     },
 
     // 获取用户信息

@@ -16,18 +16,18 @@
             >商户登录</div>
         </div>
         <input
-          v-model.trim="userForm.username"
+          v-model.trim="userForm.account"
           class="reset card__input"
-          placeholder="用户名"
+          placeholder="手机号"
           required>
         <input
           type="password"
-          v-model.trim="userForm.password"
+          v-model.trim="userForm.passwd"
           class="reset card__input"
           placeholder="密码"
           @keyup.enter.native="submit"
           required>
-        <button class="reset card__btn" @click="submit" v-loading="loading">登录</button>
+        <el-button class="reset card__btn" :loading="loading" @click="submit">登录</el-button>
         <div class="card__info">
           <el-link @click="register">注册</el-link>
           <el-link @click="forgotPWD">忘记密码</el-link>
@@ -44,8 +44,8 @@ export default {
       isUser: true,
       loading: false,
       userForm: {
-        username: '',
-        password: '',
+        account: '',
+        passwd: '',
         role: 'user'
       }
     }

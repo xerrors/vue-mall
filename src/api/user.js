@@ -1,13 +1,14 @@
 import request from '@/utils/request'
-// import { getToken } from '@/utils/auth'
+// import { getToken } from '@/utils/cookies'
 // 登录
 export function login (userForm) {
   return request({
-    url: '/login',
+    url: '/Account.php',
     method: 'post',
-    data: 'username=' + userForm.username + '&' + 'password=' + userForm.password,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    params: {
+      way: 2,
+      tel: userForm.tel,
+      passwd: userForm.passwd
     }
   })
 }
@@ -29,21 +30,9 @@ export function logout () {
 // 注册
 export function register (userForm) {
   return request({
-    url: '/register',
+    url: '/Account.php',
     method: 'post',
-    data: userForm,
-    transformRequest: [(data) => {
-      let ret = ''
-      let item = ''
-      for (item in data) {
-        ret += encodeURIComponent(item) + '=' + encodeURIComponent(data[item]) + '&'
-      }
-      ret = ret.substring(0, ret.length - 1)
-      return ret
-    }],
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+    params: { way: 1, content: userForm }
   })
 }
 
