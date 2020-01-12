@@ -63,7 +63,7 @@ export default {
   data() {
     const validatePassword = (rule, value, callback) => {
       if (!validPassword(value)) {
-        callback(new Error("密码应为5-21字母和数字组成"));
+        callback(new Error("密码应为6-21字母和数字组成"));
       } else {
         callback();
       }
