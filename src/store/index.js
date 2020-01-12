@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { getToken, setToken, removeToken } from '@/utils/cookies'
-import { register, logout, login } from '@/api/user'
+import { register, logout } from '@/api/user'
+// import { register, logout, login } from '@/api/user'
 
 import getters from './getters'
 
@@ -13,7 +14,7 @@ export default new Vuex.Store({
     token: getToken(),
     name: '',
     avatar: '',
-    roles: '',
+    roles: 'user',
     showLogin: false,
     tel: '',
     currentOrder: ''
@@ -54,24 +55,30 @@ export default new Vuex.Store({
     },
     // 登录
     Login ({ commit }, userForm) {
-      return new Promise((resolve, reject) => {
-        login(userForm).then(res => {
-          const info = res.info
-          setToken(info.PHPSESSID)
-          commit('SET_NAME', info.account)
-          commit('SET_TOKEN', info.PHPSESSID)
-          commit('SET_TEL', info.tel)
-          commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
-      })
+      // return new Promise((resolve, reject) => {
+      //   login(userForm).then(res => {
+      //     const info = res.info
+      //     setToken(info.PHPSESSID)
+      //     commit('SET_NAME', info.account)
+      //     commit('SET_TOKEN', info.PHPSESSID)
+      //     commit('SET_TEL', info.tel)
+      //     commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
+      //     resolve()
+      //   }).catch(error => {
+      //     reject(error)
+      //   })
+      // })
+      setToken('info.PHPSESSID')
+      commit('SET_NAME', 'info.account')
+      commit('SET_ROLES', 'user')
+      commit('SET_TOKEN', 'user')
+      commit('SET_TEL', '12312312313123')
+      commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
     },
 
     // 获取用户信息
     GetInfo ({ commit, state }) {
-      // return new Promise((resolve, reject) => {
+      // return new Promise((resolve, reject) => {z
       //   getInfo(state.token).then(res => {
       //     console.log(res)
       //     const data = res.data.data
@@ -88,15 +95,9 @@ export default new Vuex.Store({
       //     reject(error)
       //   })
       // })
-      if (state.token === 'user') {
-        commit('SET_ROLES', 'user')
-        commit('SET_NAME', 'Avatar')
-        commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
-      } else {
-        commit('SET_ROLES', 'boss')
-        commit('SET_NAME', 'Iron')
-        commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/wFNCwcPTBkwa.jpg?imageslim')
-      }
+      commit('SET_ROLES', 'user')
+      commit('SET_NAME', 'Avatar')
+      commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
     },
 
     // 登出

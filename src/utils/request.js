@@ -1,26 +1,26 @@
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '../store'
-// import { getToken } from '@/utils/cookies'
+import { getToken } from '@/utils/cookies'
 
 // 创建axios实例
 axios.defaults.baseURL = process.env.BASE_API// api 的 base_url
 axios.defaults.timeout = 50000 // 请求超时时间
 
 // request拦截器
-// axios.interceptors.request.use(
-//   config => {
-//     if (store.getters.token) {
-//       config.headers.token = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
-//     }
-//     return config
-//   },
-//   error => {
-//     // Do something with request error
-//     console.log(error) // for debug
-//     Promise.reject(error)
-//   }
-// )
+axios.interceptors.request.use(
+  config => {
+    if (store.getters.token) {
+      config.headers.token = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    }
+    return config
+  },
+  error => {
+    // Do something with request error
+    console.log(error) // for debug
+    Promise.reject(error)
+  }
+)
 
 const successCode = 1
 // response 拦截器

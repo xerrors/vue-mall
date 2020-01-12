@@ -3,8 +3,6 @@
     <div class="navbar">
       <router-link :to="'/' + (roles?(roles + '/main'):'')"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
-        <!-- <router-link to='/bosstest' class="nav-link" tag="div" v-if="roles==='boss'">商户用例</router-link> -->
-        <!-- <router-link to='/usertest' class="nav-link" tag="div" v-if="roles==='user'">用户用例</router-link> -->
         <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>

@@ -1,5 +1,14 @@
 import request from '@/utils/request'
 // import { getToken } from '@/utils/cookies'
+// 注册
+export function register (userForm) {
+  return request({
+    url: '/Account.php',
+    method: 'post',
+    params: { way: 1, content: userForm }
+  })
+}
+
 // 登录
 export function login (userForm) {
   return request({
@@ -12,6 +21,7 @@ export function login (userForm) {
     }
   })
 }
+
 // 获取用户信息
 export function getInfo (token) {
   return request({
@@ -25,14 +35,6 @@ export function logout () {
   return request({
     url: '/logout',
     method: 'post'
-  })
-}
-// 注册
-export function register (userForm) {
-  return request({
-    url: '/Account.php',
-    method: 'post',
-    params: { way: 1, content: userForm }
   })
 }
 

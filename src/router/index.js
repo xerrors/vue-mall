@@ -7,22 +7,21 @@ Vue.use(VueRouter)
 
 var whiteList = ['/', '/about', '/404', '/403', '/register']
 
-const routes = [
-  {
+const routes = [{
     path: '/403',
     component: () => import('@/views/errors/403'),
     meta: {
       hiddenNavbar: true,
       hiddenFooter: true
     }
-  }, {
+  }, { 
     path: '/404',
     component: () => import('@/views/errors/404'),
     meta: {
       hiddenNavbar: true,
       hiddenFooter: true
     }
-  }, {
+  }, { 
     path: '/',
     name: 'home',
     component: () => import('@/views/Home'),
@@ -31,67 +30,17 @@ const routes = [
       hiddenNavbar: true,
       hiddenFooter: true
     }
-  }, {
-    path: '/boss/main',
-    component: () => import('@/views/boss/product_flow'),
-    meta: {
-      roles: ['boss']
-    }
-  }, {
-    path: '/user/main',
-    component: () => import('@/views/user/publish'),
-    meta: {
-      roles: ['user']
-    }
-  }, {
-    path: '/boss/center',
-    component: () => import('@/views/boss/profile'),
-    meta: {
-      roles: ['boss']
-    }
-  }, {
-    path: '/user/center',
-    component: () => import('@/views/user/profile'),
-    meta: {
-      roles: ['user']
-    }
   },
+  
+  { path: '/about',       component: () => import('@/views/About.vue') },
 
-  {
-    path: '/about',
-    component: () => import('@/views/About.vue')
-  },
-
-  {
-    path: '/messages',
-    component: () => import('@/views/Messages.vue')
-  },
-
-  {
-    path: '/register',
-    component: () => import('@/views/account/Register.vue')
-  },
-
-  {
-    path: '/product/:id',
-    component: () => import('@/views/Product.vue')
-  },
-
-  {
-    path: '/price',
-    component: () => import('@/views/user/Price.vue'),
-    meta: {
-      roles: ['user']
-    }
-  },
-
-  {
-    path: '/order',
-    component: () => import('@/views/Order.vue'),
-    meta: {
-      roles: ['user', 'boss']
-    }
-  },
+  { path: '/user/main',   component: () => import('@/views/user/publish') },
+  { path: '/user/center', component: () => import('@/views/user/profile') },
+  { path: '/messages',    component: () => import('@/views/Messages.vue') },
+  { path: '/register',    component: () => import('@/views/account/Register.vue') },
+  { path: '/product/:id', component: () => import('@/views/Product.vue')},
+  { path: '/price',       component: () => import('@/views/user/Price.vue') },
+  { path: '/order',       component: () => import('@/views/Order.vue') },
 
   { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
   { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },

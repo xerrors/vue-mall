@@ -507,6 +507,12 @@ export default {
 }
 </script>
 
+<style lang="stylus">
+// 重写 ELementUI 的样式
+.el-collapse-item__header
+  font-size 1rem
+</style>
+
 <style lang="stylus" scoped>
 .publish
   color color-text-primary

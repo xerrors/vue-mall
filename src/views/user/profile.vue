@@ -38,4 +38,7 @@ export default {
 <style lang="stylus" scoped>
 .profile
   padding-top 5rem
+  max-width 900px
+  margin 0 auto
+
 </style>

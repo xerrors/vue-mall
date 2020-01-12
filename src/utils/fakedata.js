@@ -298,71 +298,37 @@ export function getMsgs () {
 }
 
 export function getUserInfo (token) {
-  if (token === 'user') {
-    return {
-      baseForm: {
-        id: 122121,
-        name: '黄玉川',
-        avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim',
-        phone: '17681352667',
-        sex: 'male'
-      },
-      addresses: [{
-        receiver: '黄玉川',
-        area: [
-          { 320000: '江苏省' },
-          { 320200: '无锡市' },
-          { 320211: '滨湖区' }
-        ],
-        address: '蠡湖大道1800号江南大学',
-        code: '214122',
-        phone: '17681352667',
-        default: true
-      }, {
-        receiver: '黄玉川',
-        area: [
-          { 340000: '安徽省' },
-          { 341600: '亳州市' },
-          { 341623: '利辛县' }
-        ],
-        address: '利辛县第一中学',
-        code: '246700',
-        phone: '17681352667',
-        default: false
-      }]
-    }
-  } else if (token === 'boss') {
-    return {
-      userForm: {
-        id: 12121,
-        name: '蔡徐坤',
-        avatar: 'http://src.xerrors.fun/blog/20191021/wFNCwcPTBkwa.jpg?imageslim',
-        phone: '15251630520',
-        sex: 'male'
-      },
-      addresses: [{
-        receiver: '蔡徐坤',
-        area: [
-          { 320000: '江苏省' },
-          { 320200: '无锡市' },
-          { 320211: '滨湖区' }
-        ],
-        address: '蠡湖大道1800号江南大学',
-        code: '214122',
-        phone: '15251630520',
-        default: true
-      }, {
-        receiver: '蔡徐坤',
-        area: [
-          { 340000: '安徽省' },
-          { 341600: '亳州市' },
-          { 341623: '利辛县' }
-        ],
-        address: '利辛县第一中学',
-        code: '246700',
-        phone: '15251630520',
-        default: false
-      }]
-    }
+  console.log(token)
+  return {
+    baseForm: {
+      id: 122121,
+      name: '黄玉川',
+      avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim',
+      phone: '17681352667',
+      sex: 'male'
+    },
+    addresses: [{
+      receiver: '黄玉川',
+      area: [
+        { 320000: '江苏省' },
+        { 320200: '无锡市' },
+        { 320211: '滨湖区' }
+      ],
+      address: '蠡湖大道1800号江南大学',
+      code: '214122',
+      phone: '17681352667',
+      default: true
+    }, {
+      receiver: '黄玉川',
+      area: [
+        { 340000: '安徽省' },
+        { 341600: '亳州市' },
+        { 341623: '利辛县' }
+      ],
+      address: '利辛县第一中学',
+      code: '246700',
+      phone: '17681352667',
+      default: false
+    }]
   }
 }
