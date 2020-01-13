@@ -4,7 +4,7 @@ import store from '../store'
 import { getToken } from '@/utils/cookies'
 
 // 创建axios实例
-axios.defaults.baseURL = process.env.BASE_API// api 的 base_url
+axios.defaults.baseURL = 'http://127.0.0.1'// api 的 base_url
 axios.defaults.timeout = 50000 // 请求超时时间
 
 // request拦截器
@@ -27,10 +27,10 @@ const successCode = 1
 axios.interceptors.response.use(
   response => {
     /**
-     * code为非1是抛错 可结合自己业务进行修改
+     * code为非 1 是抛错 可结合自己业务进行修改
      */
     const res = response.data
-    console.log(res)
+    console.log(response)
     if (res.code !== successCode) {
       Message({
         message: res.info,
@@ -38,8 +38,8 @@ axios.interceptors.response.use(
         duration: 5 * 1000
       })
 
-      // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+      // 注：10001 为全局状态码
+      if (res.code === 10001) {
         MessageBox.confirm(
           '你已被登出，可以取消继续留在该页面，或者重新登录',
           '确定登出',
@@ -65,9 +65,10 @@ axios.interceptors.response.use(
     }
   },
   error => {
+    // 当请求连接不通的时候
     console.log('error' + error) // for debug
     Message({
-      message: error.message,
+      message: 'RE:' + error.message,
       type: 'error',
       duration: 5 * 1000
     })

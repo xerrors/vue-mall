@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { getToken, setToken, removeToken } from '@/utils/cookies'
-import { register, logout } from '@/api/user'
-// import { register, logout, login } from '@/api/user'
+import { register, logout, getInfo } from '@/api/user'
+// import { register, logout, login, getInfo } from '@/api/user'
 
 import getters from './getters'
 
@@ -13,15 +13,24 @@ export default new Vuex.Store({
   state: {
     token: getToken(),
     name: '',
-    avatar: '',
+    id: '',
+    avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim',
     roles: 'user',
     showLogin: false,
     tel: '',
+    addresses: '',
     currentOrder: ''
   },
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
+    },
+    SET_BASE_INFO: (state, data) => {
+      state.name = data.account
+      state.id = data.accountid
+      state.addresses = data.addr
+      state.tel = data.tel
+      state.pay_way = data.pay_way
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -30,13 +39,16 @@ export default new Vuex.Store({
       state.avatar = avatar
     },
     SET_ROLES: (state, roles) => {
-      state.roles = roles
+      state.roles = 'user'
     },
     SET_DATA: (state, data) => {
       state.data = data
     },
     SET_TEL: (state, tel) => {
       state.tel = tel
+    },
+    SET_ADDR: (state, addr) => {
+      state.addresses = addr
     },
     CREATE_ORDER: (state, order) => {
       state.currentOrder = order
@@ -57,47 +69,31 @@ export default new Vuex.Store({
     Login ({ commit }, userForm) {
       // return new Promise((resolve, reject) => {
       //   login(userForm).then(res => {
-      //     const info = res.info
-      //     setToken(info.PHPSESSID)
-      //     commit('SET_NAME', info.account)
-      //     commit('SET_TOKEN', info.PHPSESSID)
-      //     commit('SET_TEL', info.tel)
-      //     commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
+      //     setToken(res.info.PHPSESSID)
+      //     commit('SET_BASE_INFO', res.info)
+      //     commit('SET_TOKEN', res.info.PHPSESSID)
       //     resolve()
       //   }).catch(error => {
       //     reject(error)
       //   })
       // })
-      setToken('info.PHPSESSID')
-      commit('SET_NAME', 'info.account')
-      commit('SET_ROLES', 'user')
-      commit('SET_TOKEN', 'user')
-      commit('SET_TEL', '12312312313123')
-      commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
+      console.log(userForm)
+      const res = { code: 1, info: { account: 'nick', accountid: '10000', addr: [{ receiver: '小兰', area: '500102', address: '阿里巴巴', code: '030200', tel: '15516161414', default: true, addr_id: '24' }, { receiver: '小白', area: '500102', address: '北京三里屯', code: '030201', tel: '15516161414', default: 'false', addr_id: '25' }], tel: '13712345612', pay_way: 'alipay', PHPSESSID: 'fvdpqnmm2ngllhvnvgl8ppibr7' } }
+      setToken(res.info.PHPSESSID)
+      commit('SET_BASE_INFO', res.info)
+      commit('SET_TOKEN', res.info.PHPSESSID)
     },
 
     // 获取用户信息
     GetInfo ({ commit, state }) {
-      // return new Promise((resolve, reject) => {z
-      //   getInfo(state.token).then(res => {
-      //     console.log(res)
-      //     const data = res.data.data
-      //     if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-      //       commit('SET_ROLES', data.roles)
-      //     } else {
-      //       console.log(data.roles)
-      //       reject(new Error('getInfo: roles must be a non-null array !'))
-      //     }
-      //     commit('SET_NAME', data.name)
-      //     commit('SET_AVATAR', data.avatar)
-      //     resolve(res)
-      //   }).catch(error => {
-      //     reject(error)
-      //   })
-      // })
-      commit('SET_ROLES', 'user')
-      commit('SET_NAME', 'Avatar')
-      commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim')
+      return new Promise((resolve, reject) => {
+        getInfo(state.token).then(res => {
+          commit('SET_BASE_INFO', res.info)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
     },
 
     // 登出

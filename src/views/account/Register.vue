@@ -93,9 +93,6 @@ export default {
         ],
         tel: [
           { required: true, trigger: "blur", validator: validateTelephone }
-        ],
-        pay_way: [
-          { required: true, message: "请输入支付方式", trigger: "blur" },
         ]
       },
       disabled: false,

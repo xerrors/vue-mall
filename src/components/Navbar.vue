@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="navbar">
-      <router-link :to="'/' + (roles?(roles + '/main'):'')"><img class="logo" src="logo_dark.png"></router-link>
+      <router-link :to="'/' + (token?('user/main'):'')"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
         <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
@@ -59,11 +59,7 @@ export default {
 
       // 跳转到对应的个人中心去
       if (obj === 'profile') {
-        if (this.roles === 'user') {
-          this.$router.push('/user/center')
-        } else {
-          this.$router.push('/boss/center')
-        }
+        this.$router.push('/user/center')
       }
 
       // 实现登出功能，现在只写了前端部分

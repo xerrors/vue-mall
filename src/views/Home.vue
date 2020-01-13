@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     goCenter () {
-      this.$router.push('/' + this.roles + '/main')
+      this.$router.push('/user/main')
     },
     goLogin () {
       this.$store.state.showLogin = true

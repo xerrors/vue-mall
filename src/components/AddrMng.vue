@@ -58,10 +58,9 @@
         label="操作"
         width="120">
         <template slot-scope="scope">
-        <el-button @click="handleRemove(scope.row)" type="text">删除</el-button>
+        <el-button @click="handleRemove(scope.row.addr_id)" type="text">删除</el-button>
         <el-button type="text" v-if="scope.row.default" disabled>默认地址</el-button>
         <el-button type="text" v-else @click="handleSetDefault(scope.row)">设为默认</el-button>
-        <!-- <el-button type="text" @click="handleSetDefault(scope.row)">设为默认</el-button> -->
         </template>
       </el-table-column>
     </el-table>

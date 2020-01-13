@@ -2,38 +2,38 @@
   <div class="login">
     <!--外层的遮罩 点击事件用来关闭弹窗，isShow控制弹窗显示 隐藏的props-->
     <div class="login-cover"  v-if="isShow"  @click="closeMyself"></div>
-    <!-- transition 这里可以加一些简单的动画效果 -->
-    <transition name="drop">
-      <div class="card" v-if="isShow">
-        <div class="card__head">
-          <div
-            :class="[{'select': userForm.role == 'user'}, 'title']"
-            @click="userForm.role = 'user'"
-            >用户登录</div>
-          <div
-            :class="[{'select': userForm.role == 'boss'}, 'title']"
-            @click="userForm.role = 'boss'"
-            >商户登录</div>
-        </div>
-        <input
-          v-model.trim="userForm.account"
-          class="reset card__input"
-          placeholder="手机号"
-          required>
-        <input
-          type="password"
-          v-model.trim="userForm.passwd"
-          class="reset card__input"
-          placeholder="密码"
-          @keyup.enter.native="submit"
-          required>
-        <el-button class="reset card__btn" :loading="loading" @click="submit">登录</el-button>
-        <div class="card__info">
-          <el-link @click="register">注册</el-link>
-          <el-link @click="forgotPWD">忘记密码</el-link>
-        </div>
+    <!--这里可以加一些简单的动画效果 -->
+    <div class="card" v-if="isShow">
+      <div class="card__head">
+        <div
+          :class="[{'select': userForm.role == 'user'}, 'title']"
+          @click="userForm.role = 'user'"
+          >用户登录</div>
+          <!--
+        <div
+          :class="[{'select': userForm.role == 'boss'}, 'title']"
+          @click="userForm.role = 'boss'"
+          >商户登录</div>
+          -->
       </div>
-    </transition>
+      <input
+        v-model.trim="userForm.account"
+        class="reset card__input"
+        placeholder="手机号"
+        required>
+      <input
+        type="password"
+        v-model.trim="userForm.passwd"
+        class="reset card__input"
+        placeholder="密码"
+        @keyup.enter.native="submit"
+        required>
+      <el-button class="reset card__btn" :loading="loading" @click="submit">登录</el-button>
+      <div class="card__info">
+        <el-link @click="register">注册</el-link>
+        <el-link @click="forgotPWD">忘记密码</el-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,14 +77,9 @@ export default {
           console.log(err)
           this.loading = false
         })
-      this.$store.dispatch('GetInfo')
       if (this.$route.path === '/') {
-        this.$router.push('/' + this.$store.state.roles + '/main')
+        this.$router.push('/user/main')
       }
-      this.$message({
-        message: '登录成功',
-        type: 'success'
-      })
     },
     register () {
       this.$router.push('register')
@@ -121,6 +116,7 @@ export default {
 
     background rgba(0,0,0, 0.2)
     overflow hidden
+    animation: fade-in 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 
   .card
     position fixed
@@ -139,6 +135,8 @@ export default {
     border-top 0.5rem solid mainColor
     box-shadow cardShadow
     background white
+
+    animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
     *
       margin 1rem 0
@@ -178,4 +176,24 @@ export default {
       justify-content space-around
       *
         color mainColor
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flip-in-hor-bottom {
+  0% {
+    transform: rotateX(80deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
 </style>

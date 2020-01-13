@@ -3,19 +3,25 @@ import request from '@/utils/request'
 // 注册
 export function register (userForm) {
   return request({
-    url: '/Account.php',
+    url: '/invokeAPI/index.php',
     method: 'post',
-    params: { way: 1, content: userForm }
+    params: {
+      serviceId: '100001',
+      account: userForm.account,
+      passwd: userForm.passwd,
+      tel: userForm.tel,
+      pay_way: userForm.pay_way
+    }
   })
 }
 
 // 登录
 export function login (userForm) {
   return request({
-    url: '/Account.php',
+    url: '/invokeAPI/index.php',
     method: 'post',
     params: {
-      way: 2,
+      serviceId: '100002',
       tel: userForm.tel,
       passwd: userForm.passwd
     }
@@ -23,26 +29,64 @@ export function login (userForm) {
 }
 
 // 获取用户信息
-export function getInfo (token) {
+export function getInfo () {
   return request({
-    url: '/getInfo',
+    url: '/invokeAPI/index.php',
     method: 'get',
-    params: { token }
-  })
-}
-// 登出
-export function logout () {
-  return request({
-    url: '/logout',
-    method: 'post'
+    params: {
+      serviceId: '100007'
+    }
   })
 }
 
-// 获取消息
-export function getMsg (token, roles) {
+// 登出
+export function logout () {
   return request({
-    url: '/getMsg',
-    method: 'get',
-    params: { token, roles }
+    url: '/invokeAPI/index.php',
+    method: 'post',
+    params: {
+      serviceId: '100008'
+    }
+  })
+}
+
+// 100003 添加收货地址
+export function addAddr (item) {
+  return request({
+    url: '/invokeAPI/index.php',
+    method: 'post',
+    params: {
+      serviceId: '100003',
+      receiver: item.receiver,
+      area: item.area,
+      address: item.address,
+      code: item.code,
+      tel: item.tel
+    }
+  })
+}
+
+// 100004 删除收货地址
+export function delAddr (addrID) {
+  return request({
+    url: '/invokeAPI/index.php',
+    method: 'post',
+    params: {
+      serviceId: '100004',
+      addr_id: addrID
+    }
+  })
+}
+
+// 100005 修改支付方式与手机号码
+export function changePayTel (form) {
+  return request({
+    url: '/invokeAPI/index.php',
+    method: 'post',
+    params: {
+      serviceId: '100005',
+      tel: form.tel,
+      pay_way: form.pay_way
+    }
   })
 }
