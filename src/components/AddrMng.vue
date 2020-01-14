@@ -5,7 +5,7 @@
         <el-input v-model="newAddress.receiver"></el-input>
       </el-form-item>
       <el-form-item label="地址" required>
-        <area-select type='all' :level='2' v-model="newAddress.area" :data="pcaa"></area-select>
+        <area-select type='text' :level='2' v-model="newAddress.area" :data="pcaa"></area-select>
       </el-form-item>
       <el-form-item label="详细地址" required>
         <el-input
@@ -121,6 +121,8 @@ export default {
     },
     // 添加新的收货地址
     createNewAddress () {
+      this.newAddress.area = this.newAddress.area.join('')
+      console.log(this.newAddress)
       return new Promise((resolve, reject) => {
         addAddr(this.newAddress).then(res => {
           this.refrashAddr(res.addr)

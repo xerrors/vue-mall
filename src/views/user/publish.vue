@@ -536,9 +536,6 @@ export default {
   .block
     .model_box
       height 20rem
-      border 1px solid #f3f4f5
-      border-radius 3px
-      box-shadow cardShadow
       .tabs
         color color-text-title
         display flex
