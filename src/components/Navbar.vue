@@ -16,7 +16,7 @@
         <span v-else style="font-size: 14px; margin: 0 10px;">用户版</span>
         <el-dropdown type="primary" @command="dropdownCmd">
           <el-badge :is-dot="user.unread" class="item">
-            <el-avatar :src="avatar"></el-avatar>
+            <el-avatar :src="avatar" style="border: 2px solid #f2f2f2;"></el-avatar>
           </el-badge>
           <el-dropdown-menu slot="dropdown">
             <el-badge :is-dot="user.unread" class="item">

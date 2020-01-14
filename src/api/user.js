@@ -78,6 +78,18 @@ export function delAddr (addrID) {
   })
 }
 
+// 10000x TODO:稍微默认地址
+export function setDefault (addrID) {
+  return request({
+    url: '/invokeAPI/index.php',
+    method: 'post',
+    params: {
+      serviceId: '100004',
+      addr_id: addrID
+    }
+  })
+}
+
 // 100005 修改支付方式与手机号码
 export function changePayTel (form) {
   return request({

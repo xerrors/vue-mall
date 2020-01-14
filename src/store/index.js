@@ -18,7 +18,6 @@ export default new Vuex.Store({
     roles: 'user',
     showLogin: false,
     tel: '',
-    addresses: '',
     currentOrder: ''
   },
   mutations: {
@@ -28,7 +27,6 @@ export default new Vuex.Store({
     SET_BASE_INFO: (state, data) => {
       state.name = data.account
       state.id = data.accountid
-      state.addresses = data.addr
       state.tel = data.tel
       state.pay_way = data.pay_way
     },
@@ -46,9 +44,6 @@ export default new Vuex.Store({
     },
     SET_TEL: (state, tel) => {
       state.tel = tel
-    },
-    SET_ADDR: (state, addr) => {
-      state.addresses = addr
     },
     CREATE_ORDER: (state, order) => {
       state.currentOrder = order
@@ -78,7 +73,10 @@ export default new Vuex.Store({
       //   })
       // })
       console.log(userForm)
+
       const res = { code: 1, info: { account: 'nick', accountid: '10000', addr: [{ receiver: '小兰', area: '500102', address: '阿里巴巴', code: '030200', tel: '15516161414', default: true, addr_id: '24' }, { receiver: '小白', area: '500102', address: '北京三里屯', code: '030201', tel: '15516161414', default: 'false', addr_id: '25' }], tel: '13712345612', pay_way: 'alipay', PHPSESSID: 'fvdpqnmm2ngllhvnvgl8ppibr7' } }
+      // 地址这种东西还是保存在LocalStorage里面吧
+      localStorage.addresses = JSON.stringify(res.info.addr)
       setToken(res.info.PHPSESSID)
       commit('SET_BASE_INFO', res.info)
       commit('SET_TOKEN', res.info.PHPSESSID)
@@ -101,7 +99,6 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         logout().then(() => {
           commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
           removeToken()
           resolve()
         }).catch(error => {
@@ -114,7 +111,6 @@ export default new Vuex.Store({
     FedLogOut ({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
-        commit('SET_ROLES', '')
         removeToken()
         resolve()
       })

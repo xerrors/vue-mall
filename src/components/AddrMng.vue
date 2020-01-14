@@ -49,7 +49,7 @@
         label="邮编">
       </el-table-column>
       <el-table-column
-        prop="phone"
+        prop="tel"
         label="手机"
         width="130">
       </el-table-column>
@@ -71,8 +71,8 @@
 import { pca, pcaa } from 'area-data' // v5 or higher
 import { AreaSelect } from 'vue-area-linkage'
 import 'vue-area-linkage/dist/index.css' // v2 or higher
+import { addAddr, delAddr, setDefault } from '@/api/user'
 export default {
-  props: [ 'serverEndAddrs' ],
   components: { AreaSelect },
   data () {
     return {
@@ -85,48 +85,62 @@ export default {
         code: '',
         phone: '',
         default: false
-      },
-      testAddr: this.serverEndAddrs
+      }
     }
   },
   computed: {
     addresses () {
-      let addrs = []
-      let item
-      for (var j = 0; j < this.testAddr.length; j++) {
-        // 将数组形式的数组转换为字符串形式显示，可以在服务端完成
-        item = this.testAddr[j]
-        let tmpAddr = {}
-        tmpAddr.receiver = item.receiver
-        tmpAddr.address = item.address
-        tmpAddr.code = item.code
-        tmpAddr.phone = item.phone
-        tmpAddr.default = item.default
-        let tmpArea = ''
-        for (var i = 0; i < item.area.length; i++) {
-          tmpArea = tmpArea + Object.values(item.area[i])[0]
-        }
-        tmpAddr.area = tmpArea
-        addrs.push(tmpAddr)
+      if (localStorage.addresses) {
+        return JSON.parse(localStorage.addresses)
       }
-      return addrs
+      return []
     }
   },
   methods: {
     handleRemove (item) {
       console.log(item)
+      return new Promise((resolve, reject) => {
+        delAddr(item).then(res => {
+          this.refrashAddr(res.addr)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
     },
     handleSetDefault (item) {
-      // 具有服务器后台的实现思路应该是，我向服务端发送请求，服务端处理相应之后返还心得地址
-      for (var i = 0; i < this.addresses.length; i++) {
-        this.addresses[i].default = false
-      }
-      item.default = true
-      console.log(item)
+      // 具有服务器后台的实现思路应该是，我向服务端发送请求，服务端处理相应之后返还新的地址
+      return new Promise((resolve, reject) => {
+        setDefault(item).then(res => {
+          this.refrashAddr(res.addr)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
     },
+    // 添加新的收货地址
     createNewAddress () {
-      console.log(this.newAddress)
-      this.testAddr.push(this.newAddress)
+      return new Promise((resolve, reject) => {
+        addAddr(this.newAddress).then(res => {
+          this.refrashAddr(res.addr)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    refrashAddr (addr) {
+      this.newAddress = {
+        receiver: '',
+        area: '',
+        address: '',
+        code: '',
+        phone: '',
+        default: false
+      }
+      // TODO: 这里还要根据API进行修改
+      localStorage.addresses = addr
     }
   }
 }

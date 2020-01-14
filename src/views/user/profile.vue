@@ -14,7 +14,7 @@
       </el-tab-pane>
 
       <el-tab-pane label="地址管理" name="address">
-        <addr-mng :serverEndAddrs="addresses"></addr-mng>
+        <addr-mng></addr-mng>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -24,17 +24,19 @@
 import BaseInfo from '@/components/BaseInfo.vue'
 import AddrMng from '@/components/AddrMng.vue'
 import { getUserInfo } from '@/utils/fakedata.js'
-import { mapGetters } from 'vuex'
 export default {
   components: { BaseInfo, AddrMng },
   data () {
     return {
+      localAddr: JSON.parse(localStorage.addresses),
       activeName: 'profile',
       userInfo: getUserInfo(this.$store.state.token)
     }
   },
-  computed: {
-    ...mapGetters(['addresses'])
+  mounted () {
+    if (localStorage.addresses) {
+      this.localAddr = JSON.parse(localStorage.addresses)
+    }
   }
 }
 </script>
@@ -44,5 +46,4 @@ export default {
   padding-top 5rem
   max-width 900px
   margin 0 auto
-
 </style>
