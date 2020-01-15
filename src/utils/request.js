@@ -33,7 +33,7 @@ axios.interceptors.response.use(
     console.log(response)
     if (res.code !== successCode) {
       Message({
-        message: res.info,
+        message: 'CODE ERROR:' + res.info,
         type: 'error',
         duration: 5 * 1000
       })
@@ -56,11 +56,14 @@ axios.interceptors.response.use(
       }
       return Promise.reject(new Error('error'))
     } else {
-      Message({
-        message: res.info,
-        type: 'success',
-        duration: 5 * 1000
-      })
+      // 对返回类型进行判断是否弹出信息
+      if (typeof(res.info) === 'string') {
+        Message({
+          message: res.info,
+          type: 'success',
+          duration: 5 * 1000
+        })
+      }
       return response.data
     }
   },
@@ -68,7 +71,7 @@ axios.interceptors.response.use(
     // 当请求连接不通的时候
     console.log('error' + error) // for debug
     Message({
-      message: 'RE:' + error.message,
+      message: 'CAN NOT CONNECT:' + error.message,
       type: 'error',
       duration: 5 * 1000
     })
