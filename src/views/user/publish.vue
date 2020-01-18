@@ -3,7 +3,7 @@
     <!-- TODO: 组件化 -->
     <!-- 选择机型 -->
     <div class="select">
-      <h1>发布你的产品</h1>
+      <h2>发布你的产品</h2>
       <div v-if="step==1" class="block">
         <div class="model_box">
           <!-- 手机品牌 -->
