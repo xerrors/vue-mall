@@ -92,14 +92,27 @@
       </div>
 
       <div v-if="step ==3">
+        <h4>是否想要以旧换新</h4>
+        <el-switch
+          v-model="form.change"
+          active-color="#13ce66">
+        </el-switch>
         <h4>添加手机的描述</h4>
-
         <el-input
           type="textarea"
           :autosize="{ minRows: 2, maxRows: 10}"
           placeholder="请输入描述"
           v-model="form.describe">
         </el-input>
+        <h4>选择你期望的回收方式</h4>
+        <span>拖拽排序</span>
+        <!-- https://github.com/SortableJS/Vue.Draggable -->
+        <draggable v-model="form.methods" group="people" @start="drag=true" @end="drag=false">
+          <div v-for="(element, ind) in form.methods" :key="element.id" class="methods">
+            {{ind}} : {{element.name}}
+            <el-button type="text" style="float: right; color: #f17171; padding: .3rem;" @click="delMethod(ind)">删除</el-button>
+          </div>
+        </draggable>
         <el-button class="pub_btn" @click="handlePre">上一步</el-button>
         <el-button class="pub_btn" @click="publish" type="primary">提交</el-button>
       </div>
@@ -109,6 +122,7 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 export default {
   data () {
     return {
@@ -446,9 +460,23 @@ export default {
         },
         model: '', // 保存用户的机型信息
         selected: [], // 记录用户的选择的手机的状态
-        describe: '' // 用户填写的描述
+        describe: '', // 用户填写的描述
+        change: false, // 是否想要以旧换新
+        methods: [{
+          id: 1,
+          name: '上门回收'
+        }, {
+          id: 2,
+          name: '自行邮寄'
+        }, {
+          id: 3,
+          name: '去线下门店'
+        }] // 期望的回收方式
       }
     }
+  },
+  components: {
+    draggable
   },
   methods: {
     title (select, ind) {
@@ -496,6 +524,14 @@ export default {
     handleRadioChg (e) {
       // 可以根据上次所使用的东西进行更改下面的逻辑。例如保存到矩阵里面
       this.activeNames += 1
+    },
+    // 删除不想要的回收方式
+    delMethod (ind) {
+      if (this.form.methods.length === 1) {
+        this.$message.error('至少有一种回收方式哦！')
+      } else {
+        this.form.methods.splice(ind, 1)
+      }
     },
     // 提交操作 TODO:
     publish () {
@@ -594,6 +630,13 @@ export default {
 
     .pub_btn
       margin-top 20px
+
+    .methods
+      border 1px solid #f2f2f2
+      border-radius 4px
+      margin .3rem 0
+      padding .5rem
+      background #f2f7fa
 </style>
 
 <style lang="stylus">

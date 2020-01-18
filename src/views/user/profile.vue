@@ -5,12 +5,12 @@
         <base-info :form="userInfo.baseForm"></base-info>
       </el-tab-pane>
 
-      <el-tab-pane label="已发布产品" name="published">
-        已发布产品
+      <el-tab-pane label="订单管理" name="orders">
+        <order></order>
       </el-tab-pane>
 
-      <el-tab-pane label="订单管理" name="orders">
-        订单管理
+      <el-tab-pane label="安全中心" name="security">
+        <order></order>
       </el-tab-pane>
 
       <el-tab-pane label="地址管理" name="address">
@@ -22,10 +22,11 @@
 
 <script>
 import BaseInfo from '@/components/BaseInfo.vue'
+import Order from '@/components/Order.vue'
 import AddrMng from '@/components/AddrMng.vue'
 import { getUserInfo } from '@/utils/fakedata.js'
 export default {
-  components: { BaseInfo, AddrMng },
+  components: { BaseInfo, AddrMng, Order },
   data () {
     return {
       localAddr: JSON.parse(localStorage.addresses),
