@@ -563,7 +563,7 @@ export default {
 
   .block
     .model_box
-      border 1px solid rgb(209, 213, 218);
+      border 1px solid border-color-git;
       padding-bottom 1rem
       border-radius 3px
       .tabs
