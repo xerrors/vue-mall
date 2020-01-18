@@ -1,11 +1,9 @@
 <template>
   <div class="publish">
-    <div class="publish__top_box">
-      <h1 class="publish__title">发布你的产品</h1>
-    </div>
     <!-- TODO: 组件化 -->
     <!-- 选择机型 -->
     <div class="select">
+      <h1>发布你的产品</h1>
       <div v-if="step==1" class="block">
         <div class="model_box">
           <!-- 手机品牌 -->
@@ -20,10 +18,10 @@
             <div class="tab">其他</div>
           </div>
           <!-- 手机机型 -->
-          <div class="models models_1" v-if="show_models === 1">
+          <div class="models">
             <div
               class="model"
-              v-for="(model, index) in brands[form.brand.index].models.slice(0, 5)"
+              v-for="(model, index) in brands[form.brand.index].models.slice(0, 10)"
               :key="index"
               @click="handleSelectModel(model)">
               <el-image
@@ -33,30 +31,8 @@
               ></el-image>
               <div>{{ model.label }}</div>
             </div>
-            <!-- 左右切换键 -->
-            <div class="model-arrow">
-              <i class="el-icon-caret-right" @click="show_models = 2"></i>
-            </div>
           </div>
-          <!-- 手机机型2 -->
-          <div class="models models_2" v-if="show_models === 2">
-            <div class="model-arrow">
-              <i class="el-icon-caret-left" @click="show_models = 1"></i>
-            </div>
-            <div
-              class="model"
-              v-for="(model, index) in brands[form.brand.index].models.slice(5, 10)"
-              :key="index"
-              @click="handleSelectModel(model)">
-              <el-image
-                class="model__img"
-                fit="contain"
-                :src="model.pic"
-              ></el-image>
-              <div>{{ model.label }}</div>
-            </div>
-            </div>
-          </div>
+        </div>
       </div>
       <!-- 选择手机的情况信息 -->
       <div v-if="step==2">
@@ -106,11 +82,15 @@
         </el-input>
         <h4>选择你期望的回收方式</h4>
         <span>拖拽排序</span>
+        <el-button type="text" @click="setDef">重置</el-button>
         <!-- https://github.com/SortableJS/Vue.Draggable -->
         <draggable v-model="form.methods" group="people" @start="drag=true" @end="drag=false">
           <div v-for="(element, ind) in form.methods" :key="element.id" class="methods">
             {{ind}} : {{element.name}}
-            <el-button type="text" style="float: right; color: #f17171; padding: .3rem;" @click="delMethod(ind)">删除</el-button>
+            <el-button type="text"
+              style="float: right; color: #f17171; padding: .3rem;"
+              @click="delMethod(ind)"
+              >删除</el-button>
           </div>
         </draggable>
         <el-button class="pub_btn" @click="handlePre">上一步</el-button>
@@ -126,11 +106,10 @@ import draggable from 'vuedraggable'
 export default {
   data () {
     return {
-      show_models: 1, // 两个机型块展示哪一个
       step: 1, // 当前进行的步骤是第几步
       dialogImageUrl: '',
       dialogVisible: false,
-      activeNames: ['status'], // 选择需要展开的页面
+      activeNames: 1, // 选择需要展开的页面
       brands: [{
         label: '华为',
         value: 'Huawei',
@@ -525,6 +504,19 @@ export default {
       // 可以根据上次所使用的东西进行更改下面的逻辑。例如保存到矩阵里面
       this.activeNames += 1
     },
+    // 将回收方式设置为默认的
+    setDef () {
+      this.form.methods = [{
+        id: 1,
+        name: '上门回收'
+      }, {
+        id: 2,
+        name: '自行邮寄'
+      }, {
+        id: 3,
+        name: '去线下门店'
+      }]
+    },
     // 删除不想要的回收方式
     delMethod (ind) {
       if (this.form.methods.length === 1) {
@@ -571,7 +563,8 @@ export default {
 
   .block
     .model_box
-      height 20rem
+      border 1px solid #f2f7f7
+      padding-bottom 1rem
       .tabs
         color color-text-title
         display flex
@@ -583,34 +576,20 @@ export default {
           line-height 3rem
           background #f3f4f5
           &:hover
-            background white
             cursor pointer
         .tab_active
           background white
           border-top 2px solid mainColor
     .models
       width 100%
-      height 17rem
       display flex
-      justify-content center
+      flex-flow wrap
+      justify-content space-between
       align-items center
       transition all .5s ease
-      .model-arrow
-        display flex
-        width 2rem
-        height 70%
-        opacity 0
-        &:hover
-          cursor pointer
-          opacity 1
-          color mainColor
-        i
-          margin auto
       .model
-        width: 18%
-        height 80%
+        width 11rem
         text-align center
-        display inline-block
         transition all .3s ease
         &:hover
           cursor pointer
@@ -637,6 +616,8 @@ export default {
       margin .3rem 0
       padding .5rem
       background #f2f7fa
+      &:hover
+        cursor grabbing
 </style>
 
 <style lang="stylus">
@@ -652,7 +633,6 @@ export default {
   &__inner
     display none
   &__label
-    font-size smaller
     line-height 2rem
     padding-left 0
 </style>

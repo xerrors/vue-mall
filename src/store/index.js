@@ -74,7 +74,7 @@ export default new Vuex.Store({
       // })
       console.log(userForm)
 
-      const res = { code: 1, info: { account: 'nick', accountid: '10000', addr: [{ receiver: '小兰', area: '500102', address: '阿里巴巴', code: '030200', tel: '15516161414', default: true, addr_id: '24' }, { receiver: '小白', area: '500102', address: '北京三里屯', code: '030201', tel: '15516161414', default: 'false', addr_id: '25' }], tel: '13712345612', pay_way: 'alipay', PHPSESSID: 'fvdpqnmm2ngllhvnvgl8ppibr7' } }
+      const res = { code: 1, info: { account: 'nick', accountid: '10000', addr: [{ receiver: '小兰', area: '500102', address: '阿里巴巴', code: '030200', tel: '15516161414', default: true, addr_id: '24' }, { receiver: '小白', area: '500102', address: '北京三里屯', code: '030201', tel: '15516161414', default: false, addr_id: '25' }], tel: '13712345612', pay_way: 'alipay', PHPSESSID: 'fvdpqnmm2ngllhvnvgl8ppibr7' } }
       // 地址这种东西还是保存在LocalStorage里面吧
       localStorage.addresses = JSON.stringify(res.info.addr)
       setToken(res.info.PHPSESSID)
@@ -83,10 +83,11 @@ export default new Vuex.Store({
     },
 
     // 获取用户信息
-    GetInfo ({ commit, state }) {
+    GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(res => {
+        getInfo().then(res => {
           commit('SET_BASE_INFO', res.info)
+          localStorage.addresses = JSON.stringify(res.info.addr)
           resolve()
         }).catch(error => {
           reject(error)

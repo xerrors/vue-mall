@@ -10,7 +10,7 @@
       </el-tab-pane>
 
       <el-tab-pane label="安全中心" name="security">
-        <order></order>
+        安全中心
       </el-tab-pane>
 
       <el-tab-pane label="地址管理" name="address">

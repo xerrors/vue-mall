@@ -1,18 +1,16 @@
 <template>
   <div class="msg">
-    <div class="msg__top_box">
-      <h1 class="msg__title">消息管理</h1>
-    </div>
-      <div class="messages">
-        <div class="messages__box"
-          :class="{ messages_readed : msg.readed }"
-          v-for="msg in msgs" :key='msg'
-          @click="openMsg(msg)">
-          <el-badge :is-dot="!msg.readed" style="width: 100%;">
-            {{ msg.title }}
-          </el-badge>
-        </div>
+    <div class="messages">
+      <h2>消息管理</h2>
+      <div class="messages__box"
+        :class="{ messages_readed : msg.readed }"
+        v-for="msg in msgs" :key='msg'
+        @click="openMsg(msg)">
+        <el-badge :is-dot="!msg.readed" style="width: 100%;">
+          {{ msg.title }}
+        </el-badge>
       </div>
+    </div>
   </div>
 </template>
 

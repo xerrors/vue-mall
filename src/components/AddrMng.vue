@@ -71,7 +71,7 @@
 import { pca, pcaa } from 'area-data' // v5 or higher
 import { AreaSelect } from 'vue-area-linkage'
 import 'vue-area-linkage/dist/index.css' // v2 or higher
-import { addAddr, delAddr, setDefault } from '@/api/user'
+import { addAddr, delAddr, setDefault, getInfo } from '@/api/user'
 export default {
   components: { AreaSelect },
   data () {
@@ -101,7 +101,7 @@ export default {
       console.log(item)
       return new Promise((resolve, reject) => {
         delAddr(item).then(res => {
-          this.refrashAddr(res.addr)
+          this.getInfo()
           resolve()
         }).catch(error => {
           reject(error)
@@ -112,7 +112,7 @@ export default {
       // 具有服务器后台的实现思路应该是，我向服务端发送请求，服务端处理相应之后返还新的地址
       return new Promise((resolve, reject) => {
         setDefault(item).then(res => {
-          this.refrashAddr(res.addr)
+          getInfo()
           resolve()
         }).catch(error => {
           reject(error)
@@ -125,7 +125,7 @@ export default {
       console.log(this.newAddress)
       return new Promise((resolve, reject) => {
         addAddr(this.newAddress).then(res => {
-          this.refrashAddr(res.addr)
+          this.$store.dispatch('GetInfo')
           resolve()
         }).catch(error => {
           reject(error)
