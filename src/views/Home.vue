@@ -11,7 +11,35 @@
         <button @click="showMsg" class="more">了解更多</button>
       </div>
     </div>
-    <div class="home_msg" v-if="isShowMsg"></div>
+    <div class="home_msg" v-if="isShowMsg">
+      <div class="item item1" style="background: #effffb;">
+        <div class="content">
+          <img src="http://src.xerrors.fun/blog/20200127/EvFWm9QQhbHn.png"/>
+          <div class="info">
+            <h3>这是标题 1</h3>
+            <div>科技的发展让我们有更多的机会去支持我们的环保活动，从你我开始保护我们的环境吧！</div>
+          </div>
+        </div>
+      </div>
+      <div class="item item2" style="background: #deddfa;">
+        <div class="content">
+          <div class="info">
+            <h3>这是标题 2</h3>
+            <div>科技的发展让我们有更多的机会去支持我们的环保活动，从你我开始保护我们的环境吧！</div>
+          </div>
+          <img src="http://src.xerrors.fun/blog/20200127/fTJmiXqDeHis.png"/>
+        </div>
+      </div>
+      <div class="item item3" style="background: #effcef;">
+        <div class="content">
+          <img src="http://src.xerrors.fun/blog/20200127/SS4C7nOxldb9.png"/>
+          <div class="info">
+            <h3>这是标题 3</h3>
+            <div>科技的发展让我们有更多的机会去支持我们的环保活动，从你我开始保护我们的环境吧！</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -123,6 +151,26 @@ export default {
   transition height 0.5s ease
 
 .home_msg
-  height 100vh
-  background #003847
+  height 2100px
+  width 100%
+  .item
+    width 100%
+    &>div
+      width 80%
+      min-width 1000px
+      max-width 1250px
+      margin 0 auto
+      height 40rem
+      display flex
+      justify-content center
+      align-items center
+      img
+        width 45rem
+        box-shadow cardShadow
+      .info
+        margin 0 70px
+        h3
+          color text-color-title
+        div
+          color text-color-regular
 </style>

@@ -601,7 +601,7 @@ export default {
           margin-bottom 1.5rem
           transition all .3s ease
           &:hover
-            transform scale(1.1)
+            transform scale(1.05)
 
   .select
     width 80%
