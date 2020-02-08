@@ -8,45 +8,45 @@ Vue.use(VueRouter)
 var whiteList = ['/', '/about', '/404', '/403', '/register', '/settlein']
 
 const routes = [{
-    path: '/403',
-    component: () => import('@/views/errors/403'),
-    meta: {
-      hiddenNavbar: true,
-      hiddenFooter: true
-    }
-  }, { 
-    path: '/404',
-    component: () => import('@/views/errors/404'),
-    meta: {
-      hiddenNavbar: true,
-      hiddenFooter: true
-    }
-  }, { 
-    path: '/',
-    name: 'home',
-    component: () => import('@/views/Home'),
-    meta: {
-      isSpecialPage: true,
-      hiddenNavbar: true,
-      hiddenFooter: true
-    }
-  },
-  
-  { path: '/about',       component: () => import('@/views/About.vue') },
+  path: '/403',
+  component: () => import('@/views/errors/403'),
+  meta: {
+    hiddenNavbar: true,
+    hiddenFooter: true
+  }
+}, {
+  path: '/404',
+  component: () => import('@/views/errors/404'),
+  meta: {
+    hiddenNavbar: true,
+    hiddenFooter: true
+  }
+}, {
+  path: '/',
+  name: 'home',
+  component: () => import('@/views/Home'),
+  meta: {
+    isSpecialPage: true,
+    hiddenNavbar: true,
+    hiddenFooter: true
+  }
+},
 
-  { path: '/user/main',   component: () => import('@/views/user/publish') },
-  { path: '/user/center', component: () => import('@/views/user/profile') },
-  { path: '/messages',    component: () => import('@/views/Messages.vue') },
-  { path: '/register',    component: () => import('@/views/account/Register.vue') },
-  { path: '/settlein',    component: () => import('@/views/account/SettleIn.vue') },
-  { path: '/product/:id', component: () => import('@/views/Product.vue')},
-  { path: '/price',       component: () => import('@/views/user/Price.vue') },
-  { path: '/order/:id',   component: () => import('@/views/Order.vue') },
+{ path: '/about', component: () => import('@/views/About.vue') },
 
-  { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
-  { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
+{ path: '/user/main', component: () => import('@/views/user/publish') },
+{ path: '/user/center', component: () => import('@/views/user/profile') },
+{ path: '/messages', component: () => import('@/views/Messages.vue') },
+{ path: '/register', component: () => import('@/views/account/Register.vue') },
+{ path: '/settlein', component: () => import('@/views/account/SettleIn.vue') },
+{ path: '/product/:id', component: () => import('@/views/Product.vue') },
+{ path: '/price', component: () => import('@/views/user/Price.vue') },
+{ path: '/order/:id', component: () => import('@/views/Order.vue') },
 
-  { path: '*', redirect: '/404' }
+{ path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
+{ path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
+
+{ path: '*', redirect: '/404' }
 ]
 
 const router = new VueRouter({
