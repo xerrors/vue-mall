@@ -1,33 +1,29 @@
 <template>
-  <div class="order-container">
-    <div class="error" v-if="!order"
-      style="margin-top: 100px; text-align: center; font-weight: 700;"
-      >
-      当前不存在创建中的订单，将在 {{ timer }} 秒钟后返回上一页
+  <div class='main'>
+    <div class="head">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH" alt="头像"/>
+      <h4>爱回收</h4>
+      <span style="margin-left: auto;">已完成</span>
     </div>
-    <div class="main" v-else>
-      <div class="card">
-        <div class="card__line" style="display: flex;">
-          <p class="item" style="flex-grow: 1;">商品名称:</p>
-          <p class="detail" style="flex-grow: 1; text-align: right;">{{ order.product.model.label }}</p>
-        </div>
-        <div class="card__line" style="display: flex;">
-          <p class="item" style="flex-grow: 1;">发起方:</p>
-          <p class="detail" style="flex-grow: 1; text-align: right;">{{ order.seller.name }}</p>
-        </div>
-        <div class="card__line" style="display: flex;">
-          <p class="item" style="flex-grow: 1;">购买方:</p>
-          <p class="detail" style="flex-grow: 1; text-align: right;">{{ order.buyer.name }}</p>
-        </div>
-        <div class="card__line" style="display: flex;">
-          <p class="item" style="flex-grow: 1;">交易金额:</p>
-          <p class="detail" style="flex-grow: 1; text-align: right;">￥{{ order.buyer.value }}.00</p>
-        </div>
+    <div class="info card">
+      <span><strong>交易时间：</strong>{{ order.date }}</span>
+      <span><strong>订单编号：</strong>{{ order.id }}</span>
+      <span><strong>交易方式：</strong>{{ order.method }}</span>
+      <span><strong>收款方式：</strong>{{ order.pay_way }}</span>
+      <span><strong>收款账户：</strong>{{ order.pay_account }}</span>
+    </div>
+    <div class="details card">
+      <div class="pic">
+        <img :src='order.item.main_pic' alt='商品主图'/>
       </div>
-      <div class="btn-group" style="text-align: center">
-        <el-button class="confirm-btn" type="primary" @click="order_deal">钱多成交</el-button>
-        <el-button class="return-btn" type="plain" @click="cancel">钱少不干</el-button>
+      <div class="right">
+        <h3>{{ order.item.model }}</h3>
+        <span v-for="(tag, ind) in order.item.tag" :key='ind'>{{ tag }}</span>
       </div>
+    </div>
+    <div class="bot">
+      <el-button plain type="primary" @click="contact">联系商家</el-button>
+      <el-button plain type="danger" @click="delete_order">删除订单</el-button>
     </div>
   </div>
 </template>
@@ -36,55 +32,102 @@
 export default {
   data () {
     return {
-      timer: 5,
-      order: this.$store.state.currentOrder
+      loading: true
     }
   },
-  mounted () {
-    if (!this.$store.state.currentOrder) {
-      this.rtn_home()
+  computed: {
+    order () {
+      return this.getOrderInfo(this.$route.params.id)
     }
-    // console.log(this.$store.state.currentOrder)
   },
   methods: {
-    order_deal () {
-      this.$alert('交易成功', {
+    getOrderInfo (id) {
+      console.log(id)
+      this.loading = false
+      // 这里其实应该是使用id向服务器去获取订单信息
+      return {
+        id: '201912191212138',
+        date: '2019-12-19 08:16:45',
+        method: '上门取货',
+        pay_way: '支付宝',
+        pay_account: '17681352667',
+        item: {
+          main_pic: 'https://o.aolcdn.com/images/dims?resize=2000%2C2000%2Cshrink&image_uri=https%3A%2F%2Fs.yimg.com%2Fos%2Fcreatr-uploaded-images%2F2019-09%2Fa06641f0-e037-11e9-bdcd-a1f9f86313bf&client=a1acac3e1b3290917d92&signature=84837be6dc3b91d0a748fc8808f86dd8c667841a',
+          model: '华为 Mate30 Pro 5G',
+          tag: [
+            '全新未开封',
+            '256G',
+            '完美使用无刮痕',
+            '账户可正常退出'
+          ]
+        }
+      }
+    },
+    contact () {
+      console.log('here')
+    },
+    delete_order () {
+      this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
         confirmButtonText: '确定',
-        callback: action => {
-          this.$router.push('/' + this.$store.state.roles + '/main')
-        }
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
-    },
-    cancel () {
-      console.log(this.$router)
-      this.$router.go(-1)
-    },
-    rtn_home () {
-      var intervalid = setInterval(() => {
-        this.timer--
-        if (this.timer === 0) {
-          clearInterval(intervalid)
-          this.$router.go(-1)
-        }
-      }, 1000)
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.card
-  width 35rem
-  margin 50px auto
-  padding 2rem 2rem
-  border .8em solid transparent
-
-  background:
-    linear-gradient(white,white),
-    repeating-linear-gradient(-45deg, #ff6936 0, #ff6936 12.5%, transparent 0, transparent 25%,#58a 0,#58a 37.5%,transparent 0,transparent 50%);
-  background-clip: padding-box,border-box;
-  background-size: 8em 8em;
-
-.confirm-btn
-  margin 2rem
+.main
+  max-width 900px
+  margin 0 auto
+  background white
+  padding 3rem 2rem
+  >div
+    margin 1rem 0
+  .head
+    width 100%
+    display flex
+    align-items center
+    img
+      height 40px
+      border-radius 50%
+      margin-right 15px
+  .card
+    padding 1rem 2rem
+    border-radius 6px
+    box-shadow rgba(0, 0, 0, 0.1) 0px 2px 12px 0px
+    display flex
+  .info
+    flex-flow row wrap
+    >span
+      width 48%
+      margin .5rem 0
+  .details
+    .pic
+      margin-right 1rem
+      img
+        width 200px
+        border-radius 3px
+    .right
+      align-self flex-start
+      h3
+        margin-top 0
+      >span
+        display inline-block
+        padding .3rem .5rem
+        border-radius 3px
+        background #f1f1f1
+        font-size small
+        margin-right 1rem
 </style>

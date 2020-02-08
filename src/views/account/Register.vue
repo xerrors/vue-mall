@@ -9,12 +9,10 @@
         :rules="userRules"
         class="register-form"
         auto-complete="on"
-        label-position="left"
         status-icon
       >
         <!-- 用户名 -->
-        <el-form-item prop="account">
-          <P>用户名</P>
+        <el-form-item prop="account" label="用户名">
           <el-input
             v-model.trim="userForm.account"
             name="account"
@@ -23,8 +21,7 @@
           />
         </el-form-item>
         <!-- 密码 -->
-        <el-form-item prop="passwd">
-          <p>密码</p>
+        <el-form-item prop="passwd" label="密码">
           <el-input
             type="password"
             v-model="userForm.passwd"
@@ -32,12 +29,10 @@
             name="passwd"
           />
         </el-form-item>
-        <el-form-item prop="tel">
-          <p>手机号码</p>
+        <el-form-item prop="tel" label="手机号码">
           <el-input v-model.trim="userForm.tel" placeholder="E.g.1374567XXXX"/>
         </el-form-item>
-        <el-form-item prop="pay_way">
-          <p>支付方式</p>
+        <el-form-item prop="pay_way" label="支付方式">
           <el-input v-model.trim="userForm.pay_way" placeholder="E.g.1374567XXXX"/>
         </el-form-item>
       </el-form>
@@ -153,4 +148,9 @@ export default {
   margin 0 auto
   .register-btn
     margin-top 1rem
+
+.el-input__inner
+  border none
+  border-radius 0
+  border-bottom 2px solid #DCDFE6
 </style>

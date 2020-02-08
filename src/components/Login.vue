@@ -28,10 +28,11 @@
         placeholder="密码"
         @keyup.enter.native="submit"
         required>
-      <el-button class="reset card__btn" :loading="loading" @click="submit">登录</el-button>
+      <button class="reset card__btn" :loading="loading" @click="submit">登录</button>
       <div class="card__info">
         <el-link @click="register">注册</el-link>
         <el-link @click="forgotPWD">忘记密码</el-link>
+        <el-link @click="settleIn">商家入驻</el-link>
       </div>
     </div>
   </div>
@@ -86,6 +87,9 @@ export default {
     },
     forgotPWD () {
       this.$router.push('fog-pwd')
+    },
+    settleIn () {
+      this.$router.push('settlein')
     }
   }
 }
@@ -167,8 +171,9 @@ export default {
       background-color mainColor
       font-size medium
       cursor pointer
+      transition all .5s ease
       &:hover
-        box-shadow cardShadow
+        box-shadow rgb(71, 207, 115) 0px 2px 12px 0px
 
     &__info
       font-size small

@@ -564,7 +564,7 @@ export default {
   .block
     .model_box
       border 1px solid border-color-git;
-      padding-bottom 1rem
+      padding-bottom 2rem
       border-radius 3px
       .tabs
         color color-text-title

@@ -5,7 +5,7 @@ import store from '../store'
 
 Vue.use(VueRouter)
 
-var whiteList = ['/', '/about', '/404', '/403', '/register']
+var whiteList = ['/', '/about', '/404', '/403', '/register', '/settlein']
 
 const routes = [{
     path: '/403',
@@ -38,9 +38,10 @@ const routes = [{
   { path: '/user/center', component: () => import('@/views/user/profile') },
   { path: '/messages',    component: () => import('@/views/Messages.vue') },
   { path: '/register',    component: () => import('@/views/account/Register.vue') },
+  { path: '/settlein',    component: () => import('@/views/account/SettleIn.vue') },
   { path: '/product/:id', component: () => import('@/views/Product.vue')},
   { path: '/price',       component: () => import('@/views/user/Price.vue') },
-  { path: '/order',       component: () => import('@/views/Order.vue') },
+  { path: '/order/:id',   component: () => import('@/views/Order.vue') },
 
   { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
   { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
