@@ -105,7 +105,7 @@ export default {
     .nav-link
       position relative
       display inline-block
-      line-height navIconSize - 10px
+      line-height navIconSize - 5px
       margin 0 1.5rem
       font-weight bolder
       cursor pointer
@@ -121,10 +121,10 @@ export default {
         transition transform 0.5s ease
 
       &::before
-        top 0
+        top 1px
         transform-origin center right
       &::after
-        bottom 0
+        bottom 1px
         transform-origin center left
 
       &:hover, &.active

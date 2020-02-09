@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <el-tabs  v-model="activeName" tab-position="left">
+    <el-tabs v-model="activeName" tab-position="left">
       <el-tab-pane label="个人信息" name="profile">
         <base-info :form="userInfo.baseForm"></base-info>
       </el-tab-pane>
@@ -47,4 +47,12 @@ export default {
   padding-top 5rem
   max-width 900px
   margin 0 auto
+</style>
+
+<style lang="stylus">
+.el-tabs
+  &__header.is-left
+    margin-right 40px !important
+  &__item
+    font-weight bold
 </style>

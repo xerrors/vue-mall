@@ -80,6 +80,7 @@ export default {
   header
     width 100%
     background-color navBgColor
+    box-shadow rgba(0,0,0,0.1) 0px 1px 6px 0px;
     .navbar
       margin 0 auto
       width 80%
@@ -89,12 +90,12 @@ export default {
     flex 1
     width 80%
     max-width 100rem
-    min-width 40rem
+    min-width 60rem
+    margin-top 1rem
   footer
     display flex
     justify-content center
     align-items center
-
     margin-top 10rem
     width 100%
     height fheight

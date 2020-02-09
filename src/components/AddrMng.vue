@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="newAddress" :model="newAddress" label-width="80px">
+    <el-form ref="newAddress" label-position='left' :model="newAddress" label-width="80px">
       <el-form-item label="收件人" required>
         <el-input v-model="newAddress.receiver"></el-input>
       </el-form-item>

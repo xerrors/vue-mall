@@ -113,6 +113,7 @@ export default {
       brands: [{
         label: '华为',
         value: 'Huawei',
+        logo: 'http://src.xerrors.fun/blog/20200210/2CKAUviSNhTC.png',
         models: [{
           label: '华为 Mate30',
           value: 'Huawei Mate30',

@@ -1,6 +1,6 @@
 <template>
   <div class="base-info">
-    <el-form :model="newForm" ref="newForm" label-width="100px" class="demo-ruleForm">
+    <el-form :model="newForm" ref="newForm" label-width="100px" label-position='left' class="demo-ruleForm">
       <el-form-item label="头像" prop="avatar" required>
       <!--
         <el-upload
