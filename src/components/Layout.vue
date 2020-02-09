@@ -76,6 +76,7 @@ export default {
   display flex
   flex-direction column
   align-items center
+  color text-color-regular
   header
     width 100%
     background-color navBgColor

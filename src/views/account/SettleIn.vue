@@ -106,6 +106,9 @@ export default {
 </script>
 
 <style lang="stylus">
+.main
+  width 700px
+  margin 0 auto
 .el-input__inner
   border none
   border-radius 0

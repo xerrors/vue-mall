@@ -42,6 +42,7 @@ const routes = [{
 { path: '/product/:id', component: () => import('@/views/Product.vue') },
 { path: '/price', component: () => import('@/views/user/Price.vue') },
 { path: '/order/:id', component: () => import('@/views/Order.vue') },
+{ path: '/merchant/:id', component: () => import('@/views/Merchant.vue') },
 
 { path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
 { path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },

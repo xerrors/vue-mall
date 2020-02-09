@@ -1,9 +1,9 @@
 <template>
   <div class='main'>
-    <div class="head">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH" alt="头像"/>
-      <h4>爱回收</h4>
-      <span style="margin-left: auto;">已完成</span>
+    <div class="head card">
+      <img :src="order.merchant.logo" alt="头像"/>
+      <h4><el-link @click='lookup'>{{ order.merchant.name }}</el-link></h4>
+      <span style="margin-left: auto;">{{ order.status }}</span>
     </div>
     <div class="info card">
       <span><strong>交易时间：</strong>{{ order.date }}</span>
@@ -47,10 +47,18 @@ export default {
       // 这里其实应该是使用id向服务器去获取订单信息
       return {
         id: '201912191212138',
+        status: '已完成',
+        merchant: {
+          id: '10001',
+          name: '爱回收',
+          tel: '17687876756',
+          logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH'
+        },
         date: '2019-12-19 08:16:45',
         method: '上门取货',
         pay_way: '支付宝',
         pay_account: '17681352667',
+        price: '2800',
         item: {
           main_pic: 'https://o.aolcdn.com/images/dims?resize=2000%2C2000%2Cshrink&image_uri=https%3A%2F%2Fs.yimg.com%2Fos%2Fcreatr-uploaded-images%2F2019-09%2Fa06641f0-e037-11e9-bdcd-a1f9f86313bf&client=a1acac3e1b3290917d92&signature=84837be6dc3b91d0a748fc8808f86dd8c667841a',
           model: '华为 Mate30 Pro 5G',
@@ -63,8 +71,11 @@ export default {
         }
       }
     },
+    lookup () {
+      this.$router.push('/merchant/' + this.order.merchant.id)
+    },
     contact () {
-      console.log('here')
+      console.log(this.order.merchant.tel)
     },
     delete_order () {
       this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
@@ -96,8 +107,6 @@ export default {
   >div
     margin 1rem 0
   .head
-    width 100%
-    display flex
     align-items center
     img
       height 40px
