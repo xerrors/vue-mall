@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="navbar">
-      <router-link :to="'/' + (token?('user/main'):'')"><img class="logo" src="logo_dark.png"></router-link>
+      <router-link to="/"><img class="logo" src="logo_dark.png"></router-link>
       <div class="nav-links">
+        <router-link v-if="token" to='/user/main' class="nav-link" tag="div">回收设备</router-link>
         <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>

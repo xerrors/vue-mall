@@ -1,103 +1,99 @@
 <template>
-  <div class="publish">
-    <!-- TODO: 组件化 -->
-    <!-- 选择机型 -->
-    <div class="select">
-      <h2>发布你的产品</h2>
-      <div v-if="step==1" class="block">
-        <div class="model_box">
-          <!-- 手机品牌 -->
-          <div class="tabs">
-            <div
-              v-for="(brand, index) in brands"
-              :key="index"
-              class="tab"
-              :class="{ tab_active: form.brand.value===brand.value }"
-              @click="handleBrand(brand.value, index)"
-              ><strong>{{ brand.label }}</strong></div>
-            <div class="tab">其他</div>
-          </div>
-          <!-- 手机机型 -->
-          <div class="models">
-            <div
-              class="model"
-              v-for="(model, index) in brands[form.brand.index].models.slice(0, 10)"
-              :key="index"
-              @click="handleSelectModel(model)">
-              <el-image
-                class="model__img"
-                fit="contain"
-                :src="model.pic"
-              ></el-image>
-              <div>{{ model.label }}</div>
-            </div>
+  <div class="select">
+    <div v-if="step==1" class="block">
+      <h4>选择你的产品</h4>
+      <div class="model_box">
+        <!-- 手机品牌 -->
+        <div class="tabs">
+          <div
+            v-for="(brand, index) in brands"
+            :key="index"
+            class="tab"
+            :class="{ tab_active: form.brand.value===brand.value }"
+            @click="handleBrand(brand.value, index)"
+            ><strong>{{ brand.label }}</strong></div>
+          <div class="tab">其他</div>
+        </div>
+        <!-- 手机机型 -->
+        <div class="models">
+          <div
+            class="model"
+            v-for="(model, index) in brands[form.brand.index].models.slice(0, 10)"
+            :key="index"
+            @click="handleSelectModel(model)">
+            <el-image
+              class="model__img"
+              fit="contain"
+              :src="model.pic"
+            ></el-image>
+            <div>{{ model.label }}</div>
           </div>
         </div>
       </div>
-      <!-- 选择手机的情况信息 -->
-      <div v-if="step==2">
-        <h4>根据手机情况选择</h4>
-        <el-collapse v-model="activeNames" accordion>
-          <el-collapse-item
-            v-for="(select, ind) in selections" :key="ind"
-            :title="title(select, ind)"
-            :name="ind + 1">
-            <el-radio-group v-model="form.selected[ind]" @change="handleRadioChg">
-              <el-radio
-                v-for="(option, index) in select.options" :key="index"
-                :label="index"
-                border>{{ option.label }}</el-radio>
-            </el-radio-group>
-          </el-collapse-item>
-        </el-collapse>
-        <!-- 添加手机的照片，必选项 -->
-        <h4>添加手机正面、背面、边框的照片</h4>
-        <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
-          list-type="picture-card"
-          :on-preview="handlePictureCardPreview"
-          :on-remove="handleRemove">
-          <i class="el-icon-plus"></i>
-        </el-upload>
-        <el-dialog :visible.sync="dialogVisible">
-          <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog>
-        <!-- 交互逻辑按钮 -->
-        <el-button class="pub_btn" @click="handlePre">上一步</el-button>
-        <el-button class="pub_btn" @click="handleNext" type="primary">下一步</el-button>
-      </div>
-
-      <div v-if="step ==3">
-        <h4>是否想要以旧换新</h4>
-        <el-switch
-          v-model="form.change"
-          active-color="#13ce66">
-        </el-switch>
-        <h4>添加手机的描述</h4>
-        <el-input
-          type="textarea"
-          :autosize="{ minRows: 2, maxRows: 10}"
-          placeholder="请输入描述"
-          v-model="form.describe">
-        </el-input>
-        <h4>选择你期望的回收方式</h4>
-        <span>拖拽排序</span>
-        <el-button type="text" @click="setDef">重置</el-button>
-        <!-- https://github.com/SortableJS/Vue.Draggable -->
-        <draggable v-model="form.methods" group="people" @start="drag=true" @end="drag=false">
-          <div v-for="(element, ind) in form.methods" :key="element.id" class="methods">
-            {{ind}} : {{element.name}}
-            <el-button type="text"
-              style="float: right; color: #f17171; padding: .3rem;"
-              @click="delMethod(ind)"
-              >删除</el-button>
-          </div>
-        </draggable>
-        <el-button class="pub_btn" @click="handlePre">上一步</el-button>
-        <el-button class="pub_btn" @click="publish" type="primary">提交</el-button>
-      </div>
+    </div>
+    <!-- 选择手机的情况信息 -->
+    <div v-if="step==2" class="slim">
+      <h4>手机基本信息</h4>
+      <el-collapse v-model="activeNames" accordion>
+        <el-collapse-item
+          v-for="(select, ind) in selections" :key="ind"
+          :title="title(select, ind)"
+          :name="ind + 1"
+          style='color: #304455'>
+          <el-radio-group v-model="form.selected[ind]" @change="handleRadioChg">
+            <el-radio
+              v-for="(option, index) in select.options" :key="index"
+              :label="index"
+              border>{{ option.label }}</el-radio>
+          </el-radio-group>
+        </el-collapse-item>
+      </el-collapse>
+      <!-- 添加手机的照片，必选项 -->
+      <h4>添加手机正面、背面、边框的照片</h4>
+      <el-upload
+        action="https://jsonplaceholder.typicode.com/posts/"
+        list-type="picture-card"
+        :on-preview="handlePictureCardPreview"
+        :on-remove="handleRemove">
+        <i class="el-icon-plus"></i>
+      </el-upload>
+      <el-dialog :visible.sync="dialogVisible">
+        <img width="100%" :src="dialogImageUrl" alt="">
+      </el-dialog>
+      <!-- 交互逻辑按钮 -->
+      <el-button class="pub_btn" @click="handlePre">上一步</el-button>
+      <el-button class="pub_btn" @click="handleNext" type="primary">下一步</el-button>
     </div>
 
+    <div v-if="step ==3" class="slim">
+      <h4>是否想要以旧换新</h4>
+      <el-switch
+        v-model="form.change"
+        active-color="#13ce66">
+      </el-switch>
+      <h4>添加手机的描述</h4>
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 2, maxRows: 10}"
+        placeholder="请输入描述"
+        v-model="form.describe">
+      </el-input>
+      <h4>选择你期望的回收方式</h4>
+      <span>拖拽排序</span>
+      <el-button type="text" @click="setDef">重置</el-button>
+      <!-- https://github.com/SortableJS/Vue.Draggable -->
+      <draggable v-model="form.methods" group="people" @start="drag=true" @end="drag=false">
+        <div v-for="(element, ind) in form.methods" :key="element.id" class="methods">
+          {{ind}} : {{element.name}}
+          <el-button type="text"
+            style="float: right; color: #f17171; padding: .3rem;"
+            @click="delMethod(ind)"
+            >删除</el-button>
+        </div>
+      </draggable>
+      <el-button class="pub_btn" @click="handlePre">上一步</el-button>
+      <el-button class="pub_btn" @click="publish" type="primary">提交</el-button>
+    </div>
   </div>
 </template>
 
@@ -460,7 +456,7 @@ export default {
   },
   methods: {
     title (select, ind) {
-      const head = select.label + ' : '
+      const head = select.label + ' >>> '
       let tail = ''
       if (select.options[this.form.selected[ind]]) {
         tail = select.options[this.form.selected[ind]].label
@@ -543,36 +539,25 @@ export default {
 </style>
 
 <style lang="stylus" scoped>
-.publish
-  color color-text-primary
-  &__top_box
-    height 20rem
-    &::after
-      content ''
-      z-index -1
-      position absolute
-      left 0
-      top navBarHeight
-      width 100vw
-      height 20rem
-      background navBgColor
-  &__title
-    padding-top 4rem
-    color white
-    text-align center
-    font-size 3rem
-
+.select
+  width 80%
+  min-width 30rem
+  margin 0 auto
+  >div>h4
+    display inline-block
+    background: linear-gradient(0deg, rgba(71, 207, 115, 0.5) 40%,#fff 0)
+    padding .4rem
   .block
     .model_box
-      border 1px solid border-color-git;
+      border: 1px solid #f3f4f5;
       padding-bottom 2rem
-      border-radius 3px
       .tabs
         color color-text-title
         display flex
         align-items center
         .tab
           flex-grow 1
+          border-top: 2px solid #f3f4f5;
           text-align center
           height 3rem
           line-height 3rem
@@ -590,7 +575,7 @@ export default {
       align-items center
       transition all .5s ease
       .model
-        width 11rem
+        width 12rem
         text-align center
         transition all .3s ease
         &:hover
@@ -599,42 +584,39 @@ export default {
         &__img
           width 80%
           margin-top 1rem
-          margin-bottom 1.5rem
-          transition all .3s ease
+          margin-bottom .5rem
+          transition all .1s ease
           &:hover
-            transform scale(1.05)
-
-  .select
-    width 80%
-    min-width 30rem
+            transform scale(1.01)
+  .slim
+    width 800px
     margin 0 auto
-
-    .pub_btn
-      margin-top 20px
-
-    .methods
-      border 1px solid #f2f2f2
-      border-radius 4px
-      margin .3rem 0
-      padding .5rem
-      background #f2f7fa
-      &:hover
-        cursor grabbing
+  .pub_btn
+    margin-top 20px
+  .methods
+    border 1px solid #f2f2f2
+    border-radius 4px
+    margin .3rem 0
+    padding .5rem
+    background #f2f7fa
+    &:hover
+      cursor grabbing
 </style>
 
 <style lang="stylus">
 // 对 ElementUI 的原本的样式进行修改
-.el-radio.is-bordered+.el-radio.is-bordered
-  margin-left 10px
+.el-radio-group
+  margin-top 7px
 
 .el-radio
+  &.is-bordered:not(:last-child)
+    margin-right 10px
   &.is-bordered
-    padding 0 10px
-    margin 10px
-    height 2rem
+    padding 10px 10px
+    height 34px
   &__inner
     display none
   &__label
-    line-height 2rem
+    line-height 14px
     padding-left 0
 </style>
