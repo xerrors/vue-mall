@@ -66,11 +66,14 @@
     </div>
 
     <div v-if="step ==3" class="slim">
-      <h4>是否想要以旧换新</h4>
-      <el-switch
-        v-model="form.change"
-        active-color="#13ce66">
-      </el-switch>
+      <h4>想要以旧换新</h4>
+      <div>
+        <el-switch
+          v-model="form.change"
+          active-text="是"
+          inactive-text="否">
+        </el-switch>
+      </div>
       <h4>添加手机的描述</h4>
       <el-input
         type="textarea"
@@ -79,8 +82,10 @@
         v-model="form.describe">
       </el-input>
       <h4>选择你期望的回收方式</h4>
-      <span>拖拽排序</span>
-      <el-button type="text" @click="setDef">重置</el-button>
+      <div>
+        <span>拖拽排序</span>&nbsp;
+        <el-button type="text" @click="setDef">重置</el-button>
+      </div>
       <!-- https://github.com/SortableJS/Vue.Draggable -->
       <draggable v-model="form.methods" group="people" @start="drag=true" @end="drag=false">
         <div v-for="(element, ind) in form.methods" :key="element.id" class="methods">

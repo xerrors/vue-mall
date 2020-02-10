@@ -118,7 +118,7 @@ export default {
 
 <style lang="stylus" scoped>
 .main
-  width: 700px
+  width: 800px
   margin 0 auto
   .head
     margin 30px 0
