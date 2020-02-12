@@ -2,29 +2,6 @@
   <div class="main-comp">
     <el-tabs v-model="activeName" type="card">
       <!--未完成订单-->
-      <el-tab-pane label="已完成订单" name="finished">
-        <div class="order-card" v-for="order in finished_orders" :key="order.id">
-          <div class="order-card__title">
-            <span>创建日期：{{ order.date }}</span>
-            <span style="margin-left: 2rem">订单号：{{ order.id }}</span>
-          </div>
-
-          <div class="order-card__body">
-            待优化
-            <div class="item1">a</div>
-            <div class="item2">a</div>
-            <div class="item1">a</div>
-            <div class="item1">a</div>
-            <div class="item1">a</div>
-            <div class="item1">a</div>
-          </div>
-          <div class="order-card__foot">
-            <span @click="lookup(order.id)">查看订单</span>
-          </div>
-        </div>
-      </el-tab-pane>
-
-      <!--已完成订单-->
       <el-tab-pane label="未完成订单" name="unfinished">
         <div class="order-card" v-for="order in unfinished_orders" :key="order.id">
           <div class="order-card__title">
@@ -34,12 +11,23 @@
 
           <div class="order-card__body">
             <!-- 商品照片 -->
-            <div class="item1">a</div>
-            <div class="item2">a</div>
-            <div class="item1">a</div>
-            <div class="item1">a</div>
-            <div class="item1">a</div>
-            <div class="item1">a</div>
+            没想好最终设计，暂时空着
+          </div>
+          <div class="order-card__foot">
+            <span @click="lookup(order.id)">查看订单</span>
+          </div>
+        </div>
+      </el-tab-pane>
+      <!--已完成订单-->
+      <el-tab-pane label="已完成订单" name="finished">
+        <div class="order-card" v-for="order in finished_orders" :key="order.id">
+          <div class="order-card__title">
+            <span>创建日期：{{ order.date }}</span>
+            <span style="margin-left: 2rem">订单号：{{ order.id }}</span>
+          </div>
+
+          <div class="order-card__body">
+            没想好最终设计，暂时空着
           </div>
           <div class="order-card__foot">
             <span @click="lookup(order.id)">查看订单</span>

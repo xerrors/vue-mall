@@ -89,7 +89,7 @@
       <!-- https://github.com/SortableJS/Vue.Draggable -->
       <draggable v-model="form.methods" group="people" @start="drag=true" @end="drag=false">
         <div v-for="(element, ind) in form.methods" :key="element.id" class="methods">
-          {{ind}} : {{element.name}}
+          {{ ind + 1 }} : {{element.name}}
           <el-button type="text"
             style="float: right; color: #f17171; padding: .3rem;"
             @click="delMethod(ind)"

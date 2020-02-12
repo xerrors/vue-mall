@@ -85,7 +85,7 @@ export default {
       this.$router.push('register')
     },
     forgotPWD () {
-      this.$router.push('fog-pwd')
+      this.$router.push('forgotpwd')
     },
     settleIn () {
       this.$router.push('settlein')

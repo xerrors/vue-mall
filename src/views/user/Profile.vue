@@ -10,7 +10,7 @@
       </el-tab-pane>
 
       <el-tab-pane label="安全中心" name="security">
-        安全中心
+        <security></security>
       </el-tab-pane>
 
       <el-tab-pane label="地址管理" name="address">
@@ -24,9 +24,10 @@
 import BaseInfo from '@/components/BaseInfo.vue'
 import Order from '@/components/Order.vue'
 import AddrMng from '@/components/AddrMng.vue'
+import Security from '@/components/Security.vue'
 import { getUserInfo } from '@/utils/fakedata.js'
 export default {
-  components: { BaseInfo, AddrMng, Order },
+  components: { BaseInfo, AddrMng, Order, Security },
   data () {
     return {
       localAddr: JSON.parse(localStorage.addresses),
