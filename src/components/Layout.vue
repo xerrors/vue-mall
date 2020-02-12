@@ -72,7 +72,7 @@ export default {
 
 .layout
   min-height 100vh
-  min-width 600px
+  min-width 700px
   display flex
   flex-direction column
   align-items center
@@ -84,13 +84,13 @@ export default {
     .navbar
       margin 0 auto
       width 80%
-      max-width 100rem
-      min-width 40rem
+      max-width 1600px
+      min-width 800px
   main
     flex 1
     width 80%
-    max-width 100rem
-    min-width 60rem
+    max-width 1600px
+    min-width 800px
     margin-top 1rem
   footer
     display flex

@@ -546,7 +546,7 @@ export default {
 <style lang="stylus" scoped>
 .select
   width 80%
-  min-width 30rem
+  min-width 800px
   margin 0 auto
   >div>h4
     display inline-block
@@ -574,13 +574,13 @@ export default {
           border-top 2px solid mainColor
     .models
       width 100%
-      display flex
-      flex-flow wrap
-      justify-content space-between
-      align-items center
+      display grid
+      grid-template-columns: repeat(auto-fill, 170px)
+      justify-content space-evenly
       transition all .5s ease
       .model
         width 12rem
+        height 14rem
         text-align center
         transition all .3s ease
         &:hover
