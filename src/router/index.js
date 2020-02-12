@@ -40,7 +40,7 @@ const routes = [{
 { path: '/register', component: () => import('@/views/account/Register.vue') },
 { path: '/settlein', component: () => import('@/views/account/SettleIn.vue') },
 // { path: '/product/:id', component: () => import('@/views/Product.vue') },
-{ path: '/price', component: () => import('@/views/user/Price.vue') },
+{ path: '/result', component: () => import('@/views/user/Result.vue') },
 { path: '/order/:id', component: () => import('@/views/Order.vue') },
 { path: '/merchant/:id', component: () => import('@/views/Merchant.vue') },
 
