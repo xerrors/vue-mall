@@ -17,7 +17,7 @@ axios.interceptors.request.use(
   },
   error => {
     // Do something with request error
-    console.log(error) // for debug
+    // cosole.log(error) // for debug
     Promise.reject(error)
   }
 )
@@ -30,7 +30,7 @@ axios.interceptors.response.use(
      * code为非 1 是抛错 可结合自己业务进行修改
      */
     const res = response.data
-    console.log(response)
+    // cosole.log(response)
     if (res.code !== successCode) {
       Message({
         message: 'CODE ERROR:' + res.info,
@@ -57,7 +57,7 @@ axios.interceptors.response.use(
       return Promise.reject(new Error('error'))
     } else {
       // 对返回类型进行判断是否弹出信息
-      if (typeof(res.info) === 'string') {
+      if (typeof (res.info) === 'string') {
         Message({
           message: res.info,
           type: 'success',
@@ -69,7 +69,7 @@ axios.interceptors.response.use(
   },
   error => {
     // 当请求连接不通的时候
-    console.log('error' + error) // for debug
+    // cosole.log('error' + error) // for debug
     Message({
       message: 'CAN NOT CONNECT:' + error.message,
       type: 'error',

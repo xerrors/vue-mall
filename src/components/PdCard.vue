@@ -24,7 +24,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.info)
+    // cosole.log(this.info)
   }
 }
 </script>

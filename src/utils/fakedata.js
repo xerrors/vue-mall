@@ -298,7 +298,7 @@ export function getMsgs () {
 }
 
 export function getUserInfo (token) {
-  console.log(token)
+  // cosole.log(token)
   return {
     baseForm: {
       id: 122121,

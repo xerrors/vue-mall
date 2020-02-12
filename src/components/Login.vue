@@ -74,8 +74,7 @@ export default {
           this.loading = false
           this.closeMyself()
         })
-        .catch(err => {
-          console.log(err)
+        .catch(() => {
           this.loading = false
         })
       if (this.$route.path === '/') {

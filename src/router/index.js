@@ -39,7 +39,7 @@ const routes = [{
 { path: '/messages', component: () => import('@/views/Messages.vue') },
 { path: '/register', component: () => import('@/views/account/Register.vue') },
 { path: '/settlein', component: () => import('@/views/account/SettleIn.vue') },
-{ path: '/product/:id', component: () => import('@/views/Product.vue') },
+// { path: '/product/:id', component: () => import('@/views/Product.vue') },
 { path: '/price', component: () => import('@/views/user/Price.vue') },
 { path: '/order/:id', component: () => import('@/views/Order.vue') },
 { path: '/merchant/:id', component: () => import('@/views/Merchant.vue') },
@@ -65,9 +65,9 @@ router.beforeEach((to, from, next) => {
     if (to.meta.roles) {
       if (to.meta.roles.indexOf(store.state.roles) > -1) {
         next()
-        // console.log(to.meta.roles)
-        // console.log(store.state.roles)
-        // console.log(to.meta.roles.indexOf(store.state.roles))
+        // // cosole.log(to.meta.roles)
+        // // cosole.log(store.state.roles)
+        // // cosole.log(to.meta.roles.indexOf(store.state.roles))
       } else {
         next('/404')
       }

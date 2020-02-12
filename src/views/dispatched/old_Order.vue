@@ -56,7 +56,7 @@ export default {
       })
     },
     cancel () {
-      console.log(this.$router)
+      // cosole.log(this.$router)
       this.$router.go(-1)
     },
     rtn_home () {

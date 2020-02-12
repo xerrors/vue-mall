@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     handleRemove (item) {
-      console.log(item)
+      // cosole.log(item)
       return new Promise((resolve, reject) => {
         delAddr(item).then(res => {
           this.getInfo()
@@ -122,7 +122,7 @@ export default {
     // 添加新的收货地址
     createNewAddress () {
       this.newAddress.area = this.newAddress.area.join('')
-      console.log(this.newAddress)
+      // cosole.log(this.newAddress)
       return new Promise((resolve, reject) => {
         addAddr(this.newAddress).then(res => {
           this.$store.dispatch('GetInfo')

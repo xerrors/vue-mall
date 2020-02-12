@@ -70,8 +70,8 @@ export default {
           .then(() => {
             this.$router.push('/')
           })
-          .catch(err => {
-            console.log(err)
+          .catch(() => {
+            // cosole.log(err)
           })
         this.$message({
           message: '成功登出',

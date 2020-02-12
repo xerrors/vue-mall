@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     getOrderInfo (id) {
-      console.log(id)
+      // cosole.log(id)
       this.loading = false
       // 这里其实应该是使用id向服务器去获取订单信息
       return {
@@ -75,7 +75,7 @@ export default {
       this.$router.push('/merchant/' + this.order.merchant.id)
     },
     contact () {
-      console.log(this.order.merchant.tel)
+      // cosole.log(this.order.merchant.tel)
     },
     delete_order () {
       this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {

@@ -119,8 +119,8 @@ export default {
           .dispatch('CreateOrder', order)
           .then(() => {
           })
-          .catch(err => {
-            console.log(err)
+          .catch(() => {
+            // cosole.log(err)
           })
         this.$router.push('/order')
       }).catch(() => {
@@ -151,7 +151,7 @@ export default {
           date: '2019-12-16 09:45:17',
           value: this.value
         })
-        console.log(value)
+        // cosole.log(value)
         this.$message({
           type: 'success',
           message: '出价成功!'

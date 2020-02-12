@@ -471,13 +471,13 @@ export default {
       return head + tail
     },
     handleChange (value) {
-      console.log(value)
+      // cosole.log(value)
     },
     mdSelected () {
       this.modelSelected = true
     },
     handleRemove (file, fileList) {
-      console.log(file, fileList)
+      // cosole.log(file, fileList)
     },
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url

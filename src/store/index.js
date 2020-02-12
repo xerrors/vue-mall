@@ -72,7 +72,7 @@ export default new Vuex.Store({
       //     reject(error)
       //   })
       // })
-      console.log(userForm)
+      // cosole.log(userForm)
 
       const res = { code: 1, info: { account: 'nick', accountid: '10000', addr: [{ receiver: '小兰', area: '500102', address: '阿里巴巴', code: '030200', tel: '15516161414', default: true, addr_id: '24' }, { receiver: '小白', area: '500102', address: '北京三里屯', code: '030201', tel: '15516161414', default: false, addr_id: '25' }], tel: '13712345612', pay_way: 'alipay', PHPSESSID: 'fvdpqnmm2ngllhvnvgl8ppibr7' } }
       // 地址这种东西还是保存在LocalStorage里面吧

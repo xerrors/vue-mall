@@ -98,7 +98,7 @@ export default {
       ]
     },
     lookup (id) {
-      console.log(id)
+      // cosole.log(id)
       this.$router.push('/order/' + id)
     }
   },
