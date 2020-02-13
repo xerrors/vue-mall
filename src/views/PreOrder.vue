@@ -61,7 +61,12 @@
         <el-option label="微信" value="2"></el-option>
       </el-select>
     </el-input>
-    <el-button type="primary" class="confirm" @click="confirm">确认订单</el-button>
+    <el-button type="primary" class="confirm" :loading="loading" @click="confirm">确认订单</el-button>
+    <div class="info">
+      <strong>上门取件：</strong>由商户派人到你家里或者约定的地方取件，当场对手机进行检测并交易；<br>
+      <strong>自行邮寄：</strong>如果商户距离较远，可以选择将物品邮寄给商家，待商家审核后给出最终价格，你若接受则完成交易，若不接受，机器原路返回，邮费双方自理。<br>
+      <strong>线下门店：</strong>即到商户的线下地址当场进行交易。
+    </div>
   </div>
 </template>
 
@@ -69,6 +74,7 @@
 export default {
   data () {
     return {
+      loading: false,
       collection: {
         way: '1',
         account: '17681352667'
@@ -99,10 +105,14 @@ export default {
       this.$message('导航API，待开发')
     },
     confirm () {
+      this.loading = true
       this.$message('确认订单')
-      // 发送到服务器返回一个订单的id
+      // 发送到服务器返回一个订单的id，然后进入下一个页面，此时应该有 loading
       const id = '20210231238102981'
-      this.$router.push('/order/' + id)
+      setTimeout(() => {
+        this.loading = false
+        this.$router.push('/order/' + id)
+      }, 1000)
     }
   }
 }
@@ -110,7 +120,9 @@ export default {
 
 <style lang="stylus" scoped>
 .pre-order
-  width 700px
+  width 80%
+  min-width 700px
+  max-width 900px
   margin 0 auto
 h4
   display inline-block
@@ -144,4 +156,12 @@ h4
 .confirm
   display block
   margin 1rem auto
+.info
+  background: #f9f8f8;
+  line-height: 1.7;
+  border-radius: 4px;
+  padding: 1rem;
+  color: rgba(0, 0, 0, 0.58);
+  margin-top: 8rem;
+  letter-spacing: 1px;
 </style>

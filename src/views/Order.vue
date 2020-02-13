@@ -1,10 +1,16 @@
 <template>
   <div class='main'>
+    <h4>状态信息</h4>
     <div class="head card">
       <img :src="order.merchant.logo" alt="头像"/>
-      <h4><el-link @click='lookup'>{{ order.merchant.name }}</el-link></h4>
+      <div>
+        <el-link style="font-size: 16px; font-weight: bold;" @click='lookup'>
+          {{ order.merchant.name }}
+        </el-link>
+      </div>
       <span style="margin-left: auto;">{{ order.status }}</span>
     </div>
+    <h4>交易信息</h4>
     <div class="info card">
       <span><strong>下单时间：</strong>{{ order.date }}</span>
       <span><strong>订单编号：</strong>{{ order.id }}</span>
@@ -13,6 +19,7 @@
       <span><strong>收款方式：</strong>{{ order.pay_way }}</span>
       <span><strong>收款账户：</strong>{{ order.pay_account }}</span>
     </div>
+    <h4>商品信息</h4>
     <div class="details card">
       <div class="pic">
         <img :src='order.item.main_pic' alt='商品主图'/>
@@ -105,9 +112,9 @@ export default {
   max-width 900px
   margin 0 auto
   background white
-  padding 3rem 2rem
+  padding 1rem 1rem
   >div
-    margin 1rem 0
+    margin .7rem 0
   .head
     align-items center
     img
@@ -117,7 +124,7 @@ export default {
   .card
     padding 1rem 2rem
     border-radius 6px
-    box-shadow rgba(0, 0, 0, 0.1) 0px 2px 12px 0px
+    box-shadow rgba(0, 0, 0, 0.05) 0px 1px 10px 1px
     display flex
   .info
     flex-flow row wrap
