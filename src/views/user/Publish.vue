@@ -510,13 +510,13 @@ export default {
     setDef () {
       this.form.methods = [{
         id: 1,
-        name: '上门回收'
+        name: '上门取件'
       }, {
         id: 2,
         name: '自行邮寄'
       }, {
         id: 3,
-        name: '去线下门店'
+        name: '线下门店'
       }]
     },
     // 删除不想要的回收方式
