@@ -47,7 +47,7 @@ export default {
       // 这里其实应该是使用id向服务器去获取订单信息
       return {
         id: '201912191212138',
-        status: '已完成',
+        status: '等待商家接单',
         merchant: {
           id: '10001',
           name: '爱回收',
