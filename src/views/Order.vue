@@ -6,8 +6,9 @@
       <span style="margin-left: auto;">{{ order.status }}</span>
     </div>
     <div class="info card">
-      <span><strong>交易时间：</strong>{{ order.date }}</span>
+      <span><strong>下单时间：</strong>{{ order.date }}</span>
       <span><strong>订单编号：</strong>{{ order.id }}</span>
+      <span><strong>交易时间：</strong>{{ order.pay_date }}</span>
       <span><strong>交易方式：</strong>{{ order.method }}</span>
       <span><strong>收款方式：</strong>{{ order.pay_way }}</span>
       <span><strong>收款账户：</strong>{{ order.pay_account }}</span>
@@ -55,6 +56,7 @@ export default {
           logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH'
         },
         date: '2019-12-19 08:16:45',
+        pay_date: '交易中',
         method: '上门取货',
         pay_way: '支付宝',
         pay_account: '17681352667',

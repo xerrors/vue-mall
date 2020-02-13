@@ -100,6 +100,9 @@ export default {
     },
     confirm () {
       this.$message('确认订单')
+      // 发送到服务器返回一个订单的id
+      const id = '20210231238102981'
+      this.$router.push('/order/' + id)
     }
   }
 }
