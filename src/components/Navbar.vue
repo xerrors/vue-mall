@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="navbar">
-      <router-link to="/"><img class="logo" src="logo_dark.png"></router-link>
-      <div class="nav-links">
+      <router-link to="/"><img class="logo" src="Logo.png"></router-link>
+      <div class="nav-links nav-right">
         <router-link v-if="token" to='/user/main' class="nav-link" tag="div">回收设备</router-link>
         <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
-      <div v-if="!token" class="nav-right">
+      <div v-if="!token">
         <el-button round plain @click="login"
           style="background: #47cf73; border: none; color: #000;"
           >登录</el-button>
       </div>
-      <div v-else class="user-box nav-right">
+      <div v-else class="user-box">
         <span v-if="roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>
         <span v-else style="font-size: 14px; margin: 0 10px;">用户版</span>
         <el-dropdown type="primary" @command="dropdownCmd">
@@ -99,15 +99,14 @@ export default {
   user-select none
 
   .logo
-    height navIconSize
+    height navBarHeight - 16px
     margin-right 30px
-    filter drop-shadow(2px 2px 6px rgba(0,0,0,.1))
 
   .nav-links
     .nav-link
       position relative
       display inline-block
-      line-height navIconSize - 5px
+      line-height navIconSize - 6px
       margin 0 1.5rem
       font-weight bolder
       cursor pointer
