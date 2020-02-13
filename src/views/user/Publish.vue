@@ -445,13 +445,13 @@ export default {
         change: false, // 是否想要以旧换新
         methods: [{
           id: 1,
-          name: '上门回收'
+          name: '上门取件'
         }, {
           id: 2,
           name: '自行邮寄'
         }, {
           id: 3,
-          name: '去线下门店'
+          name: '线下门店'
         }] // 期望的回收方式
       }
     }
