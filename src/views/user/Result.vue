@@ -7,13 +7,13 @@
       <h4>下面是根据所提供的信息匹配到的最佳网点:</h4>
       <div class="item" v-for="result in results" :key="result.id">
         <div class="left">
-          <div class="top" @click="lookup(result.id)">
+          <div class="top">
             <div class="logo">
               <img :src="result.logo"/>
             </div>
             <div class="body">
               <div class="head">
-                <div class="name">{{ result.name }}</div>
+                <div class="name" @click="lookup(result.id)">{{ result.name }}</div>
                 <div class="credit">
                   <i class="el-icon-star-on" v-for="_ in result.credit" :key="_"></i>
                 </div>
