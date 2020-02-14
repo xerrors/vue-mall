@@ -81,7 +81,7 @@ export default {
       }
     },
     lookup () {
-      this.$router.push('/merchant/' + this.order.merchant.id)
+      this.$router.push('/merchants/' + this.order.merchant.id)
     },
     contact () {
       // cosole.log(this.order.merchant.tel)

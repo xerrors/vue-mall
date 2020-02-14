@@ -12,3 +12,17 @@
     </ul>
   </div>
 </template>
+
+<style lang="stylus" scoped>
+p
+  margin 0
+  font-weight bold
+  color #AA2222
+ul
+  padding-left 2px
+  li
+    list-style none
+    padding-left 0
+    white-space: nowrap;
+    text-overflow: ellipsis;
+</style>

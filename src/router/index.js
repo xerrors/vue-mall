@@ -6,77 +6,79 @@ import { Message } from 'element-ui'
 
 Vue.use(VueRouter)
 
+// 不用登陆也能够访问的页面
 var whiteList = ['/', '/about', '/404', '/403', '/register', '/settlein', '/forgotpwd', '/main']
 
-const routes = [{
-  path: '/403',
-  component: () => import('@/views/errors/403'),
-  meta: {
-    isSpecialPage: true
-  }
-}, {
-  path: '/404',
-  component: () => import('@/views/errors/404'),
-  meta: {
-    isSpecialPage: true
-  }
-}, {
-  path: '/',
-  name: 'home',
-  component: () => import('@/views/Home'),
-  meta: {
-    isSpecialPage: true
-  }
-},
+const routes = [
+  {
+    path: '/403',
+    component: () => import('@/views/errors/403'),
+    meta: {
+      isSpecialPage: true
+    }
+  }, {
+    path: '/404',
+    component: () => import('@/views/errors/404'),
+    meta: {
+      isSpecialPage: true
+    }
+  }, {
+    path: '/',
+    name: 'home',
+    component: () => import('@/views/Home'),
+    meta: {
+      isSpecialPage: true
+    }
+  },
 
-{ path: '/main', component: () => import('@/views/Publish.vue') },
-{ path: '/about', component: () => import('@/views/About.vue') },
-{ path: '/forgotpwd', component: () => import('@/views/account/ForgotPwd.vue') },
-{ path: '/register', component: () => import('@/views/account/Register.vue') },
-{ path: '/settlein', component: () => import('@/views/account/SettleIn.vue') },
+  { path: '/main', component: () => import('@/views/Publish.vue') },
+  { path: '/about', component: () => import('@/views/About.vue') },
+  { path: '/forgotpwd', component: () => import('@/views/account/ForgotPwd.vue') },
+  { path: '/register', component: () => import('@/views/account/Register.vue') },
+  { path: '/settlein', component: () => import('@/views/account/SettleIn.vue') },
 
-// 用户页面
-{
-  path: '/user/center',
-  component: () => import('@/views/user/Profile.vue'),
-  meta: {
-    roles: ['user']
-  }
-}, {
-  path: '/pre-order',
-  component: () => import('@/views/user/PreOrder.vue'),
-  meta: {
-    roles: ['user']
-  }
-}, {
-  path: '/result',
-  component: () => import('@/views/user/Result.vue'),
-  meta: {
-    roles: ['user']
-  }
-}, {
-  path: '/merchant/:id',
-  component: () => import('@/views/user/Merchant.vue'),
-  meta: {
-    roles: ['user']
-  }
-},
+  // 用户页面
+  {
+    path: '/user/center',
+    component: () => import('@/views/user/Profile.vue'),
+    meta: {
+      roles: ['user']
+    }
+  }, {
+    path: '/pre-order',
+    component: () => import('@/views/user/PreOrder.vue'),
+    meta: {
+      roles: ['user']
+    }
+  }, {
+    path: '/result',
+    component: () => import('@/views/user/Result.vue'),
+    meta: {
+      roles: ['user']
+    }
+  }, {
+    path: '/merchants/:id',
+    component: () => import('@/views/user/Merchant.vue'),
+    meta: {
+      roles: ['user']
+    }
+  },
 
-// 仅商户可见
-{
-  path: '/merchant/main',
-  component: () => import('@/views/merchant/Main.vue'),
-  meta: {
-    roles: ['merchant']
-  }
-},
+  // 仅商户可见
+  {
+    path: '/merchant/main',
+    component: () => import('@/views/merchant/Main.vue'),
+    meta: {
+      roles: ['merchant']
+    }
+  },
 
-// 双方皆可见
-{ path: '/messages', component: () => import('@/views/common/Messages.vue') },
-{ path: '/product/:id', component: () => import('@/views/common/Product.vue') },
-{ path: '/order/:id', component: () => import('@/views/common/Order.vue') },
+  // 双方皆可见
+  { path: '/messages', component: () => import('@/views/common/Messages.vue') },
+  { path: '/product/:id', component: () => import('@/views/common/Product.vue') },
+  { path: '/order/:id', component: () => import('@/views/common/Order.vue') },
 
-{ path: '*', redirect: '/404' }
+  { path: '*', redirect: '/404' }
 ]
 
 const router = new VueRouter({
@@ -95,7 +97,10 @@ router.beforeEach((to, from, next) => {
       if (to.meta.roles.includes(store.state.role)) {
         next()
       } else {
-        Message(to.path)
+        console.log(to.path)
+        console.log(to.meta.roles)
+        console.log(store.state.role)
+        // Message('router.js: ' + to.path)
         next('/404')
       }
     } else {

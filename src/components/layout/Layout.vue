@@ -111,15 +111,25 @@ export default {
 
 <style scoped>
 .debug {
-  position: absolute;
-  right: 100px;
-  top: 300px;
+  position: fixed;
+  right: -170px;
+  top: 100px;
+  height: 20px;
   padding: 1rem;
   border-radius: 6px;
-  width: 200px;
+  width: 170px;
   overflow: hidden;
-  background: rgba(0,0,0,.5);
-  color: white;
+  background: rgba(241, 241, 241, 0.5);
+  color: black;
   z-index: 100;
+  opacity: 0.2;
+  transition: all 0.2s ease
 }
+
+.debug:hover {
+  right: 10px;
+  height: auto;
+  opacity: 1;
+}
+
 </style>

@@ -13,24 +13,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: getToken(),
-    name: '',
-    id: '',
-    avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim',
-    role: '',
-    showLogin: false,
-    tel: '',
-    currentOrder: ''
+    avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg',
+    role: '', // 临时
+    showLogin: false
   },
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
-    },
-    SET_BASE_INFO: (state, data) => {
-      state.name = data.account
-      state.id = data.accountid
-      state.tel = data.tel
-      state.pay_way = data.pay_way
-      // state.role = data.role
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -64,7 +53,6 @@ export default new Vuex.Store({
       // return new Promise((resolve, reject) => {
       //   login(userForm).then(res => {
       //     setToken(res.info.PHPSESSID)
-      //     commit('SET_BASE_INFO', res.info)
       //     commit('SET_TOKEN', res.info.PHPSESSID)
       //     resolve()
       //   }).catch(error => {

@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     lookup (id) {
-      this.$router.push('/merchant/' + id)
+      this.$router.push('/merchants/' + id)
     },
     toPreOrder (id) {
       this.$router.push({
