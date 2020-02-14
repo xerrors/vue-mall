@@ -46,9 +46,6 @@ const routes = [{
 { path: '/pre-order', component: () => import('@/views/PreOrder.vue') },
 { path: '/merchant/:id', component: () => import('@/views/Merchant.vue') },
 
-{ path: '/usertest', name: 'usertest', component: () => import('@/views/Test') },
-{ path: '/bosstest', name: 'bosstest', component: () => import('@/views/Test') },
-
 { path: '*', redirect: '/404' }
 ]
 
