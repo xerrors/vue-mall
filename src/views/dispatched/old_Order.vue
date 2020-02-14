@@ -44,7 +44,6 @@ export default {
     if (!this.$store.state.currentOrder) {
       this.rtn_home()
     }
-    // console.log(this.$store.state.currentOrder)
   },
   methods: {
     order_deal () {

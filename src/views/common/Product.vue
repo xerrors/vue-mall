@@ -90,14 +90,12 @@ export default {
   computed: {
     productInfo () {
       // TODO: 从服务器获取数据
-      // console.log(this.$route.params.id)
       return getProductInfo(this.$route.params.id)
     }
   },
 
   methods: {
     handleChange (now, pre) {
-      // console.log(this.$refs.gallary.$children[now])
       // TODO：在这里修改DOM的样式
     },
     handleDeal (index) {

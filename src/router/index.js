@@ -114,10 +114,7 @@ router.beforeEach((to, from, next) => {
       if (to.meta.roles.includes(store.state.role)) {
         next()
       } else {
-        console.log(to.path)
-        console.log(to.meta.roles)
-        console.log(store.state.role)
-        // Message('router.js: ' + to.path)
+        Message('router.js: ' + to.path)
         next('/404')
       }
     } else {
