@@ -1,12 +1,12 @@
 <template>
   <div class="layout">
+    <debug class="debug"/>
     <login :is-show='showLogin'/>
     <header v-if="!hiddenNavbar">
       <navbar></navbar>
     </header>
 
     <main v-if="!isSpecialPage">
-      <!-- <debug class="debug"/> -->
       <router-view/>
     </main>
 
@@ -21,7 +21,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Foot from '@/components/Foot.vue'
-// import Debug from '@/components/Debug.vue'
+import Debug from '@/components/Debug.vue'
 import Login from '@/components/Login.vue'
 
 import { mapGetters } from 'vuex'
@@ -29,7 +29,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'layout',
   components: {
-    // Debug,
+    Debug,
     Navbar,
     Foot,
     Login
@@ -114,9 +114,12 @@ export default {
   position: absolute;
   right: 100px;
   top: 300px;
+  padding: 1rem;
+  border-radius: 6px;
   width: 200px;
   overflow: hidden;
   background: rgba(0,0,0,.5);
   color: white;
+  z-index: 100;
 }
 </style>

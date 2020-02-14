@@ -89,7 +89,7 @@ export default new Vuex.Store({
     // 获取用户信息
     GetInfo ({ commit }) {
       // ================
-      // 前端测试区域
+      // FedTest
       commit('SET_ROLE', getToken())
       // ================
 
@@ -119,11 +119,11 @@ export default new Vuex.Store({
 
     // 前端 登出
     FedLogOut ({ commit }) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', '')
-        removeToken()
-        resolve()
-      })
+      commit('SET_TOKEN', '')
+      // FedTest
+      commit('SET_ROLE', '')
+      // Test end
+      removeToken()
     }
   },
   modules: {

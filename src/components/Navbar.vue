@@ -4,6 +4,7 @@
       <router-link to="/"><img class="logo" src="Logo.png"></router-link>
       <div class="nav-links nav-right">
         <router-link to='/main' v-if="!isMerchant" class="nav-link" tag="div">回收设备</router-link>
+        <router-link to='/merchant/main' v-else class="nav-link" tag="div">控制中心</router-link>
         <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
@@ -72,14 +73,14 @@ export default {
           .dispatch('FedLogOut')
           .then(() => {
             this.$router.push('/')
+            this.$message({
+              message: '成功登出',
+              type: 'success'
+            })
           })
-          .catch(() => {
-            // cosole.log(err)
+          .catch((err) => {
+            this.$message('Navbar.vue', err)
           })
-        this.$message({
-          message: '成功登出',
-          type: 'success'
-        })
       }
     }
   },
