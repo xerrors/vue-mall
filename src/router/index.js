@@ -54,6 +54,12 @@ const routes = [{
   meta: {
     roles: ['user']
   }
+}, {
+  path: '/merchant/:id',
+  component: () => import('@/views/user/Merchant.vue'),
+  meta: {
+    roles: ['user']
+  }
 },
 
 // 仅商户可见
@@ -69,7 +75,6 @@ const routes = [{
 { path: '/messages', component: () => import('@/views/common/Messages.vue') },
 { path: '/product/:id', component: () => import('@/views/common/Product.vue') },
 { path: '/order/:id', component: () => import('@/views/common/Order.vue') },
-{ path: '/merchant/:id', component: () => import('@/views/common/Merchant.vue') },
 
 { path: '*', redirect: '/404' }
 ]
