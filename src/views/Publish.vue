@@ -1,5 +1,10 @@
 <template>
   <div class="select">
+    <el-steps :active="step" simple>
+      <el-step title="选择机型" icon="el-icon-picture"></el-step>
+      <el-step title="填写信息" icon="el-icon-s-platform"></el-step>
+      <el-step title="完善信息" icon="el-icon-s-flag"></el-step>
+    </el-steps>
     <div v-if="step==1" class="block">
       <h4>选择你的产品</h4>
       <div class="model_box">
