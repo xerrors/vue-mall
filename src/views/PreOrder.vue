@@ -151,8 +151,6 @@ h4
   border 1px solid #47cf73
   .title
     color #47cf73
-.el-select .el-input
-    width 100px
 .confirm
   display block
   margin 1rem auto
@@ -164,4 +162,9 @@ h4
   color: rgba(0, 0, 0, 0.58);
   margin-top: 8rem;
   letter-spacing: 1px;
+</style>
+
+<style lang="stylus">
+.el-select .el-input
+  width 100px
 </style>

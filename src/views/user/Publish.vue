@@ -12,7 +12,7 @@
             :class="{ tab_active: form.brand.value===brand.value }"
             @click="handleBrand(brand.value, index)"
             ><strong>{{ brand.label }}</strong></div>
-          <div class="tab">其他</div>
+          <div class="tab" @click="others">其他</div>
         </div>
         <!-- 手机机型 -->
         <div class="models">
@@ -53,6 +53,9 @@
       <el-upload
         action="https://jsonplaceholder.typicode.com/posts/"
         list-type="picture-card"
+        :before-upload="onBeforeUpload"
+        multiple
+        accept="image/jpeg,image/gif,image/png"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove">
         <i class="el-icon-plus"></i>
@@ -470,14 +473,27 @@ export default {
       }
       return head + tail
     },
+    others () {
+      this.$message('开发中')
+    },
     handleChange (value) {
-      // cosole.log(value)
+      this.$message('开发中')
     },
-    mdSelected () {
-      this.modelSelected = true
+    onBeforeUpload (file) {
+      const isIMAGE = file.type === 'image/jpeg' || 'image/gif' || 'image/png'
+      const isLt1M = file.size / 1024 / 1024 < 5
+
+      if (!isIMAGE) {
+        this.$message.error('上传文件只能是图片格式!')
+      }
+      if (!isLt1M) {
+        this.$message.error('上传文件大小不能超过 5MB!')
+      }
+      return isIMAGE && isLt1M
     },
+    // 移除图片时
     handleRemove (file, fileList) {
-      // cosole.log(file, fileList)
+      this.$message('开发中')
     },
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
@@ -529,9 +545,7 @@ export default {
     },
     // 提交操作 TODO:
     publish () {
-      // 将手机的信息传到服务器，同时返还一个商品ID，然后界面跳转到商品详情界面
       this.$router.push('/result')
-      // this.$router.push('/product/id_12138')
     }
   }
 }

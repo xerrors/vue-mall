@@ -15,6 +15,9 @@
       <el-form-item label="联系电话" prop='tel'>
         <el-input v-model="form.tel" required></el-input>
       </el-form-item>
+      <el-form-item label="密码" prop='passwd'>
+        <el-input v-model="form.passwd" type="password" required></el-input>
+      </el-form-item>
       <el-form-item label="商户地址" prop='address'>
         <el-input v-model="form.address"></el-input>
       </el-form-item>
@@ -66,6 +69,10 @@ export default {
         principal: [{ required: true, message: '请输入负责人姓名' }],
         license: [{ type: 'array', required: true, message: '务必添加营业执照', trigger: 'change' }],
         tel: [{ required: true, message: '请输入联系方式' }],
+        passwd: [
+          { required: true, message: '请输入密码' },
+          { min: 6, max: 16, message: '长度在 2 到 10 个字符', trigger: 'blur' }
+        ],
         address: [{ required: true, message: '请输入商铺地址' }],
         legal_name: [{ required: true, message: '请输入法人姓名' }],
         ID: [{ required: true, message: '请输入身份证号码' }],
@@ -75,6 +82,7 @@ export default {
         name: '', // 店铺名称
         principal: '', // 负责人
         tel: '', // 联系电话
+        passwd: '', // 密码
         address: '', // 店铺地址
         license: [], // 营业执照
         legal_name: '', // 法人姓名

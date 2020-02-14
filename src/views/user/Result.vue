@@ -142,7 +142,7 @@ export default {
 
 .lds-ripple::after {
   color: #36323d;
-  content: '正在匹配最佳回收点';
+  content: '正在匹配';
   display: block;
   position: relative;
   top: 100px;
