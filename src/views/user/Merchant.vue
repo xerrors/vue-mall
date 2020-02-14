@@ -11,47 +11,45 @@
     </div>
     <div class="body">
       <div class="block b1">
-        <p>商家信誉</p>
-        <span>
-          <i class="el-icon-star-on" v-for="_ in merchant_info.credit" :key="_"></i>
-        </span>
+        <p>营业时间</p>
+        <div>{{ merchant_info.opening_time }}</div>
       </div>
       <div class="block b2">
         <p>联系电话</p>
-        <span>{{ merchant_info.tel }}</span>
+        <div>{{ merchant_info.tel }}</div>
       </div>
       <div class="block b3">
         <p>入驻时长</p>
-        <span>{{ merchant_info.settle_age }} 年</span>
+        <div>{{ merchant_info.settle_age }} 年</div>
       </div>
       <div class="block b4">
-        <p>交易总数</p>
-        <span>{{ merchant_info.deal_count }} 笔</span>
+        <p>30天交易量</p>
+        <div>{{ merchant_info.deal_count }} 笔</div>
       </div>
       <div class="block b5">
         <p>好评率</p>
-        <span>{{ merchant_info.good_rate }}</span>
+        <div>{{ merchant_info.good_rate }}</div>
       </div>
       <div class="block b6">
         <p>平均回收周期</p>
-        <span>{{ merchant_info.cycle }} 天</span>
+        <div>{{ merchant_info.cycle }} 天</div>
       </div>
-      <el-divider style="margin: 30px 0">历史订单</el-divider>
-      <div class="hist-order" v-for="order in merchant_info.hist_orders" :key='order.id'>
-        <div class="price">{{ order.deal_price }} ¥</div>
-        <div class="right">
-          <div style="padding: 1rem">
-            <span>{{ order.model }}</span>
-            <span style="float: right;">
-              <i
-                 class="el-icon-star-on"
-                 v-for="_ in order.evaluation"
-                 :key="_"></i>
-            </span>
-          </div>
-          <div class="tags">
-            <span v-for="(tag, ind) in order.tags" :key='ind'>{{ tag }}</span>
-          </div>
+    </div>
+    <el-divider style="margin: 30px 0">历史订单</el-divider>
+    <div class="hist-order" v-for="order in merchant_info.hist_orders" :key='order.id'>
+      <div class="price">{{ order.deal_price }} ¥</div>
+      <div class="right">
+        <div style="padding: 1rem">
+          <span>{{ order.model }}</span>
+          <span style="float: right;">
+            <i
+                class="el-icon-star-on"
+                v-for="_ in order.evaluation"
+                :key="_"></i>
+          </span>
+        </div>
+        <div class="tags">
+          <span v-for="(tag, ind) in order.tags" :key='ind'>{{ tag }}</span>
         </div>
       </div>
     </div>
@@ -77,6 +75,7 @@ export default {
         logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH',
         name: '爱回收',
         pics: [],
+        opening_time: '10:00 - 18:00',
         tel: '17629739090',
         address: '江苏省无锡市滨湖区蠡湖大道1800号江南大学',
         credit: 5,
@@ -136,22 +135,28 @@ export default {
         font-weight 500
   .body
     width 100%
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     .block
       display inline-block
       height 100px
-      width 23%
       margin 14px 10px
       padding .5rem 1.5rem
       border-radius 6px
       >p
-        text-shadow 0px 0px 1px #f1f1f1
-        font-size 18px
+        font-size 17px
+        font-weight 500
         letter-spacing 3px
+      >div
+        color #232323
+        background rgba(222, 222, 222, .5)
+        padding .3rem .5rem
+        border-radius 4px
     bg_shadow(c)
       background c
       box-shadow 0 1px 12px 1px c
     .b1
-      bg_shadow(#51eaea)
+      bg_shadow(#4fd3d3)
     .b2
       bg_shadow(#f6b352)
     .b3
