@@ -51,7 +51,7 @@ export default {
       this.$alert('交易成功', {
         confirmButtonText: '确定',
         callback: action => {
-          this.$router.push('/' + this.$store.state.roles + '/main')
+          this.$router.push('/' + this.$store.state.role + '/main')
         }
       })
     },

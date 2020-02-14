@@ -3,7 +3,7 @@
     <div class="navbar">
       <router-link to="/"><img class="logo" src="Logo.png"></router-link>
       <div class="nav-links nav-right">
-        <router-link v-if="token" to='/user/main' class="nav-link" tag="div">回收设备</router-link>
+        <router-link to='/main' v-if="!isMerchant" class="nav-link" tag="div">回收设备</router-link>
         <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
@@ -13,7 +13,7 @@
           >登录</el-button>
       </div>
       <div v-else class="user-box">
-        <span v-if="roles==='boss'" style="font-size: 14px; margin: 0 10px;">商家版</span>
+        <span v-if="role==='merchant'" style="font-size: 14px; margin: 0 10px;">商家版</span>
         <span v-else style="font-size: 14px; margin: 0 10px;">用户版</span>
         <el-dropdown type="primary" @command="dropdownCmd">
           <el-badge :is-dot="user.unread" class="item">
@@ -23,7 +23,7 @@
             <el-badge :is-dot="user.unread" class="item">
               <el-dropdown-item command="msg">我的消息</el-dropdown-item>
             </el-badge>
-            <el-dropdown-item command="profile">我的主页</el-dropdown-item>
+            <el-dropdown-item command="profile">个人页面</el-dropdown-item>
             <el-dropdown-item command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -38,7 +38,10 @@ import { mapGetters } from 'vuex'
 export default {
   nmae: 'nav-bar',
   computed: {
-    ...mapGetters(['token', 'avatar', 'roles', 'showLogin']),
+    ...mapGetters(['token', 'avatar', 'role', 'showLogin']),
+    isMerchant () {
+      return this.role && this.role === 'merchant'
+    },
     user () {
       var user = {
         unread: false

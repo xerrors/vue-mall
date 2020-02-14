@@ -6,8 +6,9 @@
         <h1>易传 eTran</h1>
         <p>易传二手交易平台</p>
         <p>用科技让每个电子产品都死得其所！</p>
-        <button @click="goCenter" v-if="token">进入主页</button>
-        <button @click="goLogin" v-else>去登录</button>
+        <!-- <button @click="goCenter" v-if="token">进入主页</button> -->
+        <button @click="goCenter" >进入主页</button>
+        <!-- <button @click="goLogin" v-else>去登录</button> -->
         <button @click="showMsg" class="more">了解更多</button>
       </div>
     </div>
@@ -55,11 +56,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['token', 'roles', 'showLogin'])
+    ...mapGetters(['token', 'role', 'showLogin'])
   },
   methods: {
     goCenter () {
-      this.$router.push('/user/main')
+      this.$router.push((this.role === 'merchant' ? '/merchant' : '') + '/main')
     },
     goLogin () {
       this.$store.state.showLogin = true

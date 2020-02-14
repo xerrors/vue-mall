@@ -9,12 +9,10 @@
           :class="[{'select': userForm.role == 'user'}, 'title']"
           @click="userForm.role = 'user'"
           >用户登录</div>
-          <!--
         <div
-          :class="[{'select': userForm.role == 'boss'}, 'title']"
-          @click="userForm.role = 'boss'"
+          :class="[{'select': userForm.role == 'merchant'}, 'title']"
+          @click="userForm.role = 'merchant'"
           >商户登录</div>
-          -->
       </div>
       <input
         v-model.trim="userForm.account"
@@ -32,7 +30,6 @@
       <div class="card__info">
         <el-link @click="register">注册</el-link>
         <el-link @click="forgotPWD">忘记密码</el-link>
-        <el-link @click="settleIn">商家入驻</el-link>
       </div>
     </div>
   </div>
@@ -60,6 +57,9 @@ export default {
   computed: {
     isShow () {
       return this.$store.state.showLogin
+    },
+    role () {
+      return this.$store.state.role
     }
   },
   methods: {
@@ -77,18 +77,21 @@ export default {
         .catch(() => {
           this.loading = false
         })
-      if (this.$route.path === '/') {
-        this.$router.push('/user/main')
+      if (this.role === 'merchant') {
+        this.$router.push('/merchant/main')
+      } else if (this.$route.path === '/') {
+        this.$router.push('/main')
       }
     },
     register () {
-      this.$router.push('register')
+      if (this.userForm.role === 'user') {
+        this.$router.push('register')
+      } else {
+        this.$router.push('settlein')
+      }
     },
     forgotPWD () {
       this.$router.push('forgotpwd')
-    },
-    settleIn () {
-      this.$router.push('settlein')
     }
   }
 }

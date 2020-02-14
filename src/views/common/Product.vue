@@ -26,7 +26,7 @@
         <p style="display: inline-block;"><strong>{{ item.name }}</strong> 出价{{ item.value }}元 - {{ item.date }}</p>
         <el-button
           type="text"
-          v-if="$store.state.roles === 'user'"
+          v-if="$store.state.role === 'user'"
           style="display: inline-block; margin-left: 1rem;"
           :disabled="productInfo.dealed"
           @click="handleDeal(index)">成交</el-button>
@@ -34,7 +34,7 @@
     </div>
     <div
       class="value"
-      v-if="$store.state.roles === 'boss'"
+      v-if="$store.state.role === 'merchant'"
       style="display: flex"
       >
       <el-slider
@@ -131,37 +131,7 @@ export default {
       })
     },
     handleValue () {
-      this.$confirm('确认出价吗？出价后24小时内不可更改！', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '算了',
-        type: 'warning'
-      }).then(() => {
-        let value = {
-          // 获取用户的 ID
-          id: 12138,
-          // 获取当前时间
-          date: '2019-11-29 18:15:48',
-          value: this.value
-        }
-        this.valued = true
-        // 向服务器发送请求
-        this.productInfo.values.push({
-          id: 7677,
-          name: '黄玉川',
-          date: '2019-12-16 09:45:17',
-          value: this.value
-        })
-        // cosole.log(value)
-        this.$message({
-          type: 'success',
-          message: '出价成功!'
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消'
-        })
-      })
+      this.$message('开发中')
     }
   }
 }

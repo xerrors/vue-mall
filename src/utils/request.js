@@ -4,7 +4,7 @@ import store from '../store'
 import { getToken } from '@/utils/cookies'
 
 // 创建axios实例
-axios.defaults.baseURL = 'http://127.0.0.1'// api 的 base_url
+axios.defaults.baseURL = 'http://116.62.110.131:3000'// api 的 base_url
 axios.defaults.timeout = 50000 // 请求超时时间
 
 // request拦截器

@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <login :is-show='!token'/>
+    <login :is-show='showLogin'/>
     <header v-if="!hiddenNavbar">
       <navbar></navbar>
     </header>
@@ -35,12 +35,16 @@ export default {
     Login
   },
   computed: {
-    ...mapGetters(['token']),
+    ...mapGetters(['token', 'showLogin']),
     hiddenNavbar () {
-      return this.$route.meta.hiddenNavbar || false
+      return this.$route.meta.hiddenNavbar ||
+              this.$route.meta.isSpecialPage ||
+              false
     },
     hiddenFooter () {
-      return this.$route.meta.hiddenFooter || false
+      return this.$route.meta.hiddenFooter ||
+      this.$route.meta.isSpecialPage ||
+      false
     },
     isSpecialPage () {
       return this.$route.meta.isSpecialPage || false
