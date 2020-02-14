@@ -501,17 +501,20 @@ export default {
     },
     handleSelectModel (model) {
       this.form.model = model
+      scrollTo(0, 0) // 回到顶部，不会太尬
       this.step += 1
     },
     // 处理下一步交互逻辑
     handleNext () {
       // TODO:如果当前界面的信息没有填完，无法进入下一步
+      scrollTo(0, 0) // 回到顶部，不会太尬
       this.step += 1
     },
     // 处理上一步交互逻辑
     handlePre () {
       this.step -= 1
     },
+    // 切换品牌之后
     handleBrand (value, index) {
       this.form.brand.value = value
       this.form.brand.index = index
