@@ -151,8 +151,10 @@ export default {
       display flex
       justify-content space-around
       .title
+        transition all .4s ease
         line-height 2rem
         cursor pointer
+        border-bottom 4px solid rgba(0,0,0,0)
       .select
         border-bottom 4px solid mainColor
 
