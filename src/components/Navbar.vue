@@ -5,7 +5,7 @@
       <div class="nav-links nav-right">
         <router-link to='/main' v-if="!isMerchant" class="nav-link" tag="div">回收设备</router-link>
         <router-link to='/merchant/main' v-else class="nav-link" tag="div">控制中心</router-link>
-        <router-link v-if="token" to='/messages' class="nav-link" tag="div">消息中心</router-link>
+        <router-link to='/merchant/orders' v-if="isMerchant" class="nav-link" tag="div">订单管理</router-link>
         <router-link to='/about' class="nav-link" tag="div">关于我们</router-link>
       </div>
       <div v-if="!token">
@@ -64,7 +64,7 @@ export default {
 
       // 跳转到对应的个人中心去
       if (obj === 'profile') {
-        this.$router.push('/user/center')
+        this.$router.push('/' + this.role + '/center')
       }
 
       // 实现登出功能，现在只写了前端部分

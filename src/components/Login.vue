@@ -28,7 +28,7 @@
         required>
       <button class="reset card__btn" :loading="loading" @click="submit">登录</button>
       <div class="card__info">
-        <el-link @click="register">注册</el-link>
+        <el-link @click="register">{{ userForm.role === 'user' ? '注册' : '入驻' }} </el-link>
         <el-link @click="forgotPWD">忘记密码</el-link>
       </div>
     </div>

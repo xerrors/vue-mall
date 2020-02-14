@@ -62,6 +62,12 @@ const routes = [
     meta: {
       roles: ['user']
     }
+  }, {
+    path: '/order/:id',
+    component: () => import('@/views/user/Order.vue'),
+    meta: {
+      roles: ['user']
+    }
   },
 
   // 仅商户可见
@@ -71,12 +77,23 @@ const routes = [
     meta: {
       roles: ['merchant']
     }
+  }, {
+    path: '/merchant/orders',
+    component: () => import('@/views/merchant/Orders.vue'),
+    meta: {
+      roles: ['merchant']
+    }
+  }, {
+    path: '/merchant/center',
+    component: () => import('@/views/merchant/Profile.vue'),
+    meta: {
+      roles: ['merchant']
+    }
   },
 
   // 双方皆可见
   { path: '/messages', component: () => import('@/views/common/Messages.vue') },
   { path: '/product/:id', component: () => import('@/views/common/Product.vue') },
-  { path: '/order/:id', component: () => import('@/views/common/Order.vue') },
 
   { path: '*', redirect: '/404' }
 ]
