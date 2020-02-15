@@ -1,9 +1,9 @@
 export function getProductInfo (orderID) {
-  if (orderID !== 'id_12138') {
+  if (orderID !== '12138') {
     // pass
   }
   return {
-    // seller 应该只获取得到 ID，然后再向服务器获取
+    // ! seller 应该只获取得到 ID，然后再向服务器获取
     id: 12138,
     seller: {
       seller_id: 12138,
@@ -11,7 +11,6 @@ export function getProductInfo (orderID) {
       avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim'
     },
     date: '2019-11-29',
-    dealed: false, // 此订单是否已经交易
     // 手机的品牌
     model: {
       label: '华为 Mate30 Pro',
@@ -28,25 +27,13 @@ export function getProductInfo (orderID) {
       'http://src.xerrors.fun/blog/20191126/o7Iyr9CY3s5Y.png?imageslim',
       'http://src.xerrors.fun/blog/20191126/0YFUsTWYHLaX.png?imageslim'
     ],
-    // 出价记录
-    values: [{
-      id: 12138,
-      name: '宋仁投',
-      date: '2019-11-30 17:14:16',
-      value: '2500'
-    }, {
-      id: 9527,
-      name: '潘达秋',
-      date: '2019-11-29 19:45:17',
-      value: '2899'
-    }],
     description: '换了新款手机了，这个不想使用了，没有任何问题，打算卖掉，入手渠道:专卖店全款购买的，有发票；使用感受:功能一切正常运行流畅，大型游戏不卡顿，使用起来没有任何问题，拍照清晰，吊打全球一亿像素的手机。'
   }
 }
 
 export function getProductInfos () {
   return [ {
-    // seller 应该只获取得到 ID，然后再向服务器获取
+    // ! seller 应该只获取得到 ID，然后再向服务器获取
     id: 12138,
     seller: {
       seller_id: 12138,

@@ -1,12 +1,12 @@
 <template>
   <div class="main">
     <div class="head">
-      <img :src="merchant_info.logo" alt="LOGO"/>
+      <img :src="merchant_info.logo" alt="LOGO" />
       <div class="head__info" style="display: inline-block">
         <div>{{ merchant_info.name }}</div>
         <i class="el-icon-star-on" v-for="_ in merchant_info.credit" :key="_"></i>
       </div>
-<!--       <span class="follow">关注</span> -->
+      <!--       <span class="follow">关注</span> -->
       <p style="margin-bottom: 0; color: #909399">地址：{{ merchant_info.address }}</p>
     </div>
     <div class="body">
@@ -36,20 +36,17 @@
       </div>
     </div>
     <el-divider style="margin: 30px 0">历史订单</el-divider>
-    <div class="hist-order" v-for="order in merchant_info.hist_orders" :key='order.id'>
+    <div class="hist-order" v-for="order in merchant_info.hist_orders" :key="order.id">
       <div class="price">{{ order.deal_price }} ¥</div>
       <div class="right">
         <div style="padding: 1rem">
           <span>{{ order.model }}</span>
           <span style="float: right;">
-            <i
-                class="el-icon-star-on"
-                v-for="_ in order.evaluation"
-                :key="_"></i>
+            <i class="el-icon-star-on" v-for="_ in order.evaluation" :key="_"></i>
           </span>
         </div>
         <div class="tags">
-          <span v-for="(tag, ind) in order.tags" :key='ind'>{{ tag }}</span>
+          <span v-for="(tag, ind) in order.tags" :key="ind">{{ tag }}</span>
         </div>
       </div>
     </div>
@@ -72,7 +69,8 @@ export default {
       // 这里就是通过ID向服务器获取信息了，后记可以加入一个全局的加载动画
       this.merchant_info = {
         id: '10001',
-        logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH',
+        logo:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH',
         name: '爱回收',
         pics: [],
         opening_time: '10:00 - 18:00',
@@ -92,21 +90,39 @@ export default {
         {
           id: '2183173188920',
           model: '华为 P30 Pro',
-          tags: ['轻微使用无刮痕', '128G', '屏幕显示正常', '有维修', '账户可正常退出'],
+          tags: [
+            '轻微使用无刮痕',
+            '128G',
+            '屏幕显示正常',
+            '有维修',
+            '账户可正常退出'
+          ],
           deal_price: 1800,
           evaluation: 5
         },
         {
           id: '2183173188920',
           model: '华为 P30 Pro',
-          tags: ['轻微使用无刮痕', '128G', '屏幕显示正常', '有维修', '账户可正常退出'],
+          tags: [
+            '轻微使用无刮痕',
+            '128G',
+            '屏幕显示正常',
+            '有维修',
+            '账户可正常退出'
+          ],
           deal_price: 1900,
           evaluation: 3
         },
         {
           id: '2183173188920',
           model: '华为 P30 Pro',
-          tags: ['轻微使用无刮痕', '128G', '屏幕显示正常', '有维修', '账户可正常退出'],
+          tags: [
+            '轻微使用无刮痕',
+            '128G',
+            '屏幕显示正常',
+            '有维修',
+            '账户可正常退出'
+          ],
           deal_price: 1600,
           evaluation: 5
         }
@@ -117,87 +133,129 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.main
-  width: 800px
-  margin 0 auto
-  .head
-    margin 30px 0
-    >img
-      width 100px
-      height 100px
-      border-radius 6px
-    &__info
-      padding-left 1rem
-      >div
-        letter-spacing 3px
-        padding-bottom .7rem
-        font-size 18px
-        font-weight 500
-  .body
-    width 100%
+.main {
+  width: 800px;
+  margin: 0 auto;
+
+  .head {
+    margin: 30px 0;
+
+    >img {
+      width: 100px;
+      height: 100px;
+      border-radius: 6px;
+    }
+
+    &__info {
+      padding-left: 1rem;
+
+      >div {
+        letter-spacing: 3px;
+        padding-bottom: 0.7rem;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .body {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    .block
-      display inline-block
-      height 100px
-      margin 14px 10px
-      padding .5rem 1.5rem
-      border-radius 6px
-      >p
-        font-size 17px
-        font-weight 500
-        letter-spacing 3px
-      >div
-        color #232323
-        background rgba(222, 222, 222, .5)
-        padding .3rem .5rem
-        border-radius 4px
-    bg_shadow(c)
-      background c
-      box-shadow 0 1px 12px 1px c
-    .b1
-      bg_shadow(#4fd3d3)
-    .b2
-      bg_shadow(#f6b352)
-    .b3
-      bg_shadow(#d1b6e1)
-    .b4
-      bg_shadow(#4fb0c6)
-    .b5
-      bg_shadow(#58c9b9)
-    .b6
-      bg_shadow(#9dc8c8)
-  .hist-order
-    border-radius 6px
-    box-shadow 0 1px 5px 1px rgba(0,0,0,.05)
-    margin 30px 0
-    height 100px
-    padding 1rem
-    display flex
-    .price
-      width 80px
-      height 100%
-      color #ffa426
-      font-size 20px
-      margin 0 1rem
-      display flex
-      align-items center
-    .right
-      width 100%
-      .tags
-        padding 0 1rem
-        >span
-          color #909399
-          display inline-block
-          padding .3rem .5rem
-          border-radius 3px
-          background #f1f1f1
-          font-size small
-          margin-right 1rem
+
+    .block {
+      display: inline-block;
+      height: 100px;
+      margin: 14px 10px;
+      padding: 0.5rem 1.5rem;
+      border-radius: 6px;
+
+      >p {
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: 3px;
+      }
+
+      >div {
+        color: #232323;
+        background: rgba(222, 222, 222, 0.5);
+        padding: 0.3rem 0.5rem;
+        border-radius: 4px;
+      }
+    }
+
+    bg_shadow(c) {
+      background: c;
+      box-shadow: 0 1px 12px 1px c;
+    }
+
+    .b1 {
+      bg_shadow(#4fd3d3);
+    }
+
+    .b2 {
+      bg_shadow(#f6b352);
+    }
+
+    .b3 {
+      bg_shadow(#d1b6e1);
+    }
+
+    .b4 {
+      bg_shadow(#4fb0c6);
+    }
+
+    .b5 {
+      bg_shadow(#58c9b9);
+    }
+
+    .b6 {
+      bg_shadow(#9dc8c8);
+    }
+  }
+
+  .hist-order {
+    border-radius: 6px;
+    box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.05);
+    margin: 30px 0;
+    height: 100px;
+    padding: 1rem;
+    display: flex;
+
+    .price {
+      width: 80px;
+      height: 100%;
+      color: #ffa426;
+      font-size: 20px;
+      margin: 0 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .right {
+      width: 100%;
+
+      .tags {
+        padding: 0 1rem;
+
+        >span {
+          color: #909399;
+          display: inline-block;
+          padding: 0.3rem 0.5rem;
+          border-radius: 3px;
+          background: #f1f1f1;
+          font-size: small;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
 </style>
 
 <style lang="stylus">
-.el-icon-star-on
-  margin-right 7px
-  color #ffa426
+.el-icon-star-on {
+  margin-right: 7px;
+  color: #ffa426;
+}
 </style>
