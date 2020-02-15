@@ -77,7 +77,6 @@ export default {
      */
     orders () {
       const orders = this.getOrdersFromServer()
-      console.log(orders)
       return orders.filter(order => {
         return order.status >= this.filter[0] && order.status < this.filter[1]
       })
