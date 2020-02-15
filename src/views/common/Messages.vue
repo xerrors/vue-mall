@@ -22,27 +22,38 @@ export default {
       msgs: []
     }
   },
+  computed: {
+    role () {
+      return this.$store.state.role
+    }
+  },
   methods: {
     openMsg (item) {
-      if (item.magType === 'text') {
+      if (item.msgType === 'text') {
         this.$alert(item.content, '消息详情', {
           confirmButtonText: '朕已阅',
           callback: () => {
-            // 消息已读，发送到服务器
-            item.readed = true
+            this.readed(item)
           }
         })
-      } else if (item.magType === 'product') {
-        item.readed = true
-        this.$router.push('/product/id_' + item.productID)
-      } else if (item.magType === 'web') {
+      } else if (item.msgType === 'order') {
+        this.readed(item)
+        const path = (this.role === 'merchant' ? '/merchant' : '') + '/order/' + item.orderID
+        this.$router.push(path)
+      } else if (item.msgType === 'web') {
+        this.readed(item)
         window.open(item.link)
       }
+    },
+    readed (msg) {
+      msg.readed = true
+      // 消息已读，发送到服务器
+      this.$message('Message:' + msg.id + ': readed')
     }
   },
   mounted () {
     // TODO: 从服务端获取消息
-    this.msgs = getMsgs()
+    this.msgs = getMsgs(this.role)
   }
 }
 </script>

@@ -84,6 +84,12 @@ const routes = [
       roles: ['merchant']
     }
   }, {
+    path: '/merchant/order/:id',
+    component: () => import('@/views/merchant/Order.vue'),
+    meta: {
+      roles: ['merchant']
+    }
+  }, {
     path: '/merchant/center',
     component: () => import('@/views/merchant/Profile.vue'),
     meta: {

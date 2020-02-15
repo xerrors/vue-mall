@@ -24,6 +24,33 @@
          class="el-icon-circle-close"
          style="float: right;"></i>
     </div>
+    <div class="order-card">
+      <div class="item">
+        <img src="/svg/all.svg" class="svg"/>
+        <div class="title">全部订单</div>
+        <div class="text">1290</div>
+      </div>
+      <div class="item">
+        <img src="/svg/waiting.svg" class="svg"/>
+        <div class="title">等待接单</div>
+        <div class="text">28</div>
+      </div>
+      <div class="item">
+        <img src="/svg/check.svg" class="svg"/>
+        <div class="title">审核中</div>
+        <div class="text">10</div>
+      </div>
+      <div class="item">
+        <img src="/svg/pay.svg" class="svg"/>
+        <div class="title">等待付款</div>
+        <div class="text">18</div>
+      </div>
+      <div class="item">
+        <img src="/svg/cancel.svg" class="svg"/>
+        <div class="title">已取消</div>
+        <div class="text">4</div>
+      </div>
+    </div>
     <div class="body">
       <div class="block b1">
         <p>营业时间</p>
@@ -50,7 +77,6 @@
         <div>{{ merchant_info.cycle }} 天</div>
       </div>
     </div>
-    <el-divider style="margin: 30px 0">历史订单</el-divider>
   </div>
 </template>
 
@@ -143,6 +169,41 @@ export default {
       transition opacity .3s ease
       &:hover
         opacity 0.6
+  .order-card
+    padding 1rem
+    margin 0 auto
+    box-shadow 0 1px 20px 0 rgba(0,0,0,.05)
+    border-radius 6px
+    display grid
+    grid-template-columns 1fr 1fr 1fr 1fr 1fr
+    align-items center
+    .item
+      &:not(:last-child)
+        border-right 1px dashed #e2e3e4
+        margin-right 10px
+      text-align center
+      line-height 1.7
+      display grid
+      grid-template-columns 50px auto
+      grid-template-rows repeat(2, 1fr);
+      .svg
+        width 35px
+        height 35px
+        align-self center
+        justify-self center
+        border-radius 5px
+        grid-area 1 / 1 / 3 / 2
+      .title
+        text-align left
+        padding-left 1rem
+        font-size 13px
+        font-size 16px
+        grid-area 1 / 2 / 2 / 4
+      .text
+        padding-left 1rem
+        text-align left
+        font-weight 600
+        grid-area: 2 / 2 / 3 / 4
   .body
     width 100%
     display: grid;

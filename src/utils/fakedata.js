@@ -1,5 +1,5 @@
-export function getProductInfo (productId) {
-  if (productId !== 'id_12138') {
+export function getProductInfo (orderID) {
+  if (orderID !== 'id_12138') {
     // pass
   }
   return {
@@ -269,32 +269,63 @@ export function getSelections () {
   }]
 }
 
-export function getMsgs () {
-  return [{
-    date: '',
-    readed: false,
-    profucer: 'admin',
-    reveiver: 'everyone',
-    magType: 'text', // text | product | web page
-    title: '系统测试提醒：系统将于2020年2月31日进行系统维护！',
-    content: '系统测试提醒：系统将于2020年2月31日进行系统维护，届时系统将无法进入！维护时长为 1000分钟！感谢您的理解！'
-  }, {
-    date: '',
-    readed: false,
-    profucer: '12138',
-    reveiver: '12139',
-    magType: 'product', // text | product | web page
-    title: '产品提醒：有人对你发布的商品感兴趣并进行了出价，请查看！',
-    productID: '12138' // 产品的ID
-  }, {
-    date: '',
-    readed: true,
-    profucer: 'admin',
-    reveiver: 'everyone',
-    magType: 'web', // text | product | web page
-    title: '第一届易传扯淡大会即将召开，点击进入主会场 >>',
-    link: 'http://www.baidu.com' // 外部的链接
-  }]
+export function getMsgs (role) {
+  if (role === 'merchant') {
+    return [{
+      id: '112321212',
+      date: '',
+      readed: false,
+      profucer: '12138',
+      reveiver: '12139',
+      msgType: 'order', // text | web page | order
+      title: '你有新的订单等待接单！',
+      orderID: '2019021921012138' // 订单的ID
+    }, {
+      id: '112321312',
+      date: '',
+      readed: false,
+      profucer: 'admin',
+      reveiver: 'everyone',
+      msgType: 'text', // text | web page | order
+      title: '系统测试提醒：系统将于2020年2月31日进行系统维护！',
+      content: '系统测试提醒：系统将于2020年2月31日进行系统维护，届时系统将无法进入！维护时长为 1000分钟！感谢您的理解！'
+    }, {
+      id: '112521312',
+      date: '',
+      readed: true,
+      profucer: 'admin',
+      reveiver: 'everyone',
+      msgType: 'web', // text | web page | order
+      title: '第一届易传扯淡大会即将召开，点击进入主会场 >>',
+      url: 'http://www.baidu.com' // 外部的链接
+    }]
+  } else {
+    return [{
+      date: '',
+      readed: false,
+      profucer: 'admin',
+      reveiver: 'everyone',
+      msgType: 'text', // text | product | web page
+      title: '系统测试提醒：系统将于2020年2月31日进行系统维护！',
+      content: '系统测试提醒：系统将于2020年2月31日进行系统维护，届时系统将无法进入！维护时长为 1000分钟！感谢您的理解！'
+    }, {
+      date: '',
+      readed: false,
+      profucer: '12138',
+      reveiver: '12139',
+      msgType: 'product', // text | product | web page
+      title: '产品提醒：有人对你发布的商品感兴趣并进行了出价，请查看！',
+      orderID: '12138' // 产品的ID
+    }, {
+      date: '',
+      readed: true,
+      profucer: 'admin',
+      reveiver: 'everyone',
+      msgType: 'web', // text | product | web page
+      title: '第一届易传扯淡大会即将召开，点击进入主会场 >>',
+      url: 'http://www.baidu.com' // 外部的链接
+    }]
+  }
 }
 
 export function getUserInfo (token) {
