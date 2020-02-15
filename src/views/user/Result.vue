@@ -169,11 +169,6 @@ export default {
 </style>
 
 <style lang="stylus" scoped>
-h4
-  display inline-block
-  background: linear-gradient(0deg, rgba(71, 207, 115, 0.5) 40%,#fff 0)
-  padding .4rem
-
 .container
   width 700px
   margin 0 auto

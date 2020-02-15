@@ -570,10 +570,6 @@ export default {
   width 80%
   min-width 800px
   margin 0 auto
-  >div>h4
-    display inline-block
-    background: linear-gradient(0deg, rgba(71, 207, 115, 0.5) 40%,#fff 0)
-    padding .4rem
   .block
     .model_box
       border: 1px solid #f3f4f5;

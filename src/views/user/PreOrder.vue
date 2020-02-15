@@ -124,10 +124,6 @@ export default {
   min-width 700px
   max-width 900px
   margin 0 auto
-h4
-  display inline-block
-  background: linear-gradient(0deg, rgba(71, 207, 115, 0.5) 40%,#fff 0)
-  padding .4rem
 .top
   display grid
   grid-template-columns 50% 50%

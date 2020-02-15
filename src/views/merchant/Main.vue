@@ -159,20 +159,20 @@ export default {
         letter-spacing 3px
       >div
         color #232323
-        background rgba(222, 222, 222, .5)
+        background rgba(255, 255, 255, .5)
         padding .3rem .5rem
         border-radius 4px
     bg_shadow(c)
       background c
-      box-shadow 0 1px 12px 1px c
+      // box-shadow 0 1px 20px 0px c
     .b1
-      bg_shadow(#4fd3d3)
+      bg_shadow(#afbef8)
     .b2
-      bg_shadow(#f6b352)
+      bg_shadow(#f4b75f)
     .b3
-      bg_shadow(#d1b6e1)
+      bg_shadow(#f6bb13)
     .b4
-      bg_shadow(#4fb0c6)
+      bg_shadow(#5dcbe4)
     .b5
       bg_shadow(#58c9b9)
     .b6
