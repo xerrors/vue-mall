@@ -1,71 +1,36 @@
 <template>
   <div class="main_container">
-    <div name="seller" class="seller">
+    <!-- 卖家信息 // ! 暂时隐藏 -->
+    <!-- <div name="seller" class="seller">
       <el-avatar class="seller__avatar" :src="productInfo.seller.avatar"></el-avatar>
       <span class="seller__name">{{ productInfo.seller.name }}</span>
-    </div>
-    <el-carousel class="gallary" ref="gallary" :interval="4000" type="card" height="400px" @change="handleChange">
-      <el-carousel-item v-for="(item, index) in productInfo.pics" :key="index">
-        <el-image
-          style="width: 300px; height: 400px"
-          :src="item"
-          fit="contain">
-        </el-image>
-      </el-carousel-item>
-    </el-carousel>
-    <!--TODO:-->
-    <h4 style="text-align: center">型号：{{ productInfo.model.label }}</h4>
-    <!-- 出价记录 -->
-    <div
-      class="valued-list"
-      style="width: 100%;"
-      >
-      <div class="valued-list__item"
-        v-for="(item, index) in productInfo.values" :key="item.id"
-        style="text-align: center;">
-        <p style="display: inline-block;"><strong>{{ item.name }}</strong> 出价{{ item.value }}元 - {{ item.date }}</p>
-        <el-button
-          type="text"
-          v-if="$store.state.role === 'user'"
-          style="display: inline-block; margin-left: 1rem;"
-          :disabled="productInfo.dealed"
-          @click="handleDeal(index)">成交</el-button>
-      </div>
-    </div>
-    <div
-      class="value"
-      v-if="$store.state.role === 'merchant'"
-      style="display: flex"
-      >
-      <el-slider
-        v-model="value"
-        show-input
-        :step="elSlider.step"
-        :min="elSlider.min"
-        :max='elSlider.max'
-        :disabled="valued"
-        style="width: 90%">
-      </el-slider>
-      <el-button
-        type="primary"
-        size="small"
-        style="margin-left: 1rem;"
-        :disabled="valued"
-        @click="handleValue"
-        plain>出价</el-button>
-    </div>
+    </div> -->
+    <!-- 型号信息 -->
+    <h3>{{ productInfo.model.label }}</h3>
+    <!-- 型号 -->
     <div class="product_box">
       <div class="info">
-        <div class="info__title">商品详情</div>
+        <h4 class="info__title">商品详情</h4>
         <div class="info__box" v-for="(item, index) in productInfo.selected" :key="index">
           <span><strong>{{ selections[index].label + ': ' }}</strong></span>
           <span>{{ selections[index].options[item].label }}</span>
         </div>
       </div>
+      <!-- 描述 -->
       <div class="description">
-        <div class="info__title">商品描述</div>
+        <h4 class="info__title">商品描述</h4>
         <div class="description__text">{{ productInfo.description }}</div>
       </div>
+    </div>
+    <!-- 照片信息 -->
+    <h4>商品照片</h4>
+    <div class="gallary">
+      <el-image
+        v-for="(item, index) in productInfo.pics" :key="index"
+        fit="cover"
+        :src="item"
+        :preview-src-list="productInfo.real_pics || productInfo.pics">
+      </el-image>
     </div>
   </div>
 </template>
@@ -150,42 +115,27 @@ export default {
     &__name
       margin-left 1rem
       line-height 2.5rem
-  .gallary
-    width 60%
-    min-width 50trm
-    margin 0 auto
-  .value
-    box-shadow cardShadow
-    border-radius 4px
-    padding 3rem
-    margin-top 3rem
   .product_box
-    box-shadow cardShadow
-    border-radius 4px
-    padding 3rem
-    display flex
-    margin-top 3rem
+    display grid
+    grid-template-columns 1fr 1fr
     .description
-      width 50%
       &__text
         line-height 2rem
-        padding-right 2rem
     .info
-      padding-left 3rem
-      width 50%
-      h4
-        color mainColor
-      &__title
-        margin-bottom 1rem
-        background #53bf7e
-        display: inline-block
-        color white
-        padding .5rem 1rem
-        border-radius 3px
       &__box
         margin 1rem 0
         span:first-child
           margin-right 1rem
           padding-left .5rem
           border-left 2px solid mainColor
+  .gallary
+    display grid
+    grid-template-columns 1fr 1fr 1fr 1fr
+    row-gap: 20px;
+    column-gap: 20px;
+    .el-image
+      justify-self center
+      border-radius 5px
+      height: 200px;
+      width: 200px
 </style>

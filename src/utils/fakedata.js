@@ -19,13 +19,12 @@ export function getProductInfo (orderID) {
     // 用户的选项
     selected: [1, 1, 1, 1, 1, 1, 1],
     pics: [
-      'http://src.xerrors.fun/blog/20191126/TiEyQCEnc6hi.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/O6OBffI8bIuW.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/wiafVBTwyzvD.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/thMAJ0QTX489.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/Oj6LnzUFkPUA.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/o7Iyr9CY3s5Y.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/0YFUsTWYHLaX.png?imageslim'
+      'http://src.xerrors.fun/blog%2F20200216%2FIHwE18Npo5vM.jpg',
+      'http://src.xerrors.fun/blog/20200216/yKBvu73WOisW.jpg',
+      'http://src.xerrors.fun/2.jpg',
+      'http://src.xerrors.fun/3.jpg',
+      'http://src.xerrors.fun/4.jpg',
+      'http://src.xerrors.fun/6.jpg'
     ],
     description: '换了新款手机了，这个不想使用了，没有任何问题，打算卖掉，入手渠道:专卖店全款购买的，有发票；使用感受:功能一切正常运行流畅，大型游戏不卡顿，使用起来没有任何问题，拍照清晰，吊打全球一亿像素的手机。'
   }
@@ -50,13 +49,12 @@ export function getProductInfos () {
     // 用户的选项
     selected: [1, 1, 1, 1, 1, 1, 1],
     pics: [
-      'http://src.xerrors.fun/blog/20191126/TiEyQCEnc6hi.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/O6OBffI8bIuW.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/wiafVBTwyzvD.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/thMAJ0QTX489.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/Oj6LnzUFkPUA.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/o7Iyr9CY3s5Y.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/0YFUsTWYHLaX.png?imageslim'
+      'http://src.xerrors.fun/blog%2F20200216%2FIHwE18Npo5vM.jpg',
+      'http://src.xerrors.fun/blog/20200216/yKBvu73WOisW.jpg',
+      'http://src.xerrors.fun/2.jpg',
+      'http://src.xerrors.fun/3.jpg',
+      'http://src.xerrors.fun/4.jpg',
+      'http://src.xerrors.fun/6.jpg'
     ],
     // 出价记录
     values: [{
@@ -89,13 +87,12 @@ export function getProductInfos () {
     // 用户的选项
     selected: [1, 1, 1, 1, 1, 1, 1],
     pics: [
-      'http://src.xerrors.fun/blog/20191126/TiEyQCEnc6hi.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/O6OBffI8bIuW.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/wiafVBTwyzvD.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/thMAJ0QTX489.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/Oj6LnzUFkPUA.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/o7Iyr9CY3s5Y.png?imageslim',
-      'http://src.xerrors.fun/blog/20191126/0YFUsTWYHLaX.png?imageslim'
+      'http://src.xerrors.fun/blog%2F20200216%2FIHwE18Npo5vM.jpg',
+      'http://src.xerrors.fun/blog/20200216/yKBvu73WOisW.jpg',
+      'http://src.xerrors.fun/2.jpg',
+      'http://src.xerrors.fun/3.jpg',
+      'http://src.xerrors.fun/4.jpg',
+      'http://src.xerrors.fun/6.jpg'
     ],
     // 出价记录
     values: [{
