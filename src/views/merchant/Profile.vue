@@ -1,5 +1,54 @@
 <template>
-  <div class="mer-profile">
-    商户个人主页
+  <div class="merchant-profile">
+    <el-tabs v-model="activeName" tab-position="left">
+      <el-tab-pane label="个人信息" name="profile">
+        <merchant-infos :form="userInfo.baseForm"></merchant-infos>
+      </el-tab-pane>
+
+      <el-tab-pane label="安全中心" name="security">
+        <security></security>
+      </el-tab-pane>
+
+      <el-tab-pane label="收货地址" name="address">
+        <addr-mng></addr-mng>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
+
+<script>
+import MerchantInfos from '@/components/merchant/MerchantInfos.vue'
+import AddrMng from '@/components/AddrMng.vue'
+import Security from '@/components/Security.vue'
+import { getUserInfo } from '@/utils/fakedata.js'
+export default {
+  components: { MerchantInfos, AddrMng, Security },
+  data () {
+    return {
+      localAddr: JSON.parse(localStorage.addresses),
+      activeName: 'profile',
+      userInfo: getUserInfo(this.$store.state.token)
+    }
+  },
+  mounted () {
+    if (localStorage.addresses) {
+      this.localAddr = JSON.parse(localStorage.addresses)
+    }
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+.merchant-profile
+  padding-top 3rem
+  max-width 900px
+  margin 0 auto
+</style>
+
+<style lang="stylus">
+.el-tabs
+  &__header.is-left
+    margin-right 40px !important
+  &__item
+    font-weight bold
+</style>

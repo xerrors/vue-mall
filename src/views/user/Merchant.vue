@@ -57,7 +57,6 @@
 export default {
   data () {
     return {
-      test: '123',
       merchant_info: {}
     }
   },
@@ -186,23 +185,22 @@ export default {
 
     bg_shadow(c) {
       background: c;
-      box-shadow: 0 1px 12px 1px c;
     }
 
     .b1 {
-      bg_shadow(#4fd3d3);
+      bg_shadow(#afbef8);
     }
 
     .b2 {
-      bg_shadow(#f6b352);
+      bg_shadow(#f4b75f);
     }
 
     .b3 {
-      bg_shadow(#d1b6e1);
+      bg_shadow(#f6bb13);
     }
 
     .b4 {
-      bg_shadow(#4fb0c6);
+      bg_shadow(#5dcbe4);
     }
 
     .b5 {

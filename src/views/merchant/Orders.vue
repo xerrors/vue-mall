@@ -1,30 +1,30 @@
 <template>
   <div class="orders">
     <div class="order-card">
-      <div class="item">
+      <div class="item" @click="filter=[0, 7]">
         <img src="/svg/all.svg" class="svg" />
         <div class="title">全部订单</div>
-        <div class="text" @click="filter=[0, 7]">1290</div>
+        <div class="text">1290</div>
       </div>
-      <div class="item">
+      <div class="item" @click="filter=[1, 2]">
         <img src="/svg/waiting.svg" class="svg" />
         <div class="title">等待接单</div>
-        <div class="text" @click="filter=[1, 2]">29</div>
+        <div class="text">29</div>
       </div>
-      <div class="item">
+      <div class="item" @click="filter=[2, 5]">
         <img src="/svg/check.svg" class="svg" />
         <div class="title">等待审核</div>
-        <div class="text" @click="filter=[2, 5]">10</div>
+        <div class="text">10</div>
       </div>
-      <div class="item">
+      <div class="item" @click="filter=[5, 7]">
         <img src="/svg/pay.svg" class="svg" />
         <div class="title">等待付款</div>
-        <div class="text" @click="filter=[5, 7]">18</div>
+        <div class="text">18</div>
       </div>
-      <div class="item">
+      <div class="item" @click="filter=[0, 1]">
         <img src="/svg/cancel.svg" class="svg" />
         <div class="title">已取消</div>
-        <div class="text" @click="filter=[0, 1]">4</div>
+        <div class="text">4</div>
       </div>
     </div>
     <div class="my-order" v-for="order in orders" :key="order.id">
@@ -125,6 +125,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.orders {
+  width: 80%;
+  max-width: 1000px;
+  min-width: 700px;
+  margin: 0 auto;
+}
+
 .order-card {
   padding: 1rem;
   margin: 0 auto;
@@ -145,6 +152,7 @@ export default {
     display: grid;
     grid-template-columns: 50px auto;
     grid-template-rows: repeat(2, 1fr);
+    cursor: pointer;
 
     .svg {
       width: 35px;
@@ -168,7 +176,6 @@ export default {
       text-align: left;
       font-weight: 600;
       grid-area: 2 / 2 / 3 / 4;
-      cursor: pointer;
     }
   }
 }

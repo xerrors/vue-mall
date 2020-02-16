@@ -8,7 +8,7 @@
         <p>用科技让每个电子产品都死得其所！</p>
         <!-- <button @click="goCenter" v-if="token">进入主页</button> -->
         <button @click="goCenter" >立即体验</button>
-        <!-- <button @click="goLogin" v-else>去登录</button> -->
+        <button @click="goLogin" v-if="!token">去登录</button>
         <button @click="showMsg" class="more">了解更多</button>
       </div>
     </div>

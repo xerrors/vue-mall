@@ -156,7 +156,9 @@ export default {
 
 <style lang="stylus" scoped>
 .merchant-main {
-  width: 800px;
+  width: 80%;
+  max-width 1000px
+  min-width 700px
   margin: 0 auto;
 
   .head {
