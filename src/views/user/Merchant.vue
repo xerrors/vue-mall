@@ -79,7 +79,7 @@ export default {
         settle_age: 4,
         deal_count: 1290,
         good_rate: '90%',
-        cycle_ways: ['上门取件', '自行邮递', '线下门店'],
+        cycle_ways: ['上门取货', '自行邮递', '线下门店'],
         cycle: 3.89,
         hist_orders: this.getHistOrders(id)
       }

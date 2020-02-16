@@ -453,7 +453,7 @@ export default {
         change: false, // 是否想要以旧换新
         methods: [{
           id: 1,
-          name: '上门取件'
+          name: '上门取货'
         }, {
           id: 2,
           name: '自行邮寄'
@@ -534,7 +534,7 @@ export default {
     setDef () {
       this.form.methods = [{
         id: 1,
-        name: '上门取件'
+        name: '上门取货'
       }, {
         id: 2,
         name: '自行邮寄'

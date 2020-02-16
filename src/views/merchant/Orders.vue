@@ -27,7 +27,7 @@
         <div class="text">4</div>
       </div>
     </div>
-    <div class="my-order" v-for="order in orders" :key="order.id">
+    <div class="my-order" v-for="order in orders" :key="order.id" @click="lookupOrder(order.id)">
       <div class="price">{{ order.deal_price }} ¥</div>
       <div class="status">{{ status[order.status] }}</div>
       <div class="right">
@@ -58,6 +58,7 @@ export default {
         '检验中', // （商家给出最终价格进入下一状态）
         '核价中', // （用户接受此价格）
         '等待支付', // （商户支付钱款）
+        '等待用户确认',
         '交易完成'
       ]
     }
@@ -72,7 +73,8 @@ export default {
      * 4. 检验中（商家给出最终价格进入下一状态）
      * 5. 核价中（用户接受此价格）
      * 6. 等待支付（商户支付钱款）
-     * 7. 交易完成
+     * 7. 等待用户确认（20天自动确认）
+     * 8. 交易完成
      *
      */
     orders () {
@@ -119,6 +121,9 @@ export default {
           tags: ['账户可退出', '轻微磨损', '屏幕显示正常', '屏幕有维修']
         }
       ]
+    },
+    lookupOrder (id) {
+      this.$router.push('/order/' + id)
     }
   }
 }
@@ -128,7 +133,7 @@ export default {
 .orders {
   width: 80%;
   max-width: 1000px;
-  min-width: 700px;
+  min-width: 750px;
   margin: 0 auto;
 }
 
@@ -188,6 +193,7 @@ export default {
   height: 100px;
   padding: 1rem;
   display: flex;
+  cursor: pointer;
 
   .status {
     position: absolute;

@@ -55,7 +55,7 @@ export default {
         deal_count: 1290,
         good_rate: '90%',
         price: 1870,
-        cycle_ways: ['上门取件', '自行邮递', '线下门店'],
+        cycle_ways: ['上门取货', '自行邮递', '线下门店'],
         cycle: 3.89
       }, {
         id: '10002',
