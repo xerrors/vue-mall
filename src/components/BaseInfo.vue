@@ -35,7 +35,7 @@ export default {
         account: '黄玉川',
         collection: {
           way: '支付宝',
-          account: '17681352667'
+          account: '17685673489'
         },
         tel: '17291889086'
       }

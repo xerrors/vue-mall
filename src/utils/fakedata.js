@@ -319,7 +319,7 @@ export function getUserInfo (token) {
       id: 122121,
       name: '黄玉川',
       avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg?imageslim',
-      phone: '17681352667',
+      phone: '17685673489',
       sex: 'male'
     },
     addresses: [{
@@ -331,7 +331,7 @@ export function getUserInfo (token) {
       ],
       address: '蠡湖大道1800号江南大学',
       code: '214122',
-      phone: '17681352667',
+      phone: '17685673489',
       default: true
     }, {
       receiver: '黄玉川',
@@ -342,7 +342,7 @@ export function getUserInfo (token) {
       ],
       address: '利辛县第一中学',
       code: '246700',
-      phone: '17681352667',
+      phone: '17685673489',
       default: false
     }]
   }

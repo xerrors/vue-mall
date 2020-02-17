@@ -102,7 +102,7 @@ export default {
         },
         collection: {
           way: '微信',
-          account: '17681352667'
+          account: '17685673489'
         },
         addr: '江苏省无锡市滨湖区江南大学', // 表示用户选择的地址
         merchant: {
