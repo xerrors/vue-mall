@@ -329,7 +329,7 @@ export function getUserInfo (token) {
         { 320200: '无锡市' },
         { 320211: '滨湖区' }
       ],
-      address: '蠡湖大道1800号江南大学',
+      address: '蠡湖大道1800号江北大学',
       code: '214122',
       phone: '17685673489',
       default: true

@@ -74,7 +74,7 @@ export default {
         pics: [],
         opening_time: '10:00 - 18:00',
         tel: '17629739090',
-        address: '江苏省无锡市滨湖区蠡湖大道1800号江南大学',
+        address: '江苏省无锡市滨湖区蠡湖大道1800号江北大学',
         credit: 5,
         settle_age: 4,
         deal_count: 1290,
