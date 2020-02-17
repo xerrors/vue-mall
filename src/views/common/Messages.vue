@@ -38,8 +38,7 @@ export default {
         })
       } else if (item.msgType === 'order') {
         this.readed(item)
-        const path = (this.role === 'merchant' ? '/merchant' : '') + '/order/' + item.orderID
-        this.$router.push(path)
+        this.$router.push('/order/' + item.orderID)
       } else if (item.msgType === 'web') {
         this.readed(item)
         window.open(item.link)

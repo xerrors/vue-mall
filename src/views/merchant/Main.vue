@@ -1,8 +1,8 @@
 <template>
   <div class="merchant-main">
-    <div class="head">
+    <div class="left">
       <img :src="merchant_info.logo" alt="LOGO" />
-      <div class="head__info" style="display: inline-block">
+      <div class="left__info">
         <div>{{ merchant_info.name }}</div>
         <i
           class="el-icon-star-on"
@@ -11,63 +11,66 @@
           style="margin-right: 7px; color: #ffa426;"
         ></i>
       </div>
-      <p style="margin-bottom: 0; color: #909399">地址：{{ merchant_info.address }}</p>
+      <p><i class="el-icon-location"></i></p>
+      <p style="color: #909399">{{ merchant_info.address }}</p>
     </div>
-    <div class="msg-alert" v-if="showMsgAlert">
-      <i class="el-icon-chat-line-round" @click="checkMessage">&nbsp;你有新的消息等待处理</i>
-      <i @click="showMsgAlert = false" class="el-icon-circle-close" style="float: right;"></i>
-    </div>
-    <div class="order-card">
-      <div class="item">
-        <img src="/svg/all.svg" class="svg" />
-        <div class="title">全部订单</div>
-        <div class="text">1290</div>
+    <div class="right">
+      <div class="msg-alert" v-if="showMsgAlert">
+        <i class="el-icon-chat-line-round" @click="checkMessage">&nbsp;你有新的消息等待处理</i>
+        <i @click="showMsgAlert = false" class="el-icon-circle-close" style="float: right;"></i>
       </div>
-      <div class="item">
-        <img src="/svg/waiting.svg" class="svg" />
-        <div class="title">等待接单</div>
-        <div class="text">28</div>
+      <div class="order-card">
+        <div class="item">
+          <img src="/svg/all.svg" class="svg" />
+          <div class="title">全部订单</div>
+          <div class="text">1290</div>
+        </div>
+        <div class="item">
+          <img src="/svg/waiting.svg" class="svg" />
+          <div class="title">等待接单</div>
+          <div class="text">28</div>
+        </div>
+        <div class="item">
+          <img src="/svg/check.svg" class="svg" />
+          <div class="title">审核中</div>
+          <div class="text">10</div>
+        </div>
+        <div class="item">
+          <img src="/svg/pay.svg" class="svg" />
+          <div class="title">等待付款</div>
+          <div class="text">18</div>
+        </div>
+        <div class="item">
+          <img src="/svg/cancel.svg" class="svg" />
+          <div class="title">已取消</div>
+          <div class="text">4</div>
+        </div>
       </div>
-      <div class="item">
-        <img src="/svg/check.svg" class="svg" />
-        <div class="title">审核中</div>
-        <div class="text">10</div>
-      </div>
-      <div class="item">
-        <img src="/svg/pay.svg" class="svg" />
-        <div class="title">等待付款</div>
-        <div class="text">18</div>
-      </div>
-      <div class="item">
-        <img src="/svg/cancel.svg" class="svg" />
-        <div class="title">已取消</div>
-        <div class="text">4</div>
-      </div>
-    </div>
-    <div class="body">
-      <div class="block b1">
-        <p>营业时间</p>
-        <div>10:00 - 18:00</div>
-      </div>
-      <div class="block b2">
-        <p>联系电话</p>
-        <div>{{ merchant_info.tel }}</div>
-      </div>
-      <div class="block b3">
-        <p>入驻时长</p>
-        <div>{{ merchant_info.settle_age }} 年</div>
-      </div>
-      <div class="block b4">
-        <p>30天交易量</p>
-        <div>{{ merchant_info.deal_count }} 笔</div>
-      </div>
-      <div class="block b5">
-        <p>好评率</p>
-        <div>{{ merchant_info.good_rate }}</div>
-      </div>
-      <div class="block b6">
-        <p>平均回收周期</p>
-        <div>{{ merchant_info.cycle }} 天</div>
+      <div class="body">
+        <div class="block b1">
+          <p class="el-icon-alarm-clock"> 营业时间</p>
+          <div>10:00 - 18:00</div>
+        </div>
+        <div class="block b2">
+          <p class="el-icon-phone-outline"> 联系电话</p>
+          <div>{{ merchant_info.tel }}</div>
+        </div>
+        <div class="block b3">
+          <p class="el-icon-date"> 入驻时长</p>
+          <div>{{ merchant_info.settle_age }} 年</div>
+        </div>
+        <div class="block b4">
+          <p class="el-icon-sold-out"> 30天交易量</p>
+          <div>{{ merchant_info.deal_count }} 笔</div>
+        </div>
+        <div class="block b5">
+          <p class="el-icon-star-off"> 好评率</p>
+          <div>{{ merchant_info.good_rate }}</div>
+        </div>
+        <div class="block b6">
+          <p class="el-icon-odometer"> 平均回收周期</p>
+          <div>{{ merchant_info.cycle }} 天</div>
+        </div>
       </div>
     </div>
   </div>
@@ -156,34 +159,43 @@ export default {
 
 <style lang="stylus" scoped>
 .merchant-main {
-  width: 80%;
-  max-width 1000px
-  min-width 750px
+  padding-top 1rem
   margin: 0 auto;
+  width 1000px
+  display: grid;
+  grid-template-columns: 250px auto;
 
-  .head {
-    margin: 30px 0;
-
+  .left {
+    padding 1rem
+    border 1px solid #f0f0f0
+    margin-right 1rem
     >img {
       width: 100px;
       height: 100px;
       border-radius: 6px;
+      display block
+      margin 0 auto
     }
 
     &__info {
-      padding-left: 1rem;
+      margin 0 auto
+      text-align center
 
       >div {
+        margin-top 20px
+        text-align center
         letter-spacing: 3px;
         padding-bottom: 0.7rem;
         font-size: 18px;
         font-weight: 500;
       }
     }
+    >p {
+      text-align center
+    }
   }
 
   .msg-alert {
-    margin: 10px 0;
     padding: 0.5rem 1rem;
     border-radius: 6px;
     background: rgba(255, 157, 157, 0.2);

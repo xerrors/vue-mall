@@ -159,6 +159,12 @@ export default {
     grid-template-rows: repeat(2, 1fr);
     cursor: pointer;
 
+    &:hover {
+      .title {
+        color color-primary
+      }
+    }
+
     .svg {
       width: 35px;
       height: 35px;
@@ -171,7 +177,6 @@ export default {
     .title {
       text-align: left;
       padding-left: 1rem;
-      font-size: 13px;
       font-size: 16px;
       grid-area: 1 / 2 / 2 / 4;
     }
