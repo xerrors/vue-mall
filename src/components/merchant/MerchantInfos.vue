@@ -27,7 +27,7 @@
           :limit="3"
           :on-exceed="handleExceed"
           :file-list="form.license">
-          <el-button size="small" type="primary">点击上传</el-button>
+          <el-button size="small">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过5m</div>
         </el-upload>
       </el-form-item>
@@ -46,12 +46,12 @@
           :on-exceed="handleExceed"
           :file-list="form.ID_pics"
           v-model="form.ID_pics">
-          <el-button size="small" type="primary">点击上传</el-button>
+          <el-button size="small">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">身份证正面以及背面，只能上传jpg/png文件，且不超过5m</div>
         </el-upload>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm">提交审核</el-button>
+        <el-button @click="submitForm">提交审核</el-button>
       </el-form-item>
     </el-form>
   </div>
