@@ -72,12 +72,14 @@ export default {
   },
   methods: {
     changePassword () {
-      // 确认两次密码是否相同
       this.$refs.passwordForm.validate((valid) => {
         if (valid) {
           alert('submit!')
         } else {
-          console.log('error submit!!')
+          this.$message({
+            type: 'error',
+            message: '填写错误'
+          })
           return false
         }
       })
