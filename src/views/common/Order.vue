@@ -94,7 +94,7 @@ export default {
       // 这里其实应该是使用id向服务器去获取订单信息
       return {
         id: '201912191212138',
-        status: '1',
+        status: 1,
         seller: {
           id: 12138,
           name: '黄玉川',
