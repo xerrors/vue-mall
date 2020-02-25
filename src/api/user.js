@@ -1,9 +1,9 @@
 import request from '@/utils/request'
-// import { getToken } from '@/utils/cookies'
+
 // 注册
 export function register (userForm) {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'post',
     params: {
       serviceId: '100001',
@@ -18,7 +18,7 @@ export function register (userForm) {
 // 登录
 export function login (userForm) {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'post',
     params: {
       serviceId: '100002',
@@ -31,7 +31,7 @@ export function login (userForm) {
 // 获取用户信息
 export function getInfo () {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'get',
     params: {
       serviceId: '100007'
@@ -42,7 +42,7 @@ export function getInfo () {
 // 登出
 export function logout () {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'post',
     params: {
       serviceId: '100008'
@@ -53,7 +53,7 @@ export function logout () {
 // 100003 添加收货地址
 export function addAddr (item) {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'post',
     params: {
       serviceId: '100003',
@@ -69,7 +69,7 @@ export function addAddr (item) {
 // 100004 删除收货地址
 export function delAddr (addrID) {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'post',
     params: {
       serviceId: '100004',
@@ -78,10 +78,10 @@ export function delAddr (addrID) {
   })
 }
 
-// 10000x TODO:稍微默认地址
+// TODO: 10000x 设为默认地址
 export function setDefault (addrID) {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'post',
     params: {
       serviceId: '100004',
@@ -93,7 +93,7 @@ export function setDefault (addrID) {
 // 100005 修改支付方式与手机号码
 export function changePayTel (form) {
   return request({
-    url: '/invokeAPI/index.php',
+    url: '/api',
     method: 'post',
     params: {
       serviceId: '100005',

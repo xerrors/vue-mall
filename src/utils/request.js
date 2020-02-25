@@ -4,7 +4,7 @@ import store from '../store'
 import { getToken } from '@/utils/cookies'
 
 // 创建axios实例
-axios.defaults.baseURL = 'http://116.62.110.131:3000'// api 的 base_url
+// axios.defaults.baseURL = 'http://122.51.229.4/CollegeInnovation/'// api 的 base_url
 axios.defaults.timeout = 50000 // 请求超时时间
 
 // request拦截器
@@ -30,7 +30,7 @@ axios.interceptors.response.use(
      * code为非 1 是抛错 可结合自己业务进行修改
      */
     const res = response.data
-    // cosole.log(response)
+    console.log(response)
     if (res.code !== successCode) {
       Message({
         message: 'CODE ERROR:' + res.info,

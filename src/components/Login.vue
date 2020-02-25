@@ -15,7 +15,7 @@
           >商户登录</div>
       </div>
       <input
-        v-model.trim="userForm.account"
+        v-model.trim="userForm.tel"
         class="reset card__input"
         placeholder="手机号"
         required>
@@ -42,7 +42,7 @@ export default {
       isUser: true,
       loading: false,
       userForm: {
-        account: '',
+        tel: '',
         passwd: '',
         role: 'user'
       }

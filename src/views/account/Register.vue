@@ -52,7 +52,7 @@ import {
   validPassword,
   validTelephone
 } from "@/utils/validate";
-import axios from "axios";
+import { register } from '@/api/user'
 export default {
   name: "Register",
   data() {
@@ -80,14 +80,14 @@ export default {
       },
       userRules: {
         account: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 2, max: 5, message: "长度在 2 到 10 个字符", trigger: "blur" }
+          { required: true, message: "请输入用户名", trigger: "change" },
+          { min: 2, max: 10, message: "长度在 2 到 10 个字符", trigger: "change" }
         ],
         passwd: [
-          { required: true, trigger: "blur", validator: validatePassword }
+          { required: true, trigger: "change", validator: validatePassword }
         ],
         tel: [
-          { required: true, trigger: "blur", validator: validateTelephone }
+          { required: true, trigger: "change", validator: validateTelephone }
         ]
       },
       disabled: false,
@@ -123,8 +123,7 @@ export default {
             return;
           }
           this.disabled = true;
-          this.$store
-            .dispatch("Register", this.userForm)
+          register(this.userForm)
             .then(() => {
               this.disabled = false;
               this.$router.push({ path: this.redirect || "/" });
