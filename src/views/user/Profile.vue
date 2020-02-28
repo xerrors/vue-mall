@@ -2,7 +2,7 @@
   <div class="profile">
     <el-tabs v-model="activeName" tab-position="left">
       <el-tab-pane label="个人信息" name="profile">
-        <base-info :form="userInfo.baseForm"></base-info>
+        <base-info></base-info>
       </el-tab-pane>
 
       <el-tab-pane label="订单管理" name="orders">

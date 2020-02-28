@@ -57,11 +57,11 @@
           <div slot="tip" class="el-upload__tip">身份证正面以及背面，只能上传jpg/png文件，且不超过5m</div>
         </el-upload>
         <el-button size="small" type="primary" @click="startUpload">点击上传</el-button>
-        <form enctype="multipart/form-data" action="http://122.51.229.4/CollegeInnovation/invokeAPI/index.php" method="get">
+        <!-- <form enctype="multipart/form-data" action="http://122.51.229.4/CollegeInnovation/invokeAPI/index.php" method="get">
           <input type="hidden" name="serviceId" value="200006" />
           File<input name="imgs[]" type="file" multiple /><br>
           <input type="submit" value="Send File"/>
-        </form>
+        </form> -->
       </el-form-item>
       <el-form-item>
         <el-button @click="onSubmit">提交审核</el-button>

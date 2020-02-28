@@ -71,7 +71,7 @@
 import { pca, pcaa } from 'area-data' // v5 or higher
 import { AreaSelect } from 'vue-area-linkage'
 import 'vue-area-linkage/dist/index.css' // v2 or higher
-import { addAddr, delAddr, setDefault, getInfo } from '@/api/user'
+import { addAddr, delAddr, setDefault } from '@/api/user'
 export default {
   components: { AreaSelect },
   data () {
@@ -101,7 +101,8 @@ export default {
       // cosole.log(item)
       return new Promise((resolve, reject) => {
         delAddr(item).then(res => {
-          this.getInfo()
+          this.$store.dispatch('GetInfo')
+          console.log('已删除' + item)
           resolve()
         }).catch(error => {
           reject(error)
@@ -112,7 +113,7 @@ export default {
       // 具有服务器后台的实现思路应该是，我向服务端发送请求，服务端处理相应之后返还新的地址
       return new Promise((resolve, reject) => {
         setDefault(item).then(res => {
-          getInfo()
+          this.$store.dispatch('GetInfo')
           resolve()
         }).catch(error => {
           reject(error)
@@ -126,23 +127,23 @@ export default {
       return new Promise((resolve, reject) => {
         addAddr(this.newAddress).then(res => {
           this.$store.dispatch('GetInfo')
+          this.refrashAddr()
           resolve()
         }).catch(error => {
           reject(error)
         })
       })
     },
-    refrashAddr (addr) {
+    // 重置新地址为空，避免重复添加
+    refrashAddr () {
       this.newAddress = {
         receiver: '',
-        area: '',
+        area: [],
         address: '',
         code: '',
         phone: '',
         default: false
       }
-      // TODO: 这里还要根据API进行修改
-      localStorage.addresses = addr
     }
   }
 }

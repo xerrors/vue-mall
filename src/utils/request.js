@@ -4,9 +4,9 @@ import store from '../store'
 import { getToken } from '@/utils/cookies'
 
 // 创建axios实例
-// axios.defaults.baseURL = 'http://122.51.229.4/CollegeInnovation/'// api 的 base_url
+// axios.defaults.baseURL = 'http://122.51.229.4/CollegeInnovation/invokeAPI/'// api 的 base_url
 axios.defaults.timeout = 50000 // 请求超时时间
-
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 // request拦截器
 axios.interceptors.request.use(
   config => {

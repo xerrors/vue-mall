@@ -5,7 +5,7 @@
       <div class="text-box">
         <h1>易传 eTran</h1>
         <p>易传二手交易平台</p>
-        <p>用科技让每个电子产品都死得其所！</p>
+        <p>用科技让每个电子产品都物有所值！</p>
         <!-- <button @click="goCenter" v-if="token">进入主页</button> -->
         <button @click="goCenter" >立即体验</button>
         <button @click="goLogin" v-if="!token">去登录</button>
@@ -15,9 +15,9 @@
     <div class="home_msg" v-if="isShowMsg">
       <div class="item item1" style="background: #effffb;">
         <div class="content">
-          <img src="http://src.xerrors.fun/blog/20200127/EvFWm9QQhbHn.png"/>
+          <img src="http://src.xerrors.fun/blog/20200228/APpxp1p6N8bc.png"/>
           <div class="info">
-            <h3>这是标题 1</h3>
+            <h3>随心选择自己的产品</h3>
             <div>科技的发展让我们有更多的机会去支持我们的环保活动，从你我开始保护我们的环境吧！</div>
           </div>
         </div>
@@ -25,17 +25,17 @@
       <div class="item item2" style="background: #deddfa;">
         <div class="content">
           <div class="info">
-            <h3>这是标题 2</h3>
+            <h3>可以有更多回收选择</h3>
             <div>科技的发展让我们有更多的机会去支持我们的环保活动，从你我开始保护我们的环境吧！</div>
           </div>
-          <img src="http://src.xerrors.fun/blog/20200127/fTJmiXqDeHis.png"/>
+          <img src="http://src.xerrors.fun/blog/20200228/AAjUQENtn4La.png"/>
         </div>
       </div>
       <div class="item item3" style="background: #effcef;">
         <div class="content">
-          <img src="http://src.xerrors.fun/blog/20200127/SS4C7nOxldb9.png"/>
+          <img src="http://src.xerrors.fun/blog/20200228/kmfN5D8WR4PC.png"/>
           <div class="info">
-            <h3>这是标题 3</h3>
+            <h3>订单查询，一目了然</h3>
             <div>科技的发展让我们有更多的机会去支持我们的环保活动，从你我开始保护我们的环境吧！</div>
           </div>
         </div>

@@ -65,8 +65,10 @@ export default {
   methods: {
     closeMyself () {
       this.$store.state.showLogin = false
+      // console.log('关闭弹窗')
     },
     submit () {
+      // ! 此处存在bug，无法自动关闭弹窗
       this.loading = true
       this.$store
         .dispatch('Login', this.userForm)

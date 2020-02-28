@@ -2,7 +2,7 @@
   <div class="merchant-profile">
     <el-tabs v-model="activeName" tab-position="left">
       <el-tab-pane label="个人信息" name="profile">
-        <merchant-infos :form="userInfo.baseForm"></merchant-infos>
+        <merchant-infos></merchant-infos>
       </el-tab-pane>
 
       <el-tab-pane label="安全中心" name="security">

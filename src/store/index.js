@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { getToken, setToken, removeToken } from '@/utils/cookies'
-// import { Message } from 'element-ui'
 import { logout, login, getInfo } from '@/api/user'
 
 import getters from './getters'
@@ -11,8 +10,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: getToken(),
-    avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg',
+    name: '',
+    tel: '',
+    token: getToken(), // 因为并没有使用token验证，所以直接用来保存role，仅作用于前端部分
+    avatar: '',
     role: '', // 临时
     showLogin: false
   },
@@ -41,38 +42,28 @@ export default new Vuex.Store({
     Login ({ commit }, userForm) {
       return new Promise((resolve, reject) => {
         login(userForm).then(res => {
-          setToken(res.info.PHPSESSID)
-          commit('SET_TOKEN', res.info.PHPSESSID)
+          commit('SET_TOKEN', userForm.role)
+          commit('SET_ROLE', userForm.role)
+          commit('SET_NAME', res.info.account)
+          commit('SET_TEL', res.info.tel)
+          commit('SET_AVATAR', 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg')
+          setToken(userForm.role)
+          localStorage.addresses = JSON.stringify(res.info.addr)
           resolve()
         }).catch(error => {
           reject(error)
         })
       })
-      // cosole.log(userForm)
-
-      // 因为测试的时候没有办法实时向服务器获取新的数据，要想做到刷新数据保存
-
-      // const res = { code: 1, info: { account: 'nick', accountid: '10000', addr: [{ receiver: '小兰', area: '500102', address: '阿里巴巴', code: '030200', tel: '15516161414', default: true, addr_id: '24' }, { receiver: '小白', area: '500102', address: '北京三里屯', code: '030201', tel: '15516161414', default: false, addr_id: '25' }], tel: '13712345612', pay_way: 'alipay', PHPSESSID: 'fvdpqnmm2ngllhvnvgl8ppibr7' } }
-      // // 地址这种东西还是保存在LocalStorage里面吧
-      // localStorage.addresses = JSON.stringify(res.info.addr)
-      // // setToken(res.info.PHPSESSID)
-      // setToken(userForm.role)
-      // commit('SET_BASE_INFO', res.info)
-      // // commit('SET_TOKEN', res.info.PHPSESSID)
-      // commit('SET_TOKEN', userForm.role)
-      // commit('SET_ROLE', userForm.role)
     },
 
     // 获取用户信息
     GetInfo ({ commit }) {
-      // ================
-      // FedTest
-      commit('SET_ROLE', getToken())
-      // ================
-
+      commit('SET_ROLE', getToken()) // 使用Cookie保存的身份信息
       return new Promise((resolve, reject) => {
         getInfo().then(res => {
-          commit('SET_BASE_INFO', res.info)
+          commit('SET_NAME', res.info.account)
+          commit('SET_TEL', res.info.tel)
+          localStorage.clear()
           localStorage.addresses = JSON.stringify(res.info.addr)
           resolve()
         }).catch(error => {
@@ -97,9 +88,7 @@ export default new Vuex.Store({
     // 前端 登出
     FedLogOut ({ commit }) {
       commit('SET_TOKEN', '')
-      // FedTest
-      commit('SET_ROLE', '')
-      // Test end
+      localStorage.clear()
       removeToken()
     }
   },

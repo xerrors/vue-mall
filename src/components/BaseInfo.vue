@@ -15,7 +15,7 @@
           </el-select>
         </el-input>
       </el-form-item>
-      <el-form-item label="手机号码：" prop="phone" required>
+      <el-form-item label="手机号码：" prop="手机号码" required>
         <el-input v-model="form.tel"></el-input>
       </el-form-item>
       <el-form-item>
@@ -27,30 +27,27 @@
 
 <script>
 export default {
-  // props: [ 'form' ],
   data () {
     return {
       form: {
-        avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg',
-        account: '黄玉川',
+        avatar: '',
+        account: '',
         collection: {
           way: '支付宝',
           account: '17685673489'
         },
-        tel: '17291889086'
+        tel: ''
       }
     }
   },
-  computed: {
-    baseInfo () {
-      // 向服务器获取信息，这里就是本地直接测试
-      return this.form
-    }
+  mounted () {
+    this.form.avatar = this.$store.state.avatar
+    this.form.account = this.$store.state.name
+    this.form.tel = this.$store.state.tel
   },
   methods: {
     submitForm () {
-      this.$message({ message: '修改成功！', type: 'success' })
-      // todo 向服务器发送请求啊
+      // todo
     }
   }
 }
