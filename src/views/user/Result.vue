@@ -39,12 +39,12 @@
 </template>
 
 <script>
-import { generateOrder } from '@/api/product'
+// import { generateOrder } from '@/api/product'
 export default {
   data () {
     return {
       loading: true,
-      loading2: true,
+      loading2: false,
       results: [{
         id: '10001',
         logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH',
@@ -97,20 +97,26 @@ export default {
     },
     toPreOrder (id) {
       this.loading2 = true
-      return new Promise((resolve, reject) => {
-        generateOrder().then(res => {
-          this.$router.push({
-            path: '/pre-order',
-            parms: {
-              id: res.info
-            }
-          })
-          this.loading2 = false
-          resolve()
-        }).catch(err => {
-          this.loading2 = false
-          reject(err)
-        })
+      // return new Promise((resolve, reject) => {
+      //   generateOrder().then(res => {
+      //     this.$router.push({
+      //       path: '/pre-order',
+      //       parms: {
+      //         id: res.info
+      //       }
+      //     })
+      //     this.loading2 = false
+      //     resolve()
+      //   }).catch(err => {
+      //     this.loading2 = false
+      //     reject(err)
+      //   })
+      // })
+      this.$router.push({
+        path: '/pre-order',
+        parms: {
+          id: '1212121'
+        }
       })
     }
   },

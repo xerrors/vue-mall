@@ -36,7 +36,14 @@ export function login (userForm) {
   })
 }
 
-// 100003 添加收货地址
+/**
+ * @param { serviceId } 100003 添加收货地址
+ * @param { receiver } 收货人姓名
+ * @param { area } 省市区
+ * @param { address } 详细地址
+ * @param { code } 邮政编码
+ * @param { tel } 电话
+ */
 export function addAddr (item) {
   var urlencoded = new URLSearchParams()
   urlencoded.append('serviceId', '100003')
@@ -52,7 +59,10 @@ export function addAddr (item) {
   })
 }
 
-// 100004 删除收货地址
+/**
+ * @param { serviceId } 100004 删除收货地址
+ * @param { addr_id } 地址ID
+ */
 export function delAddr (addrID) {
   var urlencoded = new URLSearchParams()
   urlencoded.append('serviceId', '100004')
@@ -113,6 +123,21 @@ export function logout () {
 }
 
 /**
+ * @param { serviceId } 100008 设为默认地址
+ * @param { addr_id } 地址ID
+ */
+export function setDefault (addrID) {
+  var urlencoded = new URLSearchParams()
+  urlencoded.append('serviceId', '100008')
+  urlencoded.append('addr_id', addrID)
+  return request({
+    url: '/api',
+    method: 'post',
+    data: urlencoded
+  })
+}
+
+/**
  * @param { serviceId } 100011 上传图片
  * @param { imgs[] } 文件数组
  * @param { type } 1. 头像 2. 订单照片
@@ -129,15 +154,3 @@ export function logout () {
  * @param { serviceId } 100013 删除图片
  * @param { pic } 图片id
  */
-
-// TODO: 10000x 设为默认地址
-export function setDefault (addrID) {
-  return request({
-    url: '/api',
-    method: 'post',
-    params: {
-      serviceId: '100004',
-      addr_id: addrID
-    }
-  })
-}

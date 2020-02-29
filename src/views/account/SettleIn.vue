@@ -23,14 +23,14 @@
       </el-form-item>
       <el-form-item label="营业执照" prop="license">
         <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :on-remove="handleRemove"
-          multiple
-          v-model="form.license"
+          action="http://122.51.229.4/CollegeInnovation/invokeAPI/index.php"
+          :auto-upload="false"
           :limit="3"
           :on-exceed="handleExceed"
-          :file-list="form.license">
-          <el-button size="small" type="primary">点击上传</el-button>
+          :file-list="license"
+          multiple>
+          <el-button size="small" type="primary">选择文件</el-button>
+          <el-button size="small" type="primary" @click="uploadLicense">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过5m</div>
         </el-upload>
       </el-form-item>
@@ -43,25 +43,15 @@
       <el-form-item label="身份证照片" prop='ID_pics'>
         <el-upload
           action="http://122.51.229.4/CollegeInnovation/invokeAPI/index.php"
-          :on-remove="handleRemove"
-          :data='data'
-          :headers="headers"
           :auto-upload="false"
-          multiple
           :limit="3"
-          :on-change="imgBroadcastChange"
-          :on-success="imgSuccess"
           :on-exceed="handleExceed"
-          :file-list="form.ID_pics">
+          :file-list="ID_pics"
+          multiple>
           <el-button size="small" type="primary">选择文件</el-button>
+          <el-button size="small" type="primary" @click="uploadIDPic">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">身份证正面以及背面，只能上传jpg/png文件，且不超过5m</div>
         </el-upload>
-        <el-button size="small" type="primary" @click="startUpload">点击上传</el-button>
-        <!-- <form enctype="multipart/form-data" action="http://122.51.229.4/CollegeInnovation/invokeAPI/index.php" method="get">
-          <input type="hidden" name="serviceId" value="200006" />
-          File<input name="imgs[]" type="file" multiple /><br>
-          <input type="submit" value="Send File"/>
-        </form> -->
       </el-form-item>
       <el-form-item>
         <el-button @click="onSubmit">提交审核</el-button>
@@ -76,9 +66,6 @@ import { uploadPics } from '@/api/common'
 export default {
   data () {
     return {
-      data: {
-        serviceId: '200006'
-      },
       rules: {
         shop_name: [{ required: true, message: '请输入商户名称' }],
         contact_person: [{ required: true, message: '请输入负责人姓名' }],
@@ -107,30 +94,37 @@ export default {
     }
   },
   methods: {
-    imgSuccess (res, file, fileList) {
-      console.log(res)
-      console.log(file)
-      console.log(fileList) // 这里可以获得上传成功的相关信息
-    },
-    handleRemove (file, fileList) {
-      // cosole.log(file, fileList)
-    },
     handleExceed (files, fileList) {
       this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
     },
-    imgBroadcastChange (file, fileList) {
-      // debugger
-      this.file = file.raw
-      this.fileName = file.name
-    },
-    startUpload () {
+    uploadLicense () {
+      // 上传营业执照
       const formData = new FormData()
-      formData.append('file', this.file)
+      formData.append('imgs[]', this.license.map(i => i.raw))
       formData.append('serviceId', '200006')
-      uploadPics(formData).then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.log(err)
+      formData.append('type', '')
+      return new Promise((resolve, reject) => {
+        uploadPics(formData).then(res => {
+          console.log(res)
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    uploadIDPic () {
+      // 上传身份证照片
+      const formData = new FormData()
+      formData.append('imgs[]', this.ID_pics.map(i => i.raw))
+      formData.append('serviceId', '200006')
+      formData.append('type', '1')
+      return new Promise((resolve, reject) => {
+        uploadPics(formData).then(res => {
+          console.log(res)
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
       })
     },
     onSubmit () {

@@ -19,7 +19,7 @@
         <el-input v-model="newAddress.code"></el-input>
       </el-form-item>
       <el-form-item label="联系方式" required>
-        <el-input v-model="newAddress.phone"></el-input>
+        <el-input v-model="newAddress.tel"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="createNewAddress" plain>创建</el-button>
@@ -83,7 +83,7 @@ export default {
         area: '',
         address: '',
         code: '',
-        phone: '',
+        tel: '',
         default: false
       }
     }
@@ -98,11 +98,9 @@ export default {
   },
   methods: {
     handleRemove (item) {
-      // cosole.log(item)
       return new Promise((resolve, reject) => {
         delAddr(item).then(res => {
           this.$store.dispatch('GetInfo')
-          console.log('已删除' + item)
           resolve()
         }).catch(error => {
           reject(error)
@@ -110,7 +108,6 @@ export default {
       })
     },
     handleSetDefault (item) {
-      // 具有服务器后台的实现思路应该是，我向服务端发送请求，服务端处理相应之后返还新的地址
       return new Promise((resolve, reject) => {
         setDefault(item).then(res => {
           this.$store.dispatch('GetInfo')
@@ -141,7 +138,7 @@ export default {
         area: [],
         address: '',
         code: '',
-        phone: '',
+        tel: '',
         default: false
       }
     }
