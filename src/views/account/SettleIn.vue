@@ -54,7 +54,7 @@
         </el-upload>
       </el-form-item>
       <el-form-item>
-        <el-button @click="onSubmit">提交审核</el-button>
+        <el-button @click="onSubmit" :loading="loading">提交审核</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -62,14 +62,14 @@
 
 <script>
 import { uploadPics } from '@/api/common'
-
+import { settleIn } from '@/api/merchant'
 export default {
   data () {
     return {
+      loading: false,
       rules: {
         shop_name: [{ required: true, message: '请输入商户名称' }],
         contact_person: [{ required: true, message: '请输入负责人姓名' }],
-        license: [{ type: 'array', required: true, message: '务必添加营业执照', trigger: 'change' }],
         tel: [{ required: true, message: '请输入联系方式' }],
         passwd: [
           { required: true, message: '请输入密码' },
@@ -128,12 +128,21 @@ export default {
       })
     },
     onSubmit () {
+      this.loading = true
       this.$refs.form.validate((valid) => {
         if (valid) {
-          alert('submit!')
+          return new Promise((resolve, reject) => {
+            settleIn(this.form).then(res => {
+              this.$router.push('/')
+              this.loading = false
+              resolve()
+            }).catch(err => {
+              this.loading = false
+              reject(err)
+            })
+          })
         } else {
-          // cosole.log('error submit!!')
-          // cosole.log(this.form.ID_pics.length)
+          this.loading = false
           return false
         }
       })

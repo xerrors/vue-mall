@@ -26,7 +26,7 @@
         placeholder="密码"
         @keyup.enter.native="submit"
         required>
-      <button class="reset card__btn" :loading="loading" @click="submit">登录</button>
+      <el-button class="reset card__btn" :loading="loading" @click="submit">登录</el-button>
       <div class="card__info">
         <el-link @click="register">{{ userForm.role === 'user' ? '注册' : '入驻' }} </el-link>
         <el-link @click="forgotPWD">忘记密码</el-link>
@@ -75,15 +75,15 @@ export default {
         .then(() => {
           this.loading = false
           this.closeMyself()
+          if (this.role === 'merchant') {
+            this.$router.push('/merchant/main')
+          } else if (this.$route.path === '/') {
+            this.$router.push('/main')
+          }
         })
         .catch(() => {
           this.loading = false
         })
-      if (this.role === 'merchant') {
-        this.$router.push('/merchant/main')
-      } else if (this.$route.path === '/') {
-        this.$router.push('/main')
-      }
     },
     register () {
       if (this.userForm.role === 'user') {
@@ -98,6 +98,17 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+.login {
+  .el-button {
+    &:focus, &:hover {
+      color inherit
+      background-color mainColor
+    }
+  }
+}
+</style>
 
 <style lang="stylus" scoped>
  // 最外层 设置position定位
