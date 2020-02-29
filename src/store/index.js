@@ -73,7 +73,7 @@ export default new Vuex.Store({
     },
 
     // 登出
-    LogOut ({ commit, state }) {
+    LogOut ({ commit }) {
       return new Promise((resolve, reject) => {
         logout().then(() => {
           commit('SET_TOKEN', '')

@@ -2,10 +2,10 @@
   <div class="base-info">
     <el-form :model="form" ref="form" label-width="100px" label-position='right'>
       <el-form-item label="头像：" prop="avatar" required>
-        <el-avatar v-if="form.avatar" :src="form.avatar"></el-avatar>
+        <el-avatar v-if="avatar" :src="avatar"></el-avatar>
       </el-form-item>
-      <el-form-item label="用户名：" prop="account" required>
-        <el-input v-model="form.account"></el-input>
+      <el-form-item label="用户名：" prop="account">
+        <el-input v-model="name"></el-input>
       </el-form-item>
       <el-form-item label="支付方式：" prop="collection" required>
         <el-input placeholder="请输入收款账户" v-model="form.collection.account" class="input-with-select">
@@ -16,22 +16,25 @@
         </el-input>
       </el-form-item>
       <el-form-item label="手机号码：" prop="手机号码" required>
-        <el-input v-model="form.tel"></el-input>
+        <el-input v-model="form.tel" :placeholder="tel"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm">保存</el-button>
+        <el-button type="primary" @click="submitForm" :loading="loading">保存</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { changePayTel } from '@/api/user'
 export default {
   data () {
     return {
+      loading: false,
       form: {
-        avatar: '',
-        account: '',
+        avatar: this.avatar,
+        account: this.name,
         collection: {
           way: '支付宝',
           account: '17685673489'
@@ -40,14 +43,22 @@ export default {
       }
     }
   },
-  mounted () {
-    this.form.avatar = this.$store.state.avatar
-    this.form.account = this.$store.state.name
-    this.form.tel = this.$store.state.tel
+  computed: {
+    ...mapGetters(['avatar', 'name', 'tel'])
   },
   methods: {
     submitForm () {
-      // todo
+      this.loading = true
+      this.form.pay_way = this.form.collection.account
+      return new Promise((resolve, reject) => {
+        changePayTel(this.form).then(() => {
+          this.loading = false
+          this.$store.dispatch('GetInfo')
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
+      })
     }
   }
 }

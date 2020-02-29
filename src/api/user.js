@@ -64,28 +64,29 @@ export function delAddr (addrID) {
   })
 }
 
-// TODO: 10000x 设为默认地址
-export function setDefault (addrID) {
+// 100005 修改支付方式与手机号码
+export function changePayTel (form) {
+  var urlencoded = new URLSearchParams()
+  urlencoded.append('serviceId', '100005')
+  urlencoded.append('tel', form.tel)
+  urlencoded.append('pay_way', form.pay_way)
   return request({
     url: '/api',
     method: 'post',
-    params: {
-      serviceId: '100004',
-      addr_id: addrID
-    }
+    data: urlencoded
   })
 }
 
-// 100005 修改支付方式与手机号码
-export function changePayTel (form) {
+// 100006 修改密码
+export function changePasswd (form) {
+  var urlencoded = new URLSearchParams()
+  urlencoded.append('serviceId', '100006')
+  urlencoded.append('old', form.oldPassword)
+  urlencoded.append('new', form.newPassword)
   return request({
     url: '/api',
     method: 'post',
-    params: {
-      serviceId: '100005',
-      tel: form.tel,
-      pay_way: form.pay_way
-    }
+    data: urlencoded
   })
 }
 
@@ -100,13 +101,43 @@ export function getInfo () {
   })
 }
 
-// 登出
+// 1000008 登出
 export function logout () {
+  var urlencoded = new URLSearchParams()
+  urlencoded.append('serviceId', '100008')
+  return request({
+    url: '/api',
+    method: 'post',
+    data: urlencoded
+  })
+}
+
+/**
+ * @param { serviceId } 100011 上传图片
+ * @param { imgs[] } 文件数组
+ * @param { type } 1. 头像 2. 订单照片
+ * @param { orderid } 订单号
+ */
+
+/**
+ * @param { serviceId } 100012 获取图片
+ * @param { type } 1. 头像 2. 订单照片
+ * @param { orderid } 订单号
+ */
+
+/**
+ * @param { serviceId } 100013 删除图片
+ * @param { pic } 图片id
+ */
+
+// TODO: 10000x 设为默认地址
+export function setDefault (addrID) {
   return request({
     url: '/api',
     method: 'post',
     params: {
-      serviceId: '100008'
+      serviceId: '100004',
+      addr_id: addrID
     }
   })
 }

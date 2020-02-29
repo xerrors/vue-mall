@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="right">
-          <el-button class="deal-button" @click="toPreOrder(result.id)">下单</el-button>
+          <el-button class="deal-button" @click="toPreOrder(result.id)" :loading="loading2">下单</el-button>
         </div>
       </div>
     </div>
@@ -39,10 +39,12 @@
 </template>
 
 <script>
+import { generateOrder } from '@/api/product'
 export default {
   data () {
     return {
       loading: true,
+      loading2: true,
       results: [{
         id: '10001',
         logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXn7pjhFRXpjBp55BxxRTnNPrtvTF_y3PbLCHGWsCVb6LRiMHH',
@@ -94,11 +96,21 @@ export default {
       this.$router.push('/merchants/' + id)
     },
     toPreOrder (id) {
-      this.$router.push({
-        path: '/pre-order',
-        parms: {
-          id: id
-        }
+      this.loading2 = true
+      return new Promise((resolve, reject) => {
+        generateOrder().then(res => {
+          this.$router.push({
+            path: '/pre-order',
+            parms: {
+              id: res.info
+            }
+          })
+          this.loading2 = false
+          resolve()
+        }).catch(err => {
+          this.loading2 = false
+          reject(err)
+        })
       })
     }
   },

@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { changePasswd } from '@/api/user'
 export default {
   data () {
     var validatePass0 = (rule, value, callback) => {
@@ -51,6 +52,7 @@ export default {
     }
     return {
       // * 密码部分的数据
+      loading: false,
       passwordForm: {
         oldPassword: '',
         newPassword: '',
@@ -72,14 +74,28 @@ export default {
   },
   methods: {
     changePassword () {
+      this.loading = true
       this.$refs.passwordForm.validate((valid) => {
         if (valid) {
-          alert('submit!')
+          return new Promise((resolve, reject) => {
+            changePasswd(this.passwordForm).then(() => {
+              this.passwordForm = {
+                oldPassword: '',
+                newPassword: '',
+                newPasswordConfirm: ''
+              }
+              this.loading = false
+              resolve()
+            }).catch(err => {
+              reject(err)
+            })
+          })
         } else {
           this.$message({
             type: 'error',
             message: '填写错误'
           })
+          this.loading = false
           return false
         }
       })
