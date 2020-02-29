@@ -11,7 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: getToken(), // 因为并没有使用token验证，所以直接用来保存role，仅作用于前端部分
-    avatar: 'http://src.xerrors.fun/blog/20191021/CcFV3DJYgi0B.jpg',
+    avatar: 'http://src.xerrors.fun/blog/20200301/6x6wwvaHbnGY.png',
     role: '', // 临时
     showLogin: false
   },

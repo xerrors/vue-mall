@@ -20,19 +20,11 @@
 import MerchantInfos from '@/components/merchant/MerchantInfos.vue'
 import AddrMng from '@/components/AddrMng.vue'
 import Security from '@/components/Security.vue'
-import { getUserInfo } from '@/utils/fakedata.js'
 export default {
   components: { MerchantInfos, AddrMng, Security },
   data () {
     return {
-      localAddr: JSON.parse(localStorage.addresses),
-      activeName: 'profile',
-      userInfo: getUserInfo(this.$store.state.token)
-    }
-  },
-  mounted () {
-    if (localStorage.addresses) {
-      this.localAddr = JSON.parse(localStorage.addresses)
+      activeName: 'profile'
     }
   }
 }

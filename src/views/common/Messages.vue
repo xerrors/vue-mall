@@ -15,6 +15,7 @@
 </template>
 
 <script>
+// ! BUG
 import { getMsgs } from '@/utils/fakedata.js'
 export default {
   data () {

@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import store from '@/store/index'
 
 // 注册
 export function register (userForm) {
@@ -18,12 +19,8 @@ export function register (userForm) {
 // 登录
 export function login (userForm) {
   const formData = new FormData()
-  if (userForm.role === 'user') {
-    formData.append('serviceId', '100002')
-  } else {
-    formData.append('serviceId', '200002')
-  }
-  formData.append('serviceId', '100002')
+  const serviceId = userForm.role === 'user' ? '100002' : '200002'
+  formData.append('serviceId', serviceId)
   formData.append('tel', userForm.tel)
   formData.append('passwd', userForm.passwd)
   return request({
@@ -103,7 +100,8 @@ export function changePasswd (form) {
 // 100007 获取用户信息
 export function getInfo () {
   var urlencoded = new URLSearchParams()
-  urlencoded.append('serviceId', '100007')
+  const serviceId = store.state.role === 'user' ? '100007' : '200011'
+  urlencoded.append('serviceId', serviceId)
   return request({
     url: '/api',
     method: 'post',
@@ -114,7 +112,8 @@ export function getInfo () {
 // 1000008 登出
 export function logout () {
   var urlencoded = new URLSearchParams()
-  urlencoded.append('serviceId', '100008')
+  const serviceId = store.state.role === 'user' ? '100008' : '200012'
+  urlencoded.append('serviceId', serviceId)
   return request({
     url: '/api',
     method: 'post',

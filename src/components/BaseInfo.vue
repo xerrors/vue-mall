@@ -5,7 +5,7 @@
         <el-avatar v-if="avatar" :src="avatar"></el-avatar>
       </el-form-item>
       <el-form-item label="用户名：" prop="account">
-        <el-input v-model="name"></el-input>
+        <el-input v-model="form.account" disabled></el-input>
       </el-form-item>
       <el-form-item label="支付方式：" prop="collection" required>
         <el-input placeholder="请输入收款账户" v-model="form.collection.account" class="input-with-select">
@@ -16,7 +16,7 @@
         </el-input>
       </el-form-item>
       <el-form-item label="手机号码：" prop="手机号码">
-        <el-input v-model="form.tel" :placeholder="tel"></el-input>
+        <el-input v-model="form.tel" :placeholder="form.tel"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm" :loading="loading">保存</el-button>
@@ -34,7 +34,7 @@ export default {
       loading: false,
       form: {
         avatar: this.avatar,
-        account: this.name,
+        account: '',
         collection: {
           way: '支付宝',
           account: ''
@@ -44,7 +44,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['avatar', 'name', 'tel'])
+    ...mapGetters(['avatar'])
   },
   methods: {
     getInfoFromServer () {
@@ -52,6 +52,7 @@ export default {
         getInfo().then(res => {
           this.form.account = res.info.account
           this.form.tel = res.info.tel
+          this.form.account = res.info.account
           this.form.collection.account = res.info.pay_way
           resolve()
         }).catch(err => {
@@ -84,6 +85,9 @@ export default {
 .el-input-group__append, .el-input-group__prepend
   width 80px
   background white
+  border none
+.el-input.is-disabled .el-input__inner
+  background inherit
   border none
 .base-info .el-input
   &__inner

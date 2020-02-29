@@ -17,3 +17,6 @@ export function settleIn (form) {
     data: urlencoded
   })
 }
+
+// 200002 商户登陆
+// export function login (form)
