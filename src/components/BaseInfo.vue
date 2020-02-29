@@ -15,7 +15,7 @@
           </el-select>
         </el-input>
       </el-form-item>
-      <el-form-item label="手机号码：" prop="手机号码" required>
+      <el-form-item label="手机号码：" prop="手机号码">
         <el-input v-model="form.tel" :placeholder="tel"></el-input>
       </el-form-item>
       <el-form-item>
@@ -27,7 +27,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { changePayTel } from '@/api/user'
+import { changePayTel, getInfo } from '@/api/user'
 export default {
   data () {
     return {
@@ -37,7 +37,7 @@ export default {
         account: this.name,
         collection: {
           way: '支付宝',
-          account: '17685673489'
+          account: ''
         },
         tel: ''
       }
@@ -47,6 +47,18 @@ export default {
     ...mapGetters(['avatar', 'name', 'tel'])
   },
   methods: {
+    getInfoFromServer () {
+      return new Promise((resolve, reject) => {
+        getInfo().then(res => {
+          this.form.account = res.info.account
+          this.form.tel = res.info.tel
+          this.form.collection.account = res.info.pay_way
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
     submitForm () {
       this.loading = true
       this.form.pay_way = this.form.collection.account
@@ -56,10 +68,14 @@ export default {
           this.$store.dispatch('GetInfo')
           resolve()
         }).catch(err => {
+          this.loading = false
           reject(err)
         })
       })
     }
+  },
+  mounted () {
+    this.getInfoFromServer()
   }
 }
 </script>
