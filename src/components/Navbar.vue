@@ -70,7 +70,7 @@ export default {
       // 实现登出功能，现在只写了前端部分
       if (obj === 'logout') {
         this.$store
-          .dispatch('FedLogOut')
+          .dispatch('LogOut')
           .then(() => {
             this.$router.push('/')
             this.$message({
@@ -81,6 +81,7 @@ export default {
           .catch((err) => {
             this.$message('Navbar.vue', err)
           })
+        this.$store.dispatch('FedLogOut')
       }
     }
   },

@@ -87,7 +87,8 @@ export function changePayTel (form) {
 // 100006 修改密码
 export function changePasswd (form) {
   var urlencoded = new URLSearchParams()
-  urlencoded.append('serviceId', '100006')
+  const serviceId = store.state.role === 'user' ? '100006' : '200009'
+  urlencoded.append('serviceId', serviceId)
   urlencoded.append('old', form.oldPassword)
   urlencoded.append('new', form.newPassword)
   return request({

@@ -58,6 +58,8 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         logout().then(() => {
           commit('SET_TOKEN', '')
+          commit('SET_ROLE', '')
+          localStorage.clear()
           removeToken()
           resolve()
         }).catch(error => {
@@ -69,6 +71,7 @@ export default new Vuex.Store({
     // 前端 登出
     FedLogOut ({ commit }) {
       commit('SET_TOKEN', '')
+      commit('SET_ROLE', '')
       localStorage.clear()
       removeToken()
     }
