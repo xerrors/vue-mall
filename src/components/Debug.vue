@@ -14,6 +14,8 @@
 </template>
 
 <style lang="stylus" scoped>
+*
+  display none
 p
   margin 0
   font-weight bold

@@ -27,10 +27,11 @@
           :auto-upload="false"
           :limit="3"
           :on-exceed="handleExceed"
-          :file-list="license"
+          :on-change="handleChangeLicense"
+          :file-list="licenses"
           multiple>
-          <el-button size="small" type="primary">选择文件</el-button>
-          <el-button size="small" type="primary" @click="uploadLicense">点击上传</el-button>
+          <el-button slot="trigger" size="small" type="primary">选择文件</el-button>
+          <el-button size="small" style="margin-left: 10px" type="primary" @click="uploadLicense">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过5m</div>
         </el-upload>
       </el-form-item>
@@ -46,10 +47,11 @@
           :auto-upload="false"
           :limit="3"
           :on-exceed="handleExceed"
+          :on-change="handleChangeIDs"
           :file-list="ID_pics"
           multiple>
-          <el-button size="small" type="primary">选择文件</el-button>
-          <el-button size="small" type="primary" @click="uploadIDPic">点击上传</el-button>
+          <el-button slot="trigger" size="small" type="primary">选择文件</el-button>
+          <el-button size="small" style="margin-left: 10px" type="primary" @click="uploadIDPic">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">身份证正面以及背面，只能上传jpg/png文件，且不超过5m</div>
         </el-upload>
       </el-form-item>
@@ -67,6 +69,10 @@ export default {
   data () {
     return {
       loading: false,
+      ID_pics: [], // 身份证照片
+      ID_pic: [], // 身份证照片
+      license: [], // 营业执照
+      licenses: [], // 营业执照
       rules: {
         shop_name: [{ required: true, message: '请输入商户名称' }],
         contact_person: [{ required: true, message: '请输入负责人姓名' }],
@@ -78,7 +84,6 @@ export default {
         address: [{ required: true, message: '请输入商铺地址' }],
         juri_person: [{ required: true, message: '请输入法人姓名' }],
         juri_person_id: [{ required: true, message: '请输入身份证号码' }]
-        // ID_pics: [{ type: 'array', required: true, message: '务必添加身份证正反照片', trigger: 'change' }]
       },
       form: {
         shop_name: '', // 店铺名称
@@ -86,23 +91,31 @@ export default {
         tel: '', // 联系电话
         passwd: '', // 密码
         address: '', // 店铺地址
-        license: [], // 营业执照
         juri_person: '', // 法人姓名
-        juri_person_id: '', // 身份证号码
-        ID_pics: [] // 身份证照片
+        juri_person_id: '' // 身份证号码
       }
     }
   },
   methods: {
+    handleChangeLicense (file, filelist) {
+      this.license = filelist.map(i => i.raw)
+    },
+    handleChangeIDs (file, filelist) {
+      this.ID_pic = filelist.map(i => i.raw)
+    },
     handleExceed (files, fileList) {
       this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
     },
     uploadLicense () {
       // 上传营业执照
       const formData = new FormData()
-      formData.append('imgs[]', this.license.map(i => i.raw))
+      for (var file of this.license) {
+        formData.append('imgs[]', file)
+      }
       formData.append('serviceId', '200006')
       formData.append('type', '')
+      formData.append('tel', this.form.tel)
+      formData.append('reg', true)
       return new Promise((resolve, reject) => {
         uploadPics(formData).then(res => {
           console.log(res)
@@ -115,9 +128,13 @@ export default {
     uploadIDPic () {
       // 上传身份证照片
       const formData = new FormData()
-      formData.append('imgs[]', this.ID_pics.map(i => i.raw))
+      for (var file of this.ID_pic) {
+        formData.append('imgs[]', file)
+      }
       formData.append('serviceId', '200006')
+      formData.append('tel', this.form.tel)
       formData.append('type', '1')
+      formData.append('reg', true)
       return new Promise((resolve, reject) => {
         uploadPics(formData).then(res => {
           console.log(res)
