@@ -118,7 +118,7 @@ export default {
       formData.append('reg', true)
       return new Promise((resolve, reject) => {
         uploadPics(formData).then(res => {
-          console.log(res)
+          // console.log(res)
           resolve()
         }).catch(err => {
           reject(err)
@@ -137,7 +137,7 @@ export default {
       formData.append('reg', true)
       return new Promise((resolve, reject) => {
         uploadPics(formData).then(res => {
-          console.log(res)
+          // console.log(res)
           resolve()
         }).catch(err => {
           reject(err)

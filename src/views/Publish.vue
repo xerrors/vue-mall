@@ -253,7 +253,7 @@ export default {
     },
     // 提交操作 TODO:
     publish () {
-      console.log(this.form)
+      // console.log(this.form)
       this.$router.push('/result')
     }
   },

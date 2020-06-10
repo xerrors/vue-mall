@@ -30,7 +30,7 @@ axios.interceptors.response.use(
      * code为非 1 是抛错 可结合自己业务进行修改
      */
     const res = response.data
-    console.log(response)
+    // console.log(response)
     if (res.code !== successCode) {
       Message({
         message: 'CODE ERROR:' + res.info,

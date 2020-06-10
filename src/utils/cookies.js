@@ -6,7 +6,7 @@ export function getToken () {
 }
 
 export function setToken (token) {
-  console.log('Set Token:' + token)
+  // console.log('Set Token:' + token)
   return Cookies.set('token', token)
 }
 
